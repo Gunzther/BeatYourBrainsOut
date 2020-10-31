@@ -35,7 +35,6 @@ public class PlayerSmoothController : MonoBehaviour
 
     void CalculateMovementInput()
     {
-
         if (useOldInputManager)
         {
             var v = Input.GetAxisRaw("Vertical");
@@ -64,11 +63,10 @@ public class PlayerSmoothController : MonoBehaviour
         {
             smoothDirection = Vector3.Lerp(smoothDirection, rawDirection, Time.deltaTime * smoothingSpeed);
         }
-        else if (hasCurrentInput)
+        else
         {
             smoothDirection = Vector3.zero;
         }
-
     }
 
     void MoveThePlayer()
@@ -79,6 +77,5 @@ public class PlayerSmoothController : MonoBehaviour
             movement = movement.normalized * movementSpeed * Time.deltaTime;
             playerRigidbody.MovePosition(transform.position + movement);
         }
-
     }
 }
