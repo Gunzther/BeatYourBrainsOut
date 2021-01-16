@@ -11,6 +11,7 @@ namespace BBO.BBO.TeamManagement
         [SerializeField]
         private Transform parent;
 
+        public Team Team => team;
         private Team team = default;
 
         private void Start()
