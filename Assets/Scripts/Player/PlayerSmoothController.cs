@@ -5,10 +5,10 @@ namespace BBO.BBO.PlayerManagement
     public class PlayerSmoothController : MonoBehaviour
     {
         [SerializeField]
-        private Camera mainCamera;
+        private Camera mainCamera = default;
 
         [Header("Physics")]
-        public Rigidbody playerRigidbody;
+        public Rigidbody playerRigidbody = default;
 
         [Header("Input")]
         public bool useOldInputManager = true;
@@ -23,7 +23,12 @@ namespace BBO.BBO.PlayerManagement
         private Vector3 smoothDirection;
         private Vector3 movement;
 
-        void Update()
+        private void Start()
+        {
+            mainCamera = Camera.main;
+        }
+
+        private void Update()
         {
             CalculateMovementInput();
         }
