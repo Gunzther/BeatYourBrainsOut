@@ -8,7 +8,7 @@ namespace BBO.BBO.PlayerManagement
         public int Health => health;
 
         private readonly int playerID = default;
-        private int health;
+        private int health = default;
 
         public PlayerStats(int playerID)
         {
