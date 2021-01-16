@@ -1,39 +1,39 @@
-﻿using UnityEngine;
+﻿using BBO.BBO.GameData;
+using UnityEngine;
 
 namespace BBO.BBO.PlayerManagement
 {
     public class PlayerStats
     {
-        public int Health => PlayerPrefs.GetInt(key + playerID);
+        public int Health => health;
 
         private readonly int playerID = default;
-        private const string key = "hp";
-        private const int defaultValue = 100;
+        private int health = default;
 
         public PlayerStats(int playerID)
         {
             this.playerID = playerID;
-            Clear();
+            Reset();
         }
 
-        public void Clear()
+        public void Reset()
         {
-            PlayerPrefs.SetInt(key + playerID, defaultValue);
+            health = PlayerData.DefaultHealth;
         }
 
         public void SetPlayerHealth(int value)
         {
-            PlayerPrefs.SetInt(key + playerID, value);
+            health = value;
         }
 
         public void DecreasePlayerHealth(int value)
         {
-            PlayerPrefs.SetInt(key + playerID, Health - value);
+            health -= value;
         }
 
         public void IncreasePlayerHealth(int value)
         {
-            PlayerPrefs.SetInt(key + playerID, Health + value);
+            health += value;
         }
     }
 }
