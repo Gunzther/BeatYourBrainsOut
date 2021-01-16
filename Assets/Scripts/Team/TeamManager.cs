@@ -6,10 +6,10 @@ namespace BBO.BBO.TeamManagement
     public class TeamManager : MonoBehaviour
     {
         [SerializeField]
-        private Transform playerPrefab;
+        private Transform playerPrefab = default;
 
         [SerializeField]
-        private Transform parent;
+        private Transform parent = default;
 
         public Team Team => team;
         private Team team = default;
