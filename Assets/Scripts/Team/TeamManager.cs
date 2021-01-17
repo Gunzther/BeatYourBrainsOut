@@ -16,6 +16,9 @@ namespace BBO.BBO.TeamManagement
         private void Start()
         {
             team = new Team();
+
+            // TODO: spawn player when any controller is already connected
+            SpawnNewPlayer(new Vector3(0, 0, 0));
         }
 
         public void SpawnNewPlayer(Vector3 position)
