@@ -131,7 +131,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 116
   m_CollisionDetection: 0
 --- !u!114 &1237616508
 MonoBehaviour:
@@ -148,8 +148,9 @@ MonoBehaviour:
   mainCamera: {fileID: 0}
   playerRigidbody: {fileID: 1237616509}
   useOldInputManager: 1
-  movementSpeed: 5
+  movementSpeed: 4
   smoothingSpeed: 1
+  PlayerAnimator: {fileID: 2624934328494790108}
 --- !u!114 &1237616510
 MonoBehaviour:
   m_ObjectHideFlags: 0
