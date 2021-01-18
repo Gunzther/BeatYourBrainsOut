@@ -19,6 +19,11 @@ namespace BBO.BBO.TeamManagement.UI
 
         public void SetTeamHpValue(int value)
         {
+            if (value < 0)
+            {
+                value = 0;
+            }
+
             teamHpSlider.value = value;
             teamHpText.text = value.ToString();
         }
