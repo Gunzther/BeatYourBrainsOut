@@ -12,6 +12,7 @@ namespace BBO.BBO.PlayerManagement
             if (other.gameObject.GetComponent<PlayerCharacter>() is PlayerCharacter player)
             {
                 player.CurrentPlayerStats.DecreasePlayerHealth(damageValue);
+                player.UpdateHpUI();
             }
         }
     }
