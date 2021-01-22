@@ -1,4 +1,4 @@
-﻿Shader "TechArt/Unlit/PlayerCharacter"
+﻿Shader "TechArt/Unlit/Character"
 {
 	Properties
 	{
@@ -6,7 +6,7 @@
 		[NoScaleOffset] _MainTex("Main Tex", 2D) = "white" {}
 		_Row("Row", Int) = 1
 		_Column("Column", Int) = 1
-		_LapCol("Overlap Color", Color) = (1, 0, 0, 0)
+		_DissolveCol("Dissolve Color", Color) = (1, 0, 0, 0)
 		_LapValue("Overlap Color Value", Range(0,1)) = 0
 	}
 
@@ -48,7 +48,7 @@
 				float _Row;
 				float _Column;
 				float _Frame;
-				fixed4 _LapCol;
+				fixed4 _DissolveCol;
 				float _LapValue;
 
 				v2f vert(appdata v)
@@ -66,16 +66,19 @@
 
 					o.uv = v.uv * tiling + offset;
 
-					o.color = v.color * _LapCol;
+					//o.color = v.color * red;
 					return o;
 				}
 
 				fixed4 frag(v2f i) : SV_Target
 				{
+					fixed4 red = fixed4(1.0, 0.2, 0.2, 0);
+
 					fixed4 col = tex2D(_MainTex, i.uv);
 					float cutoff = 0.5;
 					clip(col.a - cutoff);
-					return fixed4(lerp(col.rgb, col.rgb * _LapCol, _LapValue), col.a);
+					col.a = lerp(0.0, col.a, _DissolveCol.a);
+					return fixed4(lerp(col.rgb, red, _LapValue), col.a);
 				}
 				ENDCG
 			}
