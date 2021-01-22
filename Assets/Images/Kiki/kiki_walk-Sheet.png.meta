@@ -1,55 +1,43 @@
 fileFormatVersion: 2
-guid: cbcf919b980a3db4e8204b1bbc28cfcf
+guid: 457d2de1029c02d4eaf25443e2f63a5e
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 6160133034901456927
-    second: Player_front_walk-Sheet_0
+      213: 7493903398059919263
+    second: kiki_walk-Sheet_0
   - first:
-      213: -6734429665166187283
-    second: Player_front_walk-Sheet_1
+      213: -2361241338214553762
+    second: kiki_walk-Sheet_1
   - first:
-      213: -3730644843979989659
-    second: Player_front_walk-Sheet_2
+      213: -2048037320334783046
+    second: kiki_walk-Sheet_2
   - first:
-      213: 3481368116119772133
-    second: Player_front_walk-Sheet_3
+      213: 3748964499738818657
+    second: kiki_walk-Sheet_3
   - first:
-      213: 4238081864463752530
-    second: Player_walk-Sheet_0
+      213: 2586118675669516155
+    second: kiki_walk-Sheet_4
   - first:
-      213: 2057658621302920040
-    second: Player_walk-Sheet_1
+      213: -766294341694934235
+    second: kiki_walk-Sheet_5
   - first:
-      213: -973908224221894091
-    second: Player_walk-Sheet_2
+      213: -7670836782832295452
+    second: kiki_walk-Sheet_6
   - first:
-      213: -7983633599433393415
-    second: Player_walk-Sheet_3
+      213: -935523914617166042
+    second: kiki_walk-Sheet_7
   - first:
-      213: 2120502540096938871
-    second: Player_walk-Sheet_4
+      213: -3057344438606475007
+    second: kiki_walk-Sheet_8
   - first:
-      213: 5692479203110589863
-    second: Player_walk-Sheet_5
+      213: 8157150556754723679
+    second: kiki_walk-Sheet_9
   - first:
-      213: -1239278945868267989
-    second: Player_walk-Sheet_6
+      213: -7090509025711865400
+    second: kiki_walk-Sheet_10
   - first:
-      213: -8657099518171975337
-    second: Player_walk-Sheet_7
-  - first:
-      213: 9213596624571675735
-    second: Player_walk-Sheet_8
-  - first:
-      213: 5982736010936777004
-    second: Player_walk-Sheet_9
-  - first:
-      213: 5451456862585288466
-    second: Player_walk-Sheet_10
-  - first:
-      213: 4128791126241619212
-    second: Player_walk-Sheet_11
+      213: -2636054628132658605
+    second: kiki_walk-Sheet_11
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -135,13 +123,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Player_walk-Sheet_0
+      name: kiki_walk-Sheet_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 800
-        width: 400
-        height: 400
+        y: 600
+        width: 300
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -149,20 +137,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 25d136c5001b0da30800000000000000
-      internalID: 4238081864463752530
+      spriteID: f974476af61bff760800000000000000
+      internalID: 7493903398059919263
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_walk-Sheet_1
+      name: kiki_walk-Sheet_1
       rect:
         serializedVersion: 2
-        x: 400
-        y: 800
-        width: 400
-        height: 400
+        x: 300
+        y: 600
+        width: 300
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -170,20 +158,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 863d7c73d954e8c10800000000000000
-      internalID: 2057658621302920040
+      spriteID: e57e0c6638f2b3fd0800000000000000
+      internalID: -2361241338214553762
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_walk-Sheet_2
+      name: kiki_walk-Sheet_2
       rect:
         serializedVersion: 2
-        x: 800
-        y: 800
-        width: 400
-        height: 400
+        x: 600
+        y: 600
+        width: 300
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -191,20 +179,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 53a2c6b41abfb72f0800000000000000
-      internalID: -973908224221894091
+      spriteID: abdc3ba78e8e393e0800000000000000
+      internalID: -2048037320334783046
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_walk-Sheet_3
+      name: kiki_walk-Sheet_3
       rect:
         serializedVersion: 2
-        x: 1200
-        y: 800
-        width: 400
-        height: 400
+        x: 900
+        y: 600
+        width: 300
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -212,104 +200,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9fa36e85a8f643190800000000000000
-      internalID: -7983633599433393415
+      spriteID: 1687b72895ff60430800000000000000
+      internalID: 3748964499738818657
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_walk-Sheet_4
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 400
-        width: 400
-        height: 400
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 773aac743d98d6d10800000000000000
-      internalID: 2120502540096938871
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Player_walk-Sheet_5
-      rect:
-        serializedVersion: 2
-        x: 400
-        y: 400
-        width: 400
-        height: 400
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7a594b8dcafbffe40800000000000000
-      internalID: 5692479203110589863
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Player_walk-Sheet_6
-      rect:
-        serializedVersion: 2
-        x: 800
-        y: 400
-        width: 400
-        height: 400
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b2eb6ed5d523dcee0800000000000000
-      internalID: -1239278945868267989
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Player_walk-Sheet_7
-      rect:
-        serializedVersion: 2
-        x: 1200
-        y: 400
-        width: 400
-        height: 400
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 75177220bddcbd780800000000000000
-      internalID: -8657099518171975337
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Player_walk-Sheet_8
+      name: kiki_walk-Sheet_4
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
-        width: 400
-        height: 400
+        y: 300
+        width: 300
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -317,20 +221,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 754355770554ddf70800000000000000
-      internalID: 9213596624571675735
+      spriteID: b7ff842db3db3e320800000000000000
+      internalID: 2586118675669516155
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_walk-Sheet_9
+      name: kiki_walk-Sheet_5
       rect:
         serializedVersion: 2
-        x: 400
-        y: 0
-        width: 400
-        height: 400
+        x: 300
+        y: 300
+        width: 300
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -338,20 +242,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c29f2dc34b2f60350800000000000000
-      internalID: 5982736010936777004
+      spriteID: 523b1e13b539d55f0800000000000000
+      internalID: -766294341694934235
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_walk-Sheet_10
+      name: kiki_walk-Sheet_6
       rect:
         serializedVersion: 2
-        x: 800
-        y: 0
-        width: 400
-        height: 400
+        x: 600
+        y: 300
+        width: 300
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -359,20 +263,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 217f2ca222777ab40800000000000000
-      internalID: 5451456862585288466
+      spriteID: 4e1e74d7696bb8590800000000000000
+      internalID: -7670836782832295452
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_walk-Sheet_11
+      name: kiki_walk-Sheet_7
       rect:
         serializedVersion: 2
-        x: 1200
-        y: 0
-        width: 400
-        height: 400
+        x: 900
+        y: 300
+        width: 300
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -380,8 +284,92 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c0daa6f67a96c4930800000000000000
-      internalID: 4128791126241619212
+      spriteID: 6276c5ec4f95403f0800000000000000
+      internalID: -935523914617166042
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kiki_walk-Sheet_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 300
+        height: 300
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 10158dc7e612295d0800000000000000
+      internalID: -3057344438606475007
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kiki_walk-Sheet_9
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 0
+        width: 300
+        height: 300
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f53ceb28635043170800000000000000
+      internalID: 8157150556754723679
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kiki_walk-Sheet_10
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 0
+        width: 300
+        height: 300
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8c14eb5bb93799d90800000000000000
+      internalID: -7090509025711865400
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kiki_walk-Sheet_11
+      rect:
+        serializedVersion: 2
+        x: 900
+        y: 0
+        width: 300
+        height: 300
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 352e0a9384ada6bd0800000000000000
+      internalID: -2636054628132658605
       vertices: []
       indices: 
       edges: []
@@ -389,7 +377,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: d16b7e9da58ba614da8eda21d3c6052a
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
