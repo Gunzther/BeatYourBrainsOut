@@ -25,6 +25,14 @@ namespace BBO.BBO.TeamManagement
             team.AddPlayer(playerCharacter);
         }
 
+        public void Reload()
+        {
+            foreach (PlayerCharacter player in team.PlayerCharacters)
+            {
+                player.Reload();
+            }
+        }
+
         private void Start()
         {
             team = new Team();
