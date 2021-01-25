@@ -14,10 +14,12 @@ namespace BBO.BBO.MonsterMovement
         private float speed = default;
 
         private const float waitSec = 1;
-        private const float offset = 0.001f;
+        private const float freezeSec = 6;
+        private const float offset = 0.01f;
 
         private IEnumerable<PlayerCharacter> players = default;
         private float timer = default;
+        private float freezeTimer = default;
         private Transform target = default;
 
         private void Start()
@@ -25,20 +27,29 @@ namespace BBO.BBO.MonsterMovement
             TeamManager teamManager = (TeamManager)FindObjectOfType(typeof(TeamManager));
             players = teamManager.Team.PlayerCharacters;
             timer = 0;
+            freezeTimer = 0;
             target = GetClosetPlayer();
             Debug.Log(target == null);
         }
 
         private void Update()
         {
-            if (timer > waitSec)
+            if (freezeTimer > freezeSec)
+            {
+                target = transform;
+                freezeTimer = 0;
+                timer = 0;
+            }
+            else if (timer > waitSec)
             {
                 target = GetClosetPlayer();
                 timer = 0;
             }
 
             MoveToTarget();
+
             timer += Time.deltaTime;
+            freezeTimer += Time.deltaTime;
         }
 
         private void MoveToTarget()
