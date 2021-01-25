@@ -1,5 +1,7 @@
-﻿using BBO.BBO.GameData;
+﻿using System;
+using BBO.BBO.GameData;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace BBO.BBO.PlayerManagement
 {
@@ -27,6 +29,8 @@ namespace BBO.BBO.PlayerManagement
         [Header("Animation")]
         public Animator PlayerAnimator = default;
 
+        //var allGamepads = Gamepad.all;
+
         private void Start()
         {
             mainCamera = Camera.main;
@@ -53,11 +57,18 @@ namespace BBO.BBO.PlayerManagement
                 var h = Input.GetAxisRaw("Horizontal");
                 inputDirection = new Vector3(h, 0, v);
             }
-
+            
             hasCurrentInput = inputDirection != Vector3.zero;
         }
 
-         private void CalculateDesiredDirection()
+        public void OnMove(InputAction.CallbackContext value)
+        {
+            Vector2 inputMovement = value.ReadValue<Vector2>();
+            inputDirection = new Vector3(inputMovement.x, 0, inputMovement.y);
+            Debug.Log("moving");
+        }
+
+        private void CalculateDesiredDirection()
         {
             //Camera Direction
             var cameraForward = mainCamera.transform.forward;
@@ -119,5 +130,16 @@ namespace BBO.BBO.PlayerManagement
                 PlayerAnimator.SetTrigger(triggerHash);
             }
         }
+
+        
+
+        ////This is called from Player Input, when a button has been pushed, that correspons with the 'TogglePause' action
+        //public void OnTogglePause(InputAction.CallbackContext value)
+        //{
+        //    if (value.started)
+        //    {
+        //        GameManager.Instance.TogglePauseState(this);
+        //    }
+        //}
     }
 }
