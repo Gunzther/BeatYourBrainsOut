@@ -1,14 +1,15 @@
-﻿using UnityEngine;
+﻿using BBO.BBO.GameData;
+using UnityEngine;
 
 namespace BBO.BBO.PlayerManagement
 {
     public class PlayerSmoothController : MonoBehaviour
     {
         [SerializeField]
-        private Camera mainCamera;
+        private Camera mainCamera = default;
 
         [Header("Physics")]
-        public Rigidbody playerRigidbody;
+        public Rigidbody playerRigidbody = default;
 
         [Header("Input")]
         public bool useOldInputManager = true;
@@ -19,23 +20,32 @@ namespace BBO.BBO.PlayerManagement
         [Header("Movement Settings")]
         public float movementSpeed = 5;
         public float smoothingSpeed = 1;
-        private Vector3 rawDirection;
-        private Vector3 smoothDirection;
-        private Vector3 movement;
+        private Vector3 rawDirection = default;
+        private Vector3 smoothDirection = default;
+        private Vector3 movement = default;
 
-        void Update()
+        [Header("Animation")]
+        public Animator PlayerAnimator = default;
+
+        private void Start()
+        {
+            mainCamera = Camera.main;
+        }
+
+        private void Update()
         {
             CalculateMovementInput();
         }
 
-        void FixedUpdate()
+        private void FixedUpdate()
         {
             CalculateDesiredDirection();
             ConvertDirectionFromRawToSmooth();
             MoveThePlayer();
+            AnimatePlayerMovement();
         }
 
-        void CalculateMovementInput()
+        private void CalculateMovementInput()
         {
             if (useOldInputManager)
             {
@@ -47,7 +57,7 @@ namespace BBO.BBO.PlayerManagement
             hasCurrentInput = inputDirection != Vector3.zero;
         }
 
-        void CalculateDesiredDirection()
+         private void CalculateDesiredDirection()
         {
             //Camera Direction
             var cameraForward = mainCamera.transform.forward;
@@ -59,7 +69,7 @@ namespace BBO.BBO.PlayerManagement
             rawDirection = cameraForward * inputDirection.z + cameraRight * inputDirection.x;
         }
 
-        void ConvertDirectionFromRawToSmooth()
+        private void ConvertDirectionFromRawToSmooth()
         {
             if (hasCurrentInput)
             {
@@ -71,13 +81,42 @@ namespace BBO.BBO.PlayerManagement
             }
         }
 
-        void MoveThePlayer()
+        private void MoveThePlayer()
         {
             if (hasCurrentInput)
             {
                 movement.Set(smoothDirection.x, 0f, smoothDirection.z);
                 movement = movement.normalized * movementSpeed * Time.deltaTime;
                 playerRigidbody.MovePosition(transform.position + movement);
+            }
+        }
+
+        private void AnimatePlayerMovement()
+        {
+            int triggerHash = PlayerData.IdleTriggerHash;
+            transform.localScale = new Vector3(1, 1, 1);
+
+            if (inputDirection.z < 0)
+            {
+                triggerHash = PlayerData.WalkFrontTriggerHash;
+            }
+            else if (inputDirection.z > 0)
+            {
+                triggerHash = PlayerData.WalkBackTriggerHash;
+            }
+            else if (inputDirection.x < 0)
+            {
+                triggerHash = PlayerData.WalkSideTriggerHash;
+            }
+            else if (inputDirection.x > 0)
+            {
+                triggerHash = PlayerData.WalkSideTriggerHash;
+                transform.localScale = new Vector3(-1, 1, 1);
+            }
+
+            if (!PlayerAnimator.GetCurrentAnimatorStateInfo(0).IsName(triggerHash.ToString()))
+            {
+                PlayerAnimator.SetTrigger(triggerHash);
             }
         }
     }
