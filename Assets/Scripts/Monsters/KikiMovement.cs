@@ -15,7 +15,7 @@ namespace BBO.BBO.MonsterMovement
 
         private const float waitSec = 1;
         private const float freezeSec = 6;
-        private const float offset = 0.01f;
+        private const float offset = 0.1f;
 
         private IEnumerable<PlayerCharacter> players = default;
         private float timer = default;
