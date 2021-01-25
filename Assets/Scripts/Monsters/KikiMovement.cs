@@ -22,7 +22,7 @@ namespace BBO.BBO.MonsterMovement
         public Animator KikiAnimator = default;
 
         private const float waitSec = 1;
-        private const float bounceForce = 0.8f;
+        private const float bounceForce = 0.2f;
 
         private IEnumerable<PlayerCharacter> players = default;
         private float timer = default;

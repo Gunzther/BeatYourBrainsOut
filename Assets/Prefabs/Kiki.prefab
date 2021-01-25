@@ -193,7 +193,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 6024544657107004920}
-  speed: 3
+  speed: 1.5
   KikiAnimator: {fileID: 4252772204554103646}
 --- !u!114 &7716297010599108313
 MonoBehaviour:
