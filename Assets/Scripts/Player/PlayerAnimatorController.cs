@@ -7,11 +7,13 @@ namespace BBO.BBO.PlayerManagement
     public class PlayerAnimatorController : MonoBehaviour
     {
         [SerializeField]
-        private Texture[] spriteList;
+        private Texture[] spriteList = default;
+
         [SerializeField]
         private int spriteNumber = 0;
 
-        private Renderer renderer;
+        private Renderer renderer = default;
+
         void Awake()
         {
             renderer = GetComponent<Renderer>();
