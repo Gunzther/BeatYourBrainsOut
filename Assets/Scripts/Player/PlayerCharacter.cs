@@ -11,6 +11,11 @@ namespace BBO.BBO.PlayerManagement
         private int playerID = default;
         private UIManager uiManager = default;
         private Team team = default;
+        
+        public void Reload()
+        {
+            uiManager = FindObjectOfType<UIManager>();
+        }
 
         public void SetTeam(Team team)
         {
@@ -27,7 +32,6 @@ namespace BBO.BBO.PlayerManagement
             // TODO: generate player id and assign value to playerID variable
             playerID = 0;
             CurrentPlayerStats = new PlayerStats(playerID);
-            uiManager = FindObjectOfType<UIManager>();
         }
     }
 }

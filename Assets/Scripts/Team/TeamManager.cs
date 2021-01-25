@@ -12,6 +12,7 @@ namespace BBO.BBO.TeamManagement
         [SerializeField]
         private Transform parent = default;
 
+        public Team Team => team;
         private Team team = default;
 
         public void SpawnNewPlayer(Vector3 position)
@@ -22,6 +23,14 @@ namespace BBO.BBO.TeamManagement
             var playerCharacter = newPlayer.GetComponent<PlayerCharacter>();
             playerCharacter.SetTeam(team);
             team.AddPlayer(playerCharacter);
+        }
+
+        public void Reload()
+        {
+            foreach (PlayerCharacter player in team.PlayerCharacters)
+            {
+                player.Reload();
+            }
         }
 
         private void Start()
