@@ -1,4 +1,5 @@
-﻿using BBO.BBO.TeamManagement;
+﻿using BBO.BBO.GameData;
+using BBO.BBO.TeamManagement;
 using BBO.BBO.TeamManagement.UI;
 using UnityEngine;
 
@@ -6,6 +7,9 @@ namespace BBO.BBO.PlayerManagement
 {
     public class PlayerCharacter : MonoBehaviour
     {
+        [SerializeField]
+        private PlayerAnimatorController playerAnimatorController = default;
+
         public PlayerStats CurrentPlayerStats { get; private set; }
 
         private int playerID = default;
@@ -25,6 +29,11 @@ namespace BBO.BBO.PlayerManagement
         public void UpdateHpUI()
         {
             uiManager.SetTeamHpValue(team.CurrentTeamHealth);
+        }
+
+        public void TriggerHurtAnimation()
+        {
+            playerAnimatorController.SetTrigger(AnimationTriggerData.HurtTriggerHash);
         }
 
         private void Awake()

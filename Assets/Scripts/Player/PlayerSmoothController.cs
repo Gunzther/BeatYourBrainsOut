@@ -8,6 +8,9 @@ namespace BBO.BBO.PlayerManagement
         [SerializeField]
         private Camera mainCamera = default;
 
+        [SerializeField]
+        private PlayerAnimatorController playerAnimatorController = default;
+
         [Header("Physics")]
         public Rigidbody playerRigidbody = default;
 
@@ -23,9 +26,6 @@ namespace BBO.BBO.PlayerManagement
         private Vector3 rawDirection = default;
         private Vector3 smoothDirection = default;
         private Vector3 movement = default;
-
-        [Header("Animation")]
-        public Animator PlayerAnimator = default;
 
         private void Start()
         {
@@ -93,30 +93,30 @@ namespace BBO.BBO.PlayerManagement
 
         private void AnimatePlayerMovement()
         {
-            int triggerHash = PlayerData.IdleTriggerHash;
+            int triggerHash = AnimationTriggerData.IdleTriggerHash;
             transform.localScale = new Vector3(1, 1, 1);
 
             if (inputDirection.z < 0)
             {
-                triggerHash = PlayerData.WalkFrontTriggerHash;
+                triggerHash = AnimationTriggerData.WalkFrontTriggerHash;
             }
             else if (inputDirection.z > 0)
             {
-                triggerHash = PlayerData.WalkBackTriggerHash;
+                triggerHash = AnimationTriggerData.WalkBackTriggerHash;
             }
             else if (inputDirection.x < 0)
             {
-                triggerHash = PlayerData.WalkSideTriggerHash;
+                triggerHash = AnimationTriggerData.WalkSideTriggerHash;
             }
             else if (inputDirection.x > 0)
             {
-                triggerHash = PlayerData.WalkSideTriggerHash;
+                triggerHash = AnimationTriggerData.WalkSideTriggerHash;
                 transform.localScale = new Vector3(-1, 1, 1);
             }
 
-            if (!PlayerAnimator.GetCurrentAnimatorStateInfo(0).IsName(triggerHash.ToString()))
+            if (!playerAnimatorController.IsInState(triggerHash.ToString()))
             {
-                PlayerAnimator.SetTrigger(triggerHash);
+                playerAnimatorController.SetTrigger(triggerHash);
             }
         }
     }
