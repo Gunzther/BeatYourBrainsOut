@@ -93,24 +93,24 @@ namespace BBO.BBO.PlayerManagement
 
         private void AnimatePlayerMovement()
         {
-            int triggerHash = AnimationTriggerData.IdleTriggerHash;
+            int triggerHash = PlayerData.IdleTriggerHash;
             transform.localScale = new Vector3(1, 1, 1);
 
             if (inputDirection.z < 0)
             {
-                triggerHash = AnimationTriggerData.WalkFrontTriggerHash;
+                triggerHash = PlayerData.WalkFrontTriggerHash;
             }
             else if (inputDirection.z > 0)
             {
-                triggerHash = AnimationTriggerData.WalkBackTriggerHash;
+                triggerHash = PlayerData.WalkBackTriggerHash;
             }
             else if (inputDirection.x < 0)
             {
-                triggerHash = AnimationTriggerData.WalkSideTriggerHash;
+                triggerHash = PlayerData.WalkSideTriggerHash;
             }
             else if (inputDirection.x > 0)
             {
-                triggerHash = AnimationTriggerData.WalkSideTriggerHash;
+                triggerHash = PlayerData.WalkSideTriggerHash;
                 transform.localScale = new Vector3(-1, 1, 1);
             }
 

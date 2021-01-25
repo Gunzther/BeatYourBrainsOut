@@ -87,17 +87,17 @@ namespace BBO.BBO.MonsterMovement
 
         private void AnimateKikiMovement(float kikiXPos, float targetXPos)
         {
-            int triggerHash = AnimationTriggerData.IdleTriggerHash;
+            int triggerHash = MonstersData.IdleTriggerHash;
             transform.localScale = new Vector3(1, 1, 1);
 
             if (kikiXPos < targetXPos)
             {
-                triggerHash = AnimationTriggerData.WalkSideTriggerHash;
+                triggerHash = MonstersData.WalkSideTriggerHash;
                 transform.localScale = new Vector3(-1, 1, 1);
             }
             else if (kikiXPos > targetXPos)
             {
-                triggerHash = AnimationTriggerData.WalkSideTriggerHash;
+                triggerHash = MonstersData.WalkSideTriggerHash;
             }
 
             if (!KikiAnimator.GetCurrentAnimatorStateInfo(0).IsName(triggerHash.ToString()))

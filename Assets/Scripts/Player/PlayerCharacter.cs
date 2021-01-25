@@ -33,7 +33,7 @@ namespace BBO.BBO.PlayerManagement
 
         public void TriggerHurtAnimation()
         {
-            playerAnimatorController.SetTrigger(AnimationTriggerData.HurtTriggerHash);
+            playerAnimatorController.SetTrigger(PlayerData.HurtTriggerHash);
         }
 
         private void Awake()

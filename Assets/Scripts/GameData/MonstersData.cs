@@ -2,7 +2,7 @@
 
 namespace BBO.BBO.GameData
 {
-    public static class AnimationTriggerData
+    public static class MonstersData
     {
         public static readonly int IdleTriggerHash = Animator.StringToHash("Idle");
         public static readonly int WalkFrontTriggerHash = Animator.StringToHash("WalkFront");
