@@ -12,13 +12,27 @@ namespace BBO.BBO.PlayerManagement
         [SerializeField]
         private int spriteNumber = 0;
 
+        [SerializeField]
+        private Animator playerAnimator = default;
+
         private Renderer renderer = default;
 
-        void Awake()
+        public void SetTrigger(int triggerHash)
+        {
+            playerAnimator.SetTrigger(triggerHash);
+        }
+
+        public bool IsInState(string stateName)
+        {
+            return playerAnimator.GetCurrentAnimatorStateInfo(0).IsName(stateName);
+        }
+
+        private void Awake()
         {
             renderer = GetComponent<Renderer>();
         }
-        void Update()
+
+        private void Update()
         {
             renderer.material.SetTexture("_MainTex", spriteList[spriteNumber < spriteList.Length - 1 ? spriteNumber : spriteList.Length - 1]);
         }

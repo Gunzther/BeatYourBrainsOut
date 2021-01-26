@@ -204,7 +204,7 @@ MeshCollider:
   m_GameObject: {fileID: 675493428899472987}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   m_Convex: 1
   m_CookingOptions: 30
@@ -244,6 +244,7 @@ MonoBehaviour:
   - {fileID: 2800000, guid: cbcf919b980a3db4e8204b1bbc28cfcf, type: 3}
   - {fileID: 2800000, guid: 11ad26cfa145a4e4181184d500035531, type: 3}
   spriteNumber: 0
+  playerAnimator: {fileID: 4542186820259572506}
 --- !u!1 &2624934328494790055
 GameObject:
   m_ObjectHideFlags: 0
@@ -256,6 +257,7 @@ GameObject:
   - component: {fileID: 5387966283118922947}
   - component: {fileID: 4784475903516044564}
   - component: {fileID: 6311386286687350204}
+  - component: {fileID: 6374427223138051302}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -290,6 +292,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25abe2e311c534948abcd3c009e5fd35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerAnimatorController: {fileID: 2648536084244495007}
 --- !u!114 &4784475903516044564
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -303,11 +306,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 0}
+  playerAnimatorController: {fileID: 2648536084244495007}
   playerRigidbody: {fileID: 6311386286687350204}
   useOldInputManager: 1
   movementSpeed: 4
   smoothingSpeed: 1
-  PlayerAnimator: {fileID: 4542186820259572506}
 --- !u!54 &6311386286687350204
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -324,3 +327,17 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 116
   m_CollisionDetection: 0
+--- !u!136 &6374427223138051302
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2624934328494790055}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.3
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}

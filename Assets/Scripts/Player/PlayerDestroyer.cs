@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using BBO.BBO.MonsterManagement;
+using UnityEngine;
 
 namespace BBO.BBO.PlayerManagement
 {
@@ -9,10 +10,22 @@ namespace BBO.BBO.PlayerManagement
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.gameObject.GetComponentInParent<PlayerCharacter>() is PlayerCharacter player)
+            if (other.gameObject.GetComponent<PlayerCharacter>() is PlayerCharacter player)
             {
                 player.CurrentPlayerStats.DecreasePlayerHealth(damageValue);
                 player.UpdateHpUI();
+                player.TriggerHurtAnimation();
+            }
+        }
+
+        private void OnTriggerStay(Collider other)
+        {
+            if (other.gameObject.GetComponent<PlayerCharacter>() is PlayerCharacter player)
+            {
+                if (gameObject.GetComponent<MonsterCharacter>() is MonsterCharacter monster)
+                {
+                    monster.OnAttack();
+                }
             }
         }
     }

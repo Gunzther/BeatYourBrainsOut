@@ -1,9 +1,13 @@
-﻿using UnityEngine;
+﻿using BBO.BBO.MonsterMovement;
+using UnityEngine;
 
 namespace BBO.BBO.MonsterManagement
 {
     public class MonsterCharacter : MonoBehaviour
     {
+        [SerializeField]
+        private MonstersMovement monsterMovement = default;
+
         [SerializeField]
         private int hp = default;
 
@@ -20,6 +24,11 @@ namespace BBO.BBO.MonsterManagement
         public void IncreaseMonsterHp(int value)
         {
             hp += value;
+        }
+
+        public void OnAttack()
+        {
+            monsterMovement.OnAttackMovement();
         }
     }
 }
