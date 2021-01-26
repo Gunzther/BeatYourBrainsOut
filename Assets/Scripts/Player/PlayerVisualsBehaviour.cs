@@ -26,20 +26,12 @@ public class PlayerVisualsBehaviour : MonoBehaviour
         playerID = newPlayerID;
         playerInput = newPlayerInput;
 
-        SetupShaderIDs();
-
         UpdatePlayerVisuals();
-    }
-
-    void SetupShaderIDs()
-    {
-        clothingTintShaderID = Shader.PropertyToID("_Clothing_Tint");
     }
 
     public void UpdatePlayerVisuals()
     {
         UpdateUIDisplay();
-        UpdateCharacterShader();
     }
 
     void UpdateUIDisplay()
@@ -51,12 +43,6 @@ public class PlayerVisualsBehaviour : MonoBehaviour
 
         Color deviceColor = deviceDisplaySettings.GetDeviceColor(playerInput);
         playerUIDisplayBehaviour.UpdatePlayerIconDisplayColor(deviceColor);
-    }
-
-    void UpdateCharacterShader()
-    {
-        Color deviceColor = deviceDisplaySettings.GetDeviceColor(playerInput);
-        playerSkinnedMeshRenderer.material.SetColor(clothingTintShaderID, deviceColor);
     }
 
     public void SetDisconnectedDeviceVisuals()
