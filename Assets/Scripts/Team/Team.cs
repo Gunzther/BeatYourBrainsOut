@@ -10,6 +10,7 @@ namespace BBO.BBO.TeamManagement
         public int PlayerAmount => playerCharacters.Count();
         public int CurrentTeamHealth => playerCharacters.Select(x => x.CurrentPlayerStats.Health).Sum();
         public int TotalHealth => PlayerAmount * PlayerData.DefaultHealth;
+        public IEnumerable<PlayerCharacter> PlayerCharacters => playerCharacters;
 
         private HashSet<PlayerCharacter> playerCharacters = default;
 

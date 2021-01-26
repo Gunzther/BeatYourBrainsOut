@@ -30,12 +30,21 @@ namespace BBO.BBO.TeamManagement
         private List<PlayerSmoothController> activePlayerControllers = default;
         private PlayerSmoothController focusedPlayerController = default;
 
+        public Team Team => team;
         private Team team = default;
 
         public override void Awake()
         {
             base.Awake();
             team = new Team();
+        }
+
+        public void Reload()
+        {
+            foreach (PlayerCharacter player in team.PlayerCharacters)
+            {
+                player.Reload();
+            }
         }
 
         public void SetupLocalMultiplayer()
@@ -60,6 +69,14 @@ namespace BBO.BBO.TeamManagement
         }
 
         private void SetupActivePlayers()
+        {
+            for (int i = 0; i < activePlayerControllers.Count; i++)
+            {
+                activePlayerControllers[i].SetupPlayer(i);
+            }
+        }
+
+        private void Start()
         {
             for (int i = 0; i < activePlayerControllers.Count; i++)
             {
