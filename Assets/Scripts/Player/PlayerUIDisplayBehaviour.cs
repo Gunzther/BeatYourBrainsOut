@@ -1,15 +1,17 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
 public class PlayerUIDisplayBehaviour : MonoBehaviour
 {
+    [SerializeField]
+    private TextMeshProUGUI IDDisplayText = default;
 
-    public TextMeshProUGUI IDDisplayText;
-    public TextMeshProUGUI deviceNameDisplayText;
-    public Image deviceDisplayIcon;
+    [SerializeField]
+    private TextMeshProUGUI deviceNameDisplayText = default;
+
+    [SerializeField]
+    private Image deviceDisplayIcon = default;
 
     public void UpdatePlayerIDDisplayText(int newPlayerID)
     {
@@ -25,5 +27,4 @@ public class PlayerUIDisplayBehaviour : MonoBehaviour
     {
         deviceDisplayIcon.color = newColor;
     }
-
 }

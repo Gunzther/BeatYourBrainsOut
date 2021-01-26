@@ -1,11 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerVisualsBehaviour : MonoBehaviour
 {
-
     //Player ID
     private int playerID;
     private PlayerInput playerInput;
@@ -36,8 +33,8 @@ public class PlayerVisualsBehaviour : MonoBehaviour
         string deviceName = deviceDisplaySettings.GetDeviceName(playerInput);
         playerUIDisplayBehaviour.UpdatePlayerDeviceNameDisplayText(deviceName);
 
-        Color deviceColor = deviceDisplaySettings.GetDeviceColor(playerInput);
-        playerUIDisplayBehaviour.UpdatePlayerIconDisplayColor(deviceColor);
+        //Color deviceColor = deviceDisplaySettings.GetDeviceColor(playerInput);
+        //playerUIDisplayBehaviour.UpdatePlayerIconDisplayColor(deviceColor);
     }
 
     public void SetDisconnectedDeviceVisuals()
@@ -45,8 +42,7 @@ public class PlayerVisualsBehaviour : MonoBehaviour
         string disconnectedName = deviceDisplaySettings.GetDisconnectedName();
         playerUIDisplayBehaviour.UpdatePlayerDeviceNameDisplayText(disconnectedName);
 
-        Color disconnectedColor = deviceDisplaySettings.GetDisconnectedColor();
-        playerUIDisplayBehaviour.UpdatePlayerIconDisplayColor(disconnectedColor);
-
+        //Color disconnectedColor = deviceDisplaySettings.GetDisconnectedColor();
+        //playerUIDisplayBehaviour.UpdatePlayerIconDisplayColor(disconnectedColor);
     }
 }

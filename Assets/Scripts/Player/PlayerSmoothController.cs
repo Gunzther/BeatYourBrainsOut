@@ -1,6 +1,5 @@
-﻿using System;
+﻿using BBO.BBO.GameData;
 using System.Collections;
-using BBO.BBO.GameData;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -8,12 +7,11 @@ namespace BBO.BBO.PlayerManagement
 {
     public class PlayerSmoothController : MonoBehaviour
     {
-
         //Player ID
         private int playerID;
 
         [Header("Sub Behaviours")]
-        public PlayerVisualsBehaviour playerVisualsBehaviour;
+        public PlayerVisualsBehaviour playerVisualsBehaviour = default;
 
         //Current Control Scheme
         private string currentControlScheme;
@@ -174,13 +172,10 @@ namespace BBO.BBO.PlayerManagement
         //This is automatically called from PlayerInput, when the input device has been disconnected and can not be identified
         //IE: Device unplugged or has run out of batteries
 
-
-
         public void OnDeviceLost()
         {
             playerVisualsBehaviour.SetDisconnectedDeviceVisuals();
         }
-
 
         public void OnDeviceRegained()
         {

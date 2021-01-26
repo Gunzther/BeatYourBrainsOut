@@ -1,17 +1,12 @@
-﻿using System.Collections.Generic;
-using BBO.BBO.PlayerManagement;
-using BBO.BBO.TeamManagement;
+﻿using BBO.BBO.TeamManagement;
 using BBO.BBO.Utilities;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
-
 
 public class GameManager : MonoSingleton<GameManager>
 {
     [SerializeField]
     TeamManager teamManager = default;
-
     
     // Start is called before the first frame update
     void Start()
@@ -27,8 +22,4 @@ public class GameManager : MonoSingleton<GameManager>
             SceneManager.LoadScene("Gameplay");
         }
     }
-
-    
-
-    
 }
