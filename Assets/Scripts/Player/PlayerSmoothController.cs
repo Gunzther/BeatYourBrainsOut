@@ -33,8 +33,13 @@ namespace BBO.BBO.PlayerManagement
 
         [Header("Movement Settings")]
         public PlayerInput playerInput;
-        public float movementSpeed = 5;
-        public float smoothingSpeed = 1;
+
+        [SerializeField]
+        private float movementSpeed = 5;
+
+        [SerializeField]
+        private float smoothingSpeed = 1;
+
         private Vector3 rawDirection = default;
         private Vector3 smoothDirection = default;
         private Vector3 movement = default;
