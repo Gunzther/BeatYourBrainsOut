@@ -6,10 +6,10 @@ namespace BBO.BBO.TeamManagement.UI
     public class UIManager : MonoBehaviour
     {
         [SerializeField]
-        private Slider teamHpSlider;
+        private Slider teamHpSlider = default;
 
         [SerializeField]
-        private Text teamHpText;
+        private Text teamHpText = default;
 
         public void SetTeamHpMaxValue(int value)
         {
