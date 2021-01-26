@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
-using BBO.BBO.PlayerManagement;
+﻿using BBO.BBO.PlayerManagement;
 using BBO.BBO.Utilities;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -8,50 +8,46 @@ namespace BBO.BBO.TeamManagement
 {
     public class TeamManager : MonoSingleton<TeamManager>
     {
+        [Header("Prefabs")]
         [SerializeField]
         private Transform playerPrefab = default;
 
         [SerializeField]
         private Transform parent = default;
 
-        private Team team = default;
+        [Header("Spawners")]
+        [SerializeField]
+        private Transform spawnRingCenter = default;
 
-        public Transform spawnRingCenter;
-        public float spawnRingRadius;
+        [SerializeField]
+        private float spawnRingRadius = default;
 
-        //Local Multiplayer
-        public GameObject inScenePlayer;
-        public int numberOfPlayers;
-
+        [Header("Local Multiplayer")]
+        [SerializeField]
+        private int numberOfPlayers = default;
 
         //Spawned Players
-        private List<PlayerSmoothController> activePlayerControllers;
-        private PlayerSmoothController focusedPlayerController;
+        private List<PlayerSmoothController> activePlayerControllers = default;
+        private PlayerSmoothController focusedPlayerController = default;
 
-        private void Start()
+        private Team team = default;
+
+        public override void Awake()
         {
+            base.Awake();
             team = new Team();
-
-            SetupLocalMultiplayer();
         }
 
         public void SetupLocalMultiplayer()
         {
-
-            if (inScenePlayer == true)
-            {
-                Destroy(inScenePlayer);
-            }
-
+            DestroyOldPlayers();
             activePlayerControllers = new List<PlayerSmoothController>();
 
             for (int i = 0; i < numberOfPlayers; i++)
             {
                 // spawn players
-                Vector3 spawnPosition = CalculatePositionInRing(i, numberOfPlayers);
-                Quaternion spawnRotation = CalculateRotation();
-
-                Transform spawnedPlayer = Instantiate(playerPrefab, spawnPosition, spawnRotation);
+                Transform spawnedPlayer = Instantiate(playerPrefab, parent);
+                spawnedPlayer.position = CalculatePositionInRing(i, numberOfPlayers);
                 AddPlayerToActivePlayerList(spawnedPlayer.GetComponent<PlayerSmoothController>());
 
                 // Add player into the team
@@ -63,7 +59,7 @@ namespace BBO.BBO.TeamManagement
             SetupActivePlayers();
         }
 
-        void SetupActivePlayers()
+        private void SetupActivePlayers()
         {
             for (int i = 0; i < activePlayerControllers.Count; i++)
             {
@@ -71,13 +67,35 @@ namespace BBO.BBO.TeamManagement
             }
         }
 
-        void AddPlayerToActivePlayerList(PlayerSmoothController newPlayer)
+        private void AddPlayerToActivePlayerList(PlayerSmoothController newPlayer)
         {
             activePlayerControllers.Add(newPlayer);
         }
 
-        //Get Data ----
+        private void DestroyOldPlayers()
+        {
+            foreach (Transform child in parent)
+            {
+                Destroy(child.gameObject);
+            }
+        }
 
+        //Spawn Utilities
+        private Vector3 CalculatePositionInRing(int positionID, int numberOfPlayers)
+        {
+            if (numberOfPlayers == 1)
+            {
+                return spawnRingCenter.position;
+            }
+
+            float angle = (positionID) * Mathf.PI * 2 / numberOfPlayers;
+            float x = Mathf.Cos(angle) * spawnRingRadius;
+            float z = Mathf.Sin(angle) * spawnRingRadius;
+
+            return spawnRingCenter.position + new Vector3(x, 0, z);
+        }
+
+        //Get Data ----
         public List<PlayerSmoothController> GetActivePlayerControllers()
         {
             return activePlayerControllers;
@@ -92,24 +110,5 @@ namespace BBO.BBO.TeamManagement
         {
             return InputSystem.devices.Count;
         }
-
-        //Spawn Utilities
-
-        Vector3 CalculatePositionInRing(int positionID, int numberOfPlayers)
-        {
-            if (numberOfPlayers == 1)
-                return spawnRingCenter.position;
-
-            float angle = (positionID) * Mathf.PI * 2 / numberOfPlayers;
-            float x = Mathf.Cos(angle) * spawnRingRadius;
-            float z = Mathf.Sin(angle) * spawnRingRadius;
-            return spawnRingCenter.position + new Vector3(x, 0, z);
-        }
-
-        Quaternion CalculateRotation()
-        {
-            return Quaternion.Euler(new Vector3(0, Random.Range(0, 360), 0));
-        }
-
     }
 }
