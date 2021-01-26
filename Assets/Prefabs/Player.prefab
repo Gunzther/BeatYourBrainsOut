@@ -346,7 +346,6 @@ MonoBehaviour:
   deviceDisplaySettings: {fileID: 11400000, guid: 05f01a30e7d054be0aa1eed74f3ba906,
     type: 2}
   playerUIDisplayBehaviour: {fileID: 5309740423339311925}
-  playerSkinnedMeshRenderer: {fileID: 0}
 --- !u!1 &3295135742365079353
 GameObject:
   m_ObjectHideFlags: 0
@@ -395,7 +394,7 @@ GameObject:
   - component: {fileID: 5569352646108814244}
   - component: {fileID: 6119566612503594863}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Text_DeviceName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -611,8 +610,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a94291c1c01842be978e660509934bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IDDisplayText: {fileID: 0}
-  deviceNameDisplayText: {fileID: 0}
+  IDDisplayText: {fileID: 8847245305959953276}
+  deviceNameDisplayText: {fileID: 6119566612503594863}
   deviceDisplayIcon: {fileID: 0}
 --- !u!1 &7768799062662290521
 GameObject:
