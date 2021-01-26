@@ -158,6 +158,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 090fc2fffae9c124c9e334aec4a86b51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPrefab: {fileID: 2624934328494790051, guid: 2a0582999e76a394391eb34e94239aca,
+  playerPrefab: {fileID: 6398968537170311853, guid: 2a0582999e76a394391eb34e94239aca,
     type: 3}
   parent: {fileID: 981131384}
+  spawnRingCenter: {fileID: 0}
+  spawnRingRadius: 2
+  numberOfPlayers: 2
