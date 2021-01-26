@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e94d7d05cb8a34bc0afee5a1d4562b9f, type: 3}
+  m_Name: DeviceDisplaySettings_PS4
+  m_EditorClassIdentifier: 
+  deviceDisplayName: PlayStation4
+  deviceDisplayColor: {r: 0.04209684, g: 0.09242362, b: 0.8113208, a: 0}
+  deviceHasContextIcons: 1
+  buttonNorthIcon: {fileID: 21300000, guid: 47b0c8cbcd450124abdb1b62fb7f5806, type: 3}
+  buttonSouthIcon: {fileID: 21300000, guid: 2da2d15ce082e12448ac493c55a33f0f, type: 3}
+  buttonWestIcon: {fileID: 21300000, guid: 428de70370df69d45bd4c0025b7ba36e, type: 3}
+  buttonEastIcon: {fileID: 21300000, guid: c7f381483fb41f14e935b2d6d9fec62f, type: 3}
+  triggerRightFrontIcon: {fileID: 21300000, guid: 22b97dfa5af0d1947a62312c31e633e5,
+    type: 3}
+  triggerRightBackIcon: {fileID: 21300000, guid: 87dce22414624c74d90f8bfc4bf3582f,
+    type: 3}
+  triggerLeftFrontIcon: {fileID: 21300000, guid: 7eaab648006558044a9680311037b8f9,
+    type: 3}
+  triggerLeftBackIcon: {fileID: 21300000, guid: f920addac480add4c99e64df920b61a3,
+    type: 3}
+  customContextIcons:
+  - customInputContextString: Right Stick Press
+    customInputContextIcon: {fileID: 21300000, guid: 04f2711270cd5b64099d2ca2f99529de,
+      type: 3}
+  - customInputContextString: Left Stick Press
+    customInputContextIcon: {fileID: 21300000, guid: 7e177675a5fc16248b6e164ef7a7f2a6,
+      type: 3}
+  - customInputContextString: Select
+    customInputContextIcon: {fileID: 21300000, guid: a521d4effb3d3c64b9329370383eb640,
+      type: 3}
