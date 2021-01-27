@@ -52,6 +52,7 @@ namespace BBO.BBO.PlayerManagement
         private void Update()
         {
             CalculateMovementInput();
+            CheckPlayerAttacking();
         }
 
         private void FixedUpdate()
@@ -69,6 +70,14 @@ namespace BBO.BBO.PlayerManagement
             currentControlScheme = playerInput.currentControlScheme;
 
             playerVisualsBehaviour.SetupBehaviour(playerID, playerInput);
+        }
+
+        private void CheckPlayerAttacking()
+        {
+            if (useOldInputManager && Input.GetKeyDown(KeyCode.F))
+            {
+                playerAnimatorController.SetTrigger(PlayerData.BaseballHitTriggerHash);
+            }
         }
 
         private void CalculateMovementInput()

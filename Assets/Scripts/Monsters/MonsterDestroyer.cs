@@ -7,6 +7,11 @@ namespace BBO.BBO.MonsterManagement
         [SerializeField]
         private int damageValue = default;
 
+        public void SetDamageValue(int value)
+        {
+            damageValue = value;
+        }
+
         private void OnTriggerEnter(Collider other)
         {
             if (other.gameObject.GetComponent<MonsterCharacter>() is MonsterCharacter monster)
