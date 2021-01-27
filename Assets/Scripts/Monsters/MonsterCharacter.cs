@@ -30,5 +30,10 @@ namespace BBO.BBO.MonsterManagement
         {
             monsterMovement.OnAttackMovement();
         }
+
+        public void OnAttacked()
+        {
+            monsterMovement.OnAttackedMovement();
+        }
     }
 }

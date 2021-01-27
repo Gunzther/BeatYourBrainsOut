@@ -23,6 +23,7 @@ namespace BBO.BBO.MonsterMovement
 
         private const float waitSec = 1;
         private const float bounceForce = 0.2f;
+        private const float bounceAttackedForce = 1.5f;
 
         private IEnumerable<PlayerCharacter> players = default;
         private float timer = default;
@@ -30,7 +31,15 @@ namespace BBO.BBO.MonsterMovement
 
         public override void OnAttackMovement()
         {
+            base.OnAttackMovement();
             rb.AddForce(target.transform.position * -bounceForce, ForceMode.Impulse);
+        }
+
+        public override void OnAttackedMovement()
+        {
+            base.OnAttackedMovement();
+            KikiAnimator.SetTrigger(MonstersData.HurtTriggerHash);
+            rb.AddForce(target.transform.position * -bounceAttackedForce, ForceMode.Impulse);
         }
 
         private void Start()

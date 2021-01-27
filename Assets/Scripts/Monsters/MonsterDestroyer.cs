@@ -17,6 +17,7 @@ namespace BBO.BBO.MonsterManagement
             if (other.gameObject.GetComponent<MonsterCharacter>() is MonsterCharacter monster)
             {
                 monster.DecreaseMonsterHp(damageValue);
+                monster.OnAttacked();
             }
         }
     }
