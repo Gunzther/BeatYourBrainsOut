@@ -8,7 +8,6 @@ namespace BBO.BBO.Utilities
     [CreateAssetMenu(fileName = "Device Display Configurator", menuName = "Scriptable Objects/Device Display Configurator", order = 1)]
     public class DeviceDisplayConfigurator : ScriptableObject
     {
-
         [Serializable]
         public struct DeviceSet
         {
