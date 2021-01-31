@@ -22,7 +22,7 @@ namespace BBO.BBO.Utilities
             public Color disconnectedDisplayColor;
         }
 
-        public List<DeviceSet> listDeviceSets = new List<DeviceSet>();
+        public HashSet<DeviceSet> listDeviceSets = new HashSet<DeviceSet>();
 
         public DisconnectedSettings disconnectedDeviceSettings = default;
 
@@ -36,12 +36,12 @@ namespace BBO.BBO.Utilities
 
             string newDisplayName = null;
 
-            for (int i = 0; i < listDeviceSets.Count; i++)
+            foreach (DeviceSet device in listDeviceSets)
             {
 
-                if (listDeviceSets[i].deviceRawPath == currentDeviceRawPath)
+                if (device.deviceRawPath == currentDeviceRawPath)
                 {
-                    newDisplayName = listDeviceSets[i].deviceDisplaySettings.deviceDisplayName;
+                    newDisplayName = device.deviceDisplaySettings.deviceDisplayName;
                 }
             }
 
@@ -62,12 +62,12 @@ namespace BBO.BBO.Utilities
 
             Color newDisplayColor = fallbackDisplayColor;
 
-            for (int i = 0; i < listDeviceSets.Count; i++)
+            foreach (DeviceSet device in listDeviceSets)
             {
 
-                if (listDeviceSets[i].deviceRawPath == currentDeviceRawPath)
+                if (device.deviceRawPath == currentDeviceRawPath)
                 {
-                    newDisplayColor = listDeviceSets[i].deviceDisplaySettings.deviceDisplayColor;
+                    newDisplayColor = device.deviceDisplaySettings.deviceDisplayColor;
                 }
             }
 
@@ -82,13 +82,13 @@ namespace BBO.BBO.Utilities
 
             Sprite displaySpriteIcon = null;
 
-            for (int i = 0; i < listDeviceSets.Count; i++)
+            foreach (DeviceSet device in listDeviceSets)
             {
-                if (listDeviceSets[i].deviceRawPath == currentDeviceRawPath)
+                if (device.deviceRawPath == currentDeviceRawPath)
                 {
-                    if (listDeviceSets[i].deviceDisplaySettings.deviceHasContextIcons != null)
+                    if (device.deviceDisplaySettings.deviceHasContextIcons != null)
                     {
-                        displaySpriteIcon = FilterForDeviceInputBinding(listDeviceSets[i], playerInputDeviceInputBinding);
+                        displaySpriteIcon = FilterForDeviceInputBinding(device, playerInputDeviceInputBinding);
                     }
                 }
             }
@@ -146,18 +146,18 @@ namespace BBO.BBO.Utilities
 
                     for (int i = 0; i < targetDeviceSet.deviceDisplaySettings.customContextIcons.Count; i++)
                     {
-                        if (targetDeviceSet.deviceDisplaySettings.customContextIcons[i].customInputContextString == inputBinding)
+                        var customContextIcon = targetDeviceSet.deviceDisplaySettings.customContextIcons[i];
+
+                        if (customContextIcon.customInputContextString == inputBinding)
                         {
-                            if (targetDeviceSet.deviceDisplaySettings.customContextIcons[i].customInputContextIcon != null)
+                            if (customContextIcon.customInputContextIcon != null)
                             {
-                                spriteIcon = targetDeviceSet.deviceDisplaySettings.customContextIcons[i].customInputContextIcon;
+                                spriteIcon = customContextIcon.customInputContextIcon;
                             }
                         }
                     }
 
-
                     break;
-
             }
 
             return spriteIcon;
