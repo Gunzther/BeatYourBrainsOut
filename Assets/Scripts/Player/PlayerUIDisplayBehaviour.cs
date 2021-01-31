@@ -2,29 +2,32 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerUIDisplayBehaviour : MonoBehaviour
+namespace BBO.BBO.PlayerInputSystem
 {
-    [SerializeField]
-    private TextMeshProUGUI IDDisplayText = default;
-
-    [SerializeField]
-    private TextMeshProUGUI deviceNameDisplayText = default;
-
-    [SerializeField]
-    private Image deviceDisplayIcon = default;
-
-    public void UpdatePlayerIDDisplayText(int newPlayerID)
+    public class PlayerUIDisplayBehaviour : MonoBehaviour
     {
-        IDDisplayText.SetText((newPlayerID + 1).ToString());
-    }
+        [SerializeField]
+        private TextMeshProUGUI IDDisplayText = default;
 
-    public void UpdatePlayerDeviceNameDisplayText(string newDeviceName)
-    {
-        deviceNameDisplayText.SetText(newDeviceName);
-    }
+        [SerializeField]
+        private TextMeshProUGUI deviceNameDisplayText = default;
 
-    public void UpdatePlayerIconDisplayColor(Color newColor)
-    {
-        deviceDisplayIcon.color = newColor;
+        [SerializeField]
+        private Image deviceDisplayIcon = default;
+
+        public void UpdatePlayerIDDisplayText(int newPlayerID)
+        {
+            IDDisplayText.SetText((newPlayerID + 1).ToString());
+        }
+
+        public void UpdatePlayerDeviceNameDisplayText(string newDeviceName)
+        {
+            deviceNameDisplayText.SetText(newDeviceName);
+        }
+
+        public void UpdatePlayerIconDisplayColor(Color newColor)
+        {
+            deviceDisplayIcon.color = newColor;
+        }
     }
 }

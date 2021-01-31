@@ -1,19 +1,22 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections.Generic;
 using UnityEngine.InputSystem;
+using BBO.BBO.Utilities;
+
 
 [CreateAssetMenu(fileName = "Device Display Configurator", menuName = "Scriptable Objects/Device Display Configurator", order = 1)]
 public class DeviceDisplayConfigurator : ScriptableObject
 {
 
-    [System.Serializable]
+    [Serializable]
     public struct DeviceSet
     {
         public string deviceRawPath;
         public DeviceDisplaySettings deviceDisplaySettings;
     }
 
-    [System.Serializable]
+    [Serializable]
     public struct DisconnectedSettings
     {
         public string disconnectedDisplayName;

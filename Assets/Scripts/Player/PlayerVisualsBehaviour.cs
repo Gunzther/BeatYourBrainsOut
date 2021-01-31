@@ -1,48 +1,52 @@
 ﻿using UnityEngine;
 using UnityEngine.InputSystem;
+using BBO.BBO.Utilities;
 
-public class PlayerVisualsBehaviour : MonoBehaviour
+namespace BBO.BBO.PlayerInputSystem
 {
-    //Player ID
-    private int playerID;
-    private PlayerInput playerInput;
-
-    [Header("Device Display Settings")]
-    public DeviceDisplayConfigurator deviceDisplaySettings;
-
-    [Header("Sub Behaviours")]
-    public PlayerUIDisplayBehaviour playerUIDisplayBehaviour;
-
-    public void SetupBehaviour(int newPlayerID, PlayerInput newPlayerInput)
+    public class PlayerVisualsBehaviour : MonoBehaviour
     {
-        playerID = newPlayerID;
-        playerInput = newPlayerInput;
+        //Player ID
+        private int playerID = default;
+        private PlayerInput playerInput = default;
 
-        UpdatePlayerVisuals();
-    }
+        [SerializeField]
+        private DeviceDisplayConfigurator deviceDisplaySettings;
 
-    public void UpdatePlayerVisuals()
-    {
-        UpdateUIDisplay();
-    }
+        [SerializeField]
+        private PlayerUIDisplayBehaviour playerUIDisplayBehaviour;
 
-    void UpdateUIDisplay()
-    {
-        playerUIDisplayBehaviour.UpdatePlayerIDDisplayText(playerID);
+        public void SetupBehaviour(int newPlayerID, PlayerInput newPlayerInput)
+        {
+            playerID = newPlayerID;
+            playerInput = newPlayerInput;
 
-        string deviceName = deviceDisplaySettings.GetDeviceName(playerInput);
-        playerUIDisplayBehaviour.UpdatePlayerDeviceNameDisplayText(deviceName);
+            UpdatePlayerVisuals();
+        }
 
-        //Color deviceColor = deviceDisplaySettings.GetDeviceColor(playerInput);
-        //playerUIDisplayBehaviour.UpdatePlayerIconDisplayColor(deviceColor);
-    }
+        public void UpdatePlayerVisuals()
+        {
+            UpdateUIDisplay();
+        }
 
-    public void SetDisconnectedDeviceVisuals()
-    {
-        string disconnectedName = deviceDisplaySettings.GetDisconnectedName();
-        playerUIDisplayBehaviour.UpdatePlayerDeviceNameDisplayText(disconnectedName);
+        private void UpdateUIDisplay()
+        {
+            playerUIDisplayBehaviour.UpdatePlayerIDDisplayText(playerID);
 
-        //Color disconnectedColor = deviceDisplaySettings.GetDisconnectedColor();
-        //playerUIDisplayBehaviour.UpdatePlayerIconDisplayColor(disconnectedColor);
+            string deviceName = deviceDisplaySettings.GetDeviceName(playerInput);
+            playerUIDisplayBehaviour.UpdatePlayerDeviceNameDisplayText(deviceName);
+
+            //Color deviceColor = deviceDisplaySettings.GetDeviceColor(playerInput);
+            //playerUIDisplayBehaviour.UpdatePlayerIconDisplayColor(deviceColor);
+        }
+
+        public void SetDisconnectedDeviceVisuals()
+        {
+            string disconnectedName = deviceDisplaySettings.GetDisconnectedName();
+            playerUIDisplayBehaviour.UpdatePlayerDeviceNameDisplayText(disconnectedName);
+
+            //Color disconnectedColor = deviceDisplaySettings.GetDisconnectedColor();
+            //playerUIDisplayBehaviour.UpdatePlayerIconDisplayColor(disconnectedColor);
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using BBO.BBO.GameData;
+using BBO.BBO.PlayerInputSystem;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -8,13 +9,10 @@ namespace BBO.BBO.PlayerManagement
     public class PlayerSmoothController : MonoBehaviour
     {
         //Player ID
-        private int playerID;
+        private int playerID = default;
 
-        [Header("Sub Behaviours")]
-        public PlayerVisualsBehaviour playerVisualsBehaviour = default;
-
-        //Current Control Scheme
-        private string currentControlScheme;
+        [SerializeField]
+        private PlayerVisualsBehaviour playerVisualsBehaviour = default;
 
         [SerializeField]
         private Camera mainCamera = default;
@@ -22,17 +20,8 @@ namespace BBO.BBO.PlayerManagement
         [SerializeField]
         private PlayerAnimatorController playerAnimatorController = default;
 
-        [Header("Physics")]
-        public Rigidbody playerRigidbody = default;
-
-        [Header("Input")]
-        public bool useOldInputManager = true;
-
-        private Vector3 inputDirection;
-        private bool hasCurrentInput = false;
-
-        [Header("Movement Settings")]
-        public PlayerInput playerInput;
+        [SerializeField]
+        private PlayerInput playerInput = default;
 
         [SerializeField]
         private float movementSpeed = 5;
@@ -43,6 +32,18 @@ namespace BBO.BBO.PlayerManagement
         private Vector3 rawDirection = default;
         private Vector3 smoothDirection = default;
         private Vector3 movement = default;
+
+        private Vector3 inputDirection;
+        private bool hasCurrentInput = false;
+
+        [Header("Physics")]
+        public Rigidbody playerRigidbody = default;
+
+        [Header("Input")]
+        public bool useOldInputManager = true;
+
+        //Current Control Scheme
+        private string currentControlScheme = default;
 
         private void Start()
         {
@@ -65,9 +66,7 @@ namespace BBO.BBO.PlayerManagement
         public void SetupPlayer(int newPlayerID)
         {
             playerID = newPlayerID;
-
             currentControlScheme = playerInput.currentControlScheme;
-
             playerVisualsBehaviour.SetupBehaviour(playerID, playerInput);
         }
 
@@ -79,7 +78,6 @@ namespace BBO.BBO.PlayerManagement
                 var h = Input.GetAxisRaw("Horizontal");
                 inputDirection = new Vector3(h, 0, v);
             }
-            
             hasCurrentInput = inputDirection != Vector3.zero;
         }
 
@@ -87,7 +85,6 @@ namespace BBO.BBO.PlayerManagement
         {
             Vector2 inputMovement = value.ReadValue<Vector2>();
             inputDirection = new Vector3(inputMovement.x, 0, inputMovement.y);
-            Debug.Log("moving");
         }
 
         private void CalculateDesiredDirection()
@@ -159,7 +156,6 @@ namespace BBO.BBO.PlayerManagement
         //(IE: Keyboard -> Xbox Controller)
         public void OnControlsChanged()
         {
-
             if (playerInput.currentControlScheme != currentControlScheme)
             {
                 currentControlScheme = playerInput.currentControlScheme;
@@ -169,7 +165,7 @@ namespace BBO.BBO.PlayerManagement
             }
         }
 
-        void RemoveAllBindingOverrides()
+        private void RemoveAllBindingOverrides()
         {
             InputActionRebindingExtensions.RemoveAllBindingOverrides(playerInput.currentActionMap);
         }
@@ -184,7 +180,7 @@ namespace BBO.BBO.PlayerManagement
 
         public void OnDeviceRegained()
         {
-            StartCoroutine(WaitForDeviceToBeRegained());
+           StartCoroutine(WaitForDeviceToBeRegained());
         }
 
         IEnumerator WaitForDeviceToBeRegained()

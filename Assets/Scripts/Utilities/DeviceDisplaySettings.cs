@@ -1,33 +1,36 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using System;
 
-[System.Serializable]
-public struct CustomInputContextIcon
+namespace BBO.BBO.Utilities
 {
-    public string customInputContextString;
-    public Sprite customInputContextIcon;
-}
+    [Serializable]
+    public struct CustomInputContextIcon
+    {
+        public string customInputContextString;
+        public Sprite customInputContextIcon;
+    }
 
-[CreateAssetMenu(fileName = "Device Display Settings", menuName = "Scriptable Objects/Device Display Settings", order = 1)]
-public class DeviceDisplaySettings : ScriptableObject
-{
+    [CreateAssetMenu(fileName = "Device Display Settings", menuName = "Scriptable Objects/Device Display Settings", order = 1)]
+    public class DeviceDisplaySettings : ScriptableObject
+    {
+        public string deviceDisplayName = default;
 
-    public string deviceDisplayName;
+        public Color deviceDisplayColor = default;
 
-    public Color deviceDisplayColor;
+        public bool deviceHasContextIcons = default;
 
-    public bool deviceHasContextIcons;
+        public Sprite buttonNorthIcon = default;
+        public Sprite buttonSouthIcon = default;
+        public Sprite buttonWestIcon = default;
+        public Sprite buttonEastIcon = default;
 
-    public Sprite buttonNorthIcon;
-    public Sprite buttonSouthIcon;
-    public Sprite buttonWestIcon;
-    public Sprite buttonEastIcon;
+        public Sprite triggerRightFrontIcon = default;
+        public Sprite triggerRightBackIcon = default;
+        public Sprite triggerLeftFrontIcon = default;
+        public Sprite triggerLeftBackIcon = default;
 
-    public Sprite triggerRightFrontIcon;
-    public Sprite triggerRightBackIcon;
-    public Sprite triggerLeftFrontIcon;
-    public Sprite triggerLeftBackIcon;
-
-    public List<CustomInputContextIcon> customContextIcons = new List<CustomInputContextIcon>();
+        public List<CustomInputContextIcon> customContextIcons = new List<CustomInputContextIcon>();
+    }
 
 }
