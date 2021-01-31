@@ -24,7 +24,7 @@ namespace BBO.BBO.Utilities
 
         public List<DeviceSet> listDeviceSets = new List<DeviceSet>();
 
-        public DisconnectedSettings disconnectedDeviceSettings;
+        public DisconnectedSettings disconnectedDeviceSettings = default;
 
         private Color fallbackDisplayColor = Color.white;
 
