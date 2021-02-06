@@ -15,9 +15,7 @@ namespace BBO.BBO.Utilities
     public class DeviceDisplaySettings : ScriptableObject
     {
         public string deviceDisplayName = default;
-
         public Color deviceDisplayColor = default;
-
         public bool deviceHasContextIcons = default;
 
         public Sprite buttonNorthIcon = default;
@@ -32,5 +30,4 @@ namespace BBO.BBO.Utilities
 
         public List<CustomInputContextIcon> customContextIcons = new List<CustomInputContextIcon>();
     }
-
 }

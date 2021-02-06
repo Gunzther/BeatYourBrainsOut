@@ -37,7 +37,8 @@ namespace BBO.BBO.PlayerManagement
         private bool hasCurrentInput = false;
 
         [Header("Physics")]
-        public Rigidbody playerRigidbody = default;
+        [SerializeField]
+        private Rigidbody playerRigidbody = default;
 
         [Header("Input")]
         public bool useOldInputManager = true;
@@ -78,6 +79,7 @@ namespace BBO.BBO.PlayerManagement
                 var h = Input.GetAxisRaw("Horizontal");
                 inputDirection = new Vector3(h, 0, v);
             }
+
             hasCurrentInput = inputDirection != Vector3.zero;
         }
 
@@ -180,10 +182,10 @@ namespace BBO.BBO.PlayerManagement
 
         public void OnDeviceRegained()
         {
-           StartCoroutine(WaitForDeviceToBeRegained());
+            StartCoroutine(WaitForDeviceToBeRegained());
         }
 
-        IEnumerator WaitForDeviceToBeRegained()
+        private IEnumerator WaitForDeviceToBeRegained()
         {
             yield return new WaitForSeconds(0.1f);
             playerVisualsBehaviour.UpdatePlayerVisuals();

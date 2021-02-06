@@ -23,22 +23,17 @@ namespace BBO.BBO.Utilities
         }
 
         public HashSet<DeviceSet> listDeviceSets = new HashSet<DeviceSet>();
-
         public DisconnectedSettings disconnectedDeviceSettings = default;
 
         private Color fallbackDisplayColor = Color.white;
 
-
         public string GetDeviceName(PlayerInput playerInput)
         {
-
             string currentDeviceRawPath = playerInput.devices[0].ToString();
-
             string newDisplayName = null;
 
             foreach (DeviceSet device in listDeviceSets)
             {
-
                 if (device.deviceRawPath == currentDeviceRawPath)
                 {
                     newDisplayName = device.deviceDisplaySettings.deviceDisplayName;
@@ -51,20 +46,17 @@ namespace BBO.BBO.Utilities
             }
 
             return newDisplayName;
-
         }
 
 
         public Color GetDeviceColor(PlayerInput playerInput)
         {
-
             string currentDeviceRawPath = playerInput.devices[0].ToString();
 
             Color newDisplayColor = fallbackDisplayColor;
 
             foreach (DeviceSet device in listDeviceSets)
             {
-
                 if (device.deviceRawPath == currentDeviceRawPath)
                 {
                     newDisplayColor = device.deviceDisplaySettings.deviceDisplayColor;
@@ -72,12 +64,10 @@ namespace BBO.BBO.Utilities
             }
 
             return newDisplayColor;
-
         }
 
         public Sprite GetDeviceBindingIcon(PlayerInput playerInput, string playerInputDeviceInputBinding)
         {
-
             string currentDeviceRawPath = playerInput.devices[0].ToString();
 
             Sprite displaySpriteIcon = null;
@@ -96,7 +86,7 @@ namespace BBO.BBO.Utilities
             return displaySpriteIcon;
         }
 
-        Sprite FilterForDeviceInputBinding(DeviceSet targetDeviceSet, string inputBinding)
+        private Sprite FilterForDeviceInputBinding(DeviceSet targetDeviceSet, string inputBinding)
         {
             Sprite spriteIcon = null;
 
@@ -143,7 +133,6 @@ namespace BBO.BBO.Utilities
                     break;
 
                 default:
-
                     for (int i = 0; i < targetDeviceSet.deviceDisplaySettings.customContextIcons.Count; i++)
                     {
                         var customContextIcon = targetDeviceSet.deviceDisplaySettings.customContextIcons[i];
@@ -172,7 +161,5 @@ namespace BBO.BBO.Utilities
         {
             return disconnectedDeviceSettings.disconnectedDisplayColor;
         }
-
-
     }
 }
