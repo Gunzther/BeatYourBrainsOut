@@ -18,11 +18,12 @@ namespace BBO.BBO.GameManager
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                StartCoroutine(BBOSceneManager.LoadSceneAsync("Gameplay", 
-                    () => {
+                StartCoroutine(BBOSceneManager.LoadSceneAsync("Gameplay",
+                    () =>
+                    {
                         teamManager.Reload();
                         StopAllCoroutines();
-                        }
+                    }
                     ));
             }
         }
