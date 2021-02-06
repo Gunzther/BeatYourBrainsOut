@@ -1,28 +1,42 @@
 ﻿using BBO.BBO.PlayerManagement;
 using BBO.BBO.Utilities;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace BBO.BBO.TeamManagement
 {
     public class TeamManager : MonoSingleton<TeamManager>
     {
+        [Header("Prefabs")]
         [SerializeField]
         private Transform playerPrefab = default;
 
         [SerializeField]
         private Transform parent = default;
 
+        [Header("Spawners")]
+        [SerializeField]
+        private Transform spawnRingCenter = default;
+
+        [SerializeField]
+        private float spawnRingRadius = default;
+
+        [Header("Local Multiplayer")]
+        [SerializeField]
+        private int numberOfPlayers = default;
+
+        //Spawned Players
+        private List<PlayerSmoothController> activePlayerControllers = default;
+        private PlayerSmoothController focusedPlayerController = default;
+
         public Team Team => team;
         private Team team = default;
 
-        public void SpawnNewPlayer(Vector3 position)
+        public override void Awake()
         {
-            Transform newPlayer = Instantiate(playerPrefab, parent);
-            newPlayer.position = position;
-
-            var playerCharacter = newPlayer.GetComponent<PlayerCharacter>();
-            playerCharacter.SetTeam(team);
-            team.AddPlayer(playerCharacter);
+            base.Awake();
+            team = new Team();
         }
 
         public void Reload()
@@ -33,12 +47,85 @@ namespace BBO.BBO.TeamManagement
             }
         }
 
+        public void SetupLocalMultiplayer()
+        {
+            DestroyOldPlayers();
+            activePlayerControllers = new List<PlayerSmoothController>();
+
+            for (int i = 0; i < numberOfPlayers; i++)
+            {
+                // spawn players
+                Transform spawnedPlayer = Instantiate(playerPrefab, parent);
+                spawnedPlayer.position = CalculatePositionInRing(i, numberOfPlayers);
+                AddPlayerToActivePlayerList(spawnedPlayer.GetComponent<PlayerSmoothController>());
+
+                // Add player into the team
+                var playerCharacter = spawnedPlayer.GetComponent<PlayerCharacter>();
+                playerCharacter.SetTeam(team);
+                team.AddPlayer(playerCharacter);
+            }
+
+            SetupActivePlayers();
+        }
+
+        private void SetupActivePlayers()
+        {
+            for (int i = 0; i < activePlayerControllers.Count; i++)
+            {
+                activePlayerControllers[i].SetupPlayer(i);
+            }
+        }
+
         private void Start()
         {
-            team = new Team();
+            for (int i = 0; i < activePlayerControllers.Count; i++)
+            {
+                activePlayerControllers[i].SetupPlayer(i);
+            }
+        }
 
-            // TODO: spawn player when any controller is already connected
-            SpawnNewPlayer(new Vector3(0, 0, 0));
+        private void AddPlayerToActivePlayerList(PlayerSmoothController newPlayer)
+        {
+            activePlayerControllers.Add(newPlayer);
+        }
+
+        private void DestroyOldPlayers()
+        {
+            foreach (Transform child in parent)
+            {
+                Destroy(child.gameObject);
+            }
+        }
+
+        //Spawn Utilities
+        private Vector3 CalculatePositionInRing(int positionID, int numberOfPlayers)
+        {
+            if (numberOfPlayers == 1)
+            {
+                return spawnRingCenter.position;
+            }
+
+            float angle = (positionID) * Mathf.PI * 2 / numberOfPlayers;
+            float x = Mathf.Cos(angle) * spawnRingRadius;
+            float z = Mathf.Sin(angle) * spawnRingRadius;
+
+            return spawnRingCenter.position + new Vector3(x, 0, z);
+        }
+
+        //Get Data ----
+        public List<PlayerSmoothController> GetActivePlayerControllers()
+        {
+            return activePlayerControllers;
+        }
+
+        public PlayerSmoothController GetFocusedPlayerController()
+        {
+            return focusedPlayerController;
+        }
+
+        public int NumberOfConnectedDevices()
+        {
+            return InputSystem.devices.Count;
         }
     }
 }

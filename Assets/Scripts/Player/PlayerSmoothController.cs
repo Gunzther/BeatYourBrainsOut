@@ -1,31 +1,50 @@
 ﻿using BBO.BBO.GameData;
+using BBO.BBO.PlayerInputSystem;
+using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace BBO.BBO.PlayerManagement
 {
     public class PlayerSmoothController : MonoBehaviour
     {
+        //Player ID
+        private int playerID = default;
+
+        [SerializeField]
+        private PlayerVisualsBehaviour playerVisualsBehaviour = default;
+
         [SerializeField]
         private Camera mainCamera = default;
 
         [SerializeField]
         private PlayerAnimatorController playerAnimatorController = default;
 
-        [Header("Physics")]
-        public Rigidbody playerRigidbody = default;
+        [SerializeField]
+        private PlayerInput playerInput = default;
 
-        [Header("Input")]
-        public bool useOldInputManager = true;
+        [SerializeField]
+        private float movementSpeed = 5;
+
+        [SerializeField]
+        private float smoothingSpeed = 1;
+
+        private Vector3 rawDirection = default;
+        private Vector3 smoothDirection = default;
+        private Vector3 movement = default;
 
         private Vector3 inputDirection;
         private bool hasCurrentInput = false;
 
-        [Header("Movement Settings")]
-        public float movementSpeed = 5;
-        public float smoothingSpeed = 1;
-        private Vector3 rawDirection = default;
-        private Vector3 smoothDirection = default;
-        private Vector3 movement = default;
+        [Header("Physics")]
+        [SerializeField]
+        private Rigidbody playerRigidbody = default;
+
+        [Header("Input")]
+        public bool useOldInputManager = true;
+
+        //Current Control Scheme
+        private string currentControlScheme = default;
 
         private void Start()
         {
@@ -45,6 +64,13 @@ namespace BBO.BBO.PlayerManagement
             AnimatePlayerMovement();
         }
 
+        public void SetupPlayer(int newPlayerID)
+        {
+            playerID = newPlayerID;
+            currentControlScheme = playerInput.currentControlScheme;
+            playerVisualsBehaviour.SetupBehaviour(playerID, playerInput);
+        }
+
         private void CalculateMovementInput()
         {
             if (useOldInputManager)
@@ -57,7 +83,13 @@ namespace BBO.BBO.PlayerManagement
             hasCurrentInput = inputDirection != Vector3.zero;
         }
 
-         private void CalculateDesiredDirection()
+        public void OnMove(InputAction.CallbackContext value)
+        {
+            Vector2 inputMovement = value.ReadValue<Vector2>();
+            inputDirection = new Vector3(inputMovement.x, 0, inputMovement.y);
+        }
+
+        private void CalculateDesiredDirection()
         {
             //Camera Direction
             var cameraForward = mainCamera.transform.forward;
@@ -119,5 +151,69 @@ namespace BBO.BBO.PlayerManagement
                 playerAnimatorController.SetTrigger(triggerHash);
             }
         }
+
+        //INPUT SYSTEM AUTOMATIC CALLBACKS --------------
+
+        //This is automatically called from PlayerInput, when the input device has changed
+        //(IE: Keyboard -> Xbox Controller)
+        public void OnControlsChanged()
+        {
+            if (playerInput.currentControlScheme != currentControlScheme)
+            {
+                currentControlScheme = playerInput.currentControlScheme;
+
+                playerVisualsBehaviour.UpdatePlayerVisuals();
+                RemoveAllBindingOverrides();
+            }
+        }
+
+        private void RemoveAllBindingOverrides()
+        {
+            InputActionRebindingExtensions.RemoveAllBindingOverrides(playerInput.currentActionMap);
+        }
+
+        //This is automatically called from PlayerInput, when the input device has been disconnected and can not be identified
+        //IE: Device unplugged or has run out of batteries
+
+        public void OnDeviceLost()
+        {
+            playerVisualsBehaviour.SetDisconnectedDeviceVisuals();
+        }
+
+        public void OnDeviceRegained()
+        {
+            StartCoroutine(WaitForDeviceToBeRegained());
+        }
+
+        private IEnumerator WaitForDeviceToBeRegained()
+        {
+            yield return new WaitForSeconds(0.1f);
+            playerVisualsBehaviour.UpdatePlayerVisuals();
+        }
+
+        //Get Data ----
+        public int GetPlayerID()
+        {
+            return playerID;
+        }
+
+        public InputActionAsset GetActionAsset()
+        {
+            return playerInput.actions;
+        }
+
+        public PlayerInput GetPlayerInput()
+        {
+            return playerInput;
+        }
+
+        ////This is called from Player Input, when a button has been pushed, that correspons with the 'TogglePause' action
+        //public void OnTogglePause(InputAction.CallbackContext value)
+        //{
+        //    if (value.started)
+        //    {
+        //        GameManager.Instance.TogglePauseState(this);
+        //    }
+        //}
     }
 }

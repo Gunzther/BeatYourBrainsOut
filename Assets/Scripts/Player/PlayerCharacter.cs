@@ -15,7 +15,7 @@ namespace BBO.BBO.PlayerManagement
         private int playerID = default;
         private UIManager uiManager = default;
         private Team team = default;
-        
+
         public void Reload()
         {
             uiManager = FindObjectOfType<UIManager>();

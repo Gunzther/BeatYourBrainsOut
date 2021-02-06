@@ -10,8 +10,8 @@ namespace BBO.BBO.Utilities
     public class MonoSingleton<T> : MonoSingleton where T : MonoBehaviour
     {
         private static bool isDestroyed = false;
-
         private static T instance = null;
+
         public static T Instance
         {
             get
@@ -38,8 +38,10 @@ namespace BBO.BBO.Utilities
                         singleton.name = instance.GetType().Name;
                     }
                 }
+
                 return instance;
             }
+
             private set { instance = value; }
         }
 

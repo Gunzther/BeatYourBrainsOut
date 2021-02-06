@@ -9,22 +9,21 @@ namespace BBO.BBO.GameManager
         [SerializeField]
         TeamManager teamManager = default;
 
-        // Start is called before the first frame update
-        void Start()
+        private void Start()
         {
-
+            teamManager.SetupLocalMultiplayer();
         }
 
-        // Update is called once per frame
-        void Update()
+        private void Update()
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                StartCoroutine(BBOSceneManager.LoadSceneAsync("Gameplay", 
-                    () => {
+                StartCoroutine(BBOSceneManager.LoadSceneAsync("Gameplay",
+                    () =>
+                    {
                         teamManager.Reload();
                         StopAllCoroutines();
-                        }
+                    }
                     ));
             }
         }
