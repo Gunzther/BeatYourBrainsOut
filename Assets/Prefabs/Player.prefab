@@ -350,6 +350,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerAnimatorController: {fileID: 7510636998256204326}
+  weaponSpriteRenderer: {fileID: 6268139799632246959}
 --- !u!114 &4784475903516044564
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -365,11 +366,12 @@ MonoBehaviour:
   playerVisualsBehaviour: {fileID: 4018970313251512849}
   mainCamera: {fileID: 0}
   playerAnimatorController: {fileID: 7510636998256204326}
-  playerRigidbody: {fileID: 6311386286687350204}
-  useOldInputManager: 0
+  playerCharacter: {fileID: 5387966283118922947}
   playerInput: {fileID: 1990279388630374648}
   movementSpeed: 4
   smoothingSpeed: 1
+  playerRigidbody: {fileID: 6311386286687350204}
+  useOldInputManager: 0
 --- !u!114 &4018970313251512849
 MonoBehaviour:
   m_ObjectHideFlags: 0

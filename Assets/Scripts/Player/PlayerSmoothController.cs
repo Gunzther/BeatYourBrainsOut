@@ -21,6 +21,9 @@ namespace BBO.BBO.PlayerManagement
         private PlayerAnimatorController playerAnimatorController = default;
 
         [SerializeField]
+        private PlayerCharacter playerCharacter = default;
+
+        [SerializeField]
         private PlayerInput playerInput = default;
 
         [SerializeField]
@@ -76,8 +79,13 @@ namespace BBO.BBO.PlayerManagement
         {
             if (useOldInputManager && Input.GetKeyDown(KeyCode.F))
             {
-                playerAnimatorController.SetTrigger(PlayerData.BaseballHitTriggerHash);
+                OnAttack();
             }
+        }
+
+        public void OnAttack()
+        {
+            playerAnimatorController.SetTrigger(playerCharacter.CurrentPlayerWeapon.WeaponHitTriggerHash);
         }
 
         private void CalculateMovementInput()

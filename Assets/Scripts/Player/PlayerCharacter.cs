@@ -10,7 +10,11 @@ namespace BBO.BBO.PlayerManagement
         [SerializeField]
         private PlayerAnimatorController playerAnimatorController = default;
 
+        [SerializeField]
+        private SpriteRenderer weaponSpriteRenderer = default;
+
         public PlayerStats CurrentPlayerStats { get; private set; }
+        public PlayerWeapon CurrentPlayerWeapon { get; private set; }
 
         private int playerID = default;
         private UIManager uiManager = default;
@@ -41,6 +45,12 @@ namespace BBO.BBO.PlayerManagement
             // TODO: generate player id and assign value to playerID variable
             playerID = 0;
             CurrentPlayerStats = new PlayerStats(playerID);
+            CurrentPlayerWeapon = new PlayerWeapon();
+
+            if (weaponSpriteRenderer.sprite is Sprite sprite)
+            {
+                CurrentPlayerWeapon.SetWeaponType(sprite.name);
+            }
         }
     }
 }
