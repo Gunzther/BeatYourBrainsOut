@@ -13,5 +13,10 @@ namespace BBO.BBO.GameData
         public static readonly int DeadTriggerHash = Animator.StringToHash("Dead");
         public static readonly int HurtTriggerHash = Animator.StringToHash("Hurt");
         public static readonly int BaseballHitTriggerHash = Animator.StringToHash("BaseballHit");
+
+        public static readonly int[] WeaponTriggerHash =
+        {
+            BaseballHitTriggerHash
+        };
     }
 }
