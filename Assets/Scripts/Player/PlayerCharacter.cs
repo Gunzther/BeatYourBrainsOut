@@ -23,6 +23,7 @@ namespace BBO.BBO.PlayerManagement
         public void Reload()
         {
             uiManager = FindObjectOfType<UIManager>();
+            uiManager.SetTeamHpMaxValue(team.CurrentTeamHealth);
         }
 
         public void SetTeam(Team team)

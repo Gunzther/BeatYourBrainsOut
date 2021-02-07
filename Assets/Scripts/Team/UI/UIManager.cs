@@ -15,6 +15,8 @@ namespace BBO.BBO.TeamManagement.UI
         {
             teamHpSlider.maxValue = value;
             teamHpText.text = value.ToString();
+
+            SetTeamHpValue(value);
         }
 
         public void SetTeamHpValue(int value)
