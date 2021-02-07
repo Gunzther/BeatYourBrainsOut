@@ -21,6 +21,9 @@ namespace BBO.BBO.PlayerManagement
         private PlayerAnimatorController playerAnimatorController = default;
 
         [SerializeField]
+        private PlayerCharacter playerCharacter = default;
+
+        [SerializeField]
         private PlayerInput playerInput = default;
 
         [SerializeField]
@@ -54,6 +57,7 @@ namespace BBO.BBO.PlayerManagement
         private void Update()
         {
             CalculateMovementInput();
+            CheckPlayerAttacking();
         }
 
         private void FixedUpdate()
@@ -69,6 +73,19 @@ namespace BBO.BBO.PlayerManagement
             playerID = newPlayerID;
             currentControlScheme = playerInput.currentControlScheme;
             playerVisualsBehaviour.SetupBehaviour(playerID, playerInput);
+        }
+
+        private void CheckPlayerAttacking()
+        {
+            if (useOldInputManager && Input.GetKeyDown(KeyCode.F))
+            {
+                OnAttack();
+            }
+        }
+
+        public void OnAttack()
+        {
+            playerAnimatorController.SetTrigger(playerCharacter.CurrentPlayerWeapon.WeaponHitTriggerHash);
         }
 
         private void CalculateMovementInput()

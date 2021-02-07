@@ -1,5 +1,4 @@
-﻿using BBO.BBO.TeamManagement;
-using BBO.BBO.TeamManagement.UI;
+﻿using BBO.BBO.MonsterManagement;
 using UnityEngine;
 
 namespace BBO.BBO.PlayerManagement
@@ -15,6 +14,12 @@ namespace BBO.BBO.PlayerManagement
         [SerializeField]
         private Animator playerAnimator = default;
 
+        [SerializeField]
+        private GameObject weaponSprite = default;
+
+        [SerializeField]
+        private MonsterDestroyer weaponCollider = default;
+
         private Renderer renderer = default;
 
         public void SetTrigger(int triggerHash)
@@ -25,6 +30,28 @@ namespace BBO.BBO.PlayerManagement
         public bool IsInState(string stateName)
         {
             return playerAnimator.GetCurrentAnimatorStateInfo(0).IsName(stateName);
+        }
+
+        public void BeginAttackAction(int shortWeaponDamageValue)
+        {
+            if (shortWeaponDamageValue > 0)
+            {
+                //set damage value depands on weapon
+                weaponCollider.SetDamageValue(shortWeaponDamageValue);
+                weaponCollider.gameObject.SetActive(true);
+            }
+
+            weaponSprite.SetActive(false);
+        }
+
+        public void EndAttackAction(int isShortWeapon)
+        {
+            if (isShortWeapon == 1)
+            {
+                weaponCollider.gameObject.SetActive(false);
+            }
+
+            weaponSprite.SetActive(true);
         }
 
         private void Awake()
