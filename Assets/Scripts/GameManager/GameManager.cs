@@ -1,6 +1,7 @@
 ﻿using BBO.BBO.TeamManagement;
 using BBO.BBO.Utilities;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace BBO.BBO.GameManager
 {
@@ -16,6 +17,7 @@ namespace BBO.BBO.GameManager
 
         private void Update()
         {
+            teamManager.AddPlayerFromController();
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 StartCoroutine(BBOSceneManager.LoadSceneAsync("Gameplay",

@@ -22,21 +22,19 @@ namespace BBO.BBO.TeamManagement
         [SerializeField]
         private float spawnRingRadius = default;
 
-        [Header("Local Multiplayer")]
-        [SerializeField]
-        private int numberOfPlayers = default;
-
         //Spawned Players
         private List<PlayerSmoothController> activePlayerControllers = default;
         private PlayerSmoothController focusedPlayerController = default;
 
         public Team Team => team;
         private Team team = default;
+        private int numberOfPlayers = 1;
 
         public override void Awake()
         {
             base.Awake();
             team = new Team();
+            activePlayerControllers = new List<PlayerSmoothController>();
         }
 
         public void Reload()
@@ -49,39 +47,41 @@ namespace BBO.BBO.TeamManagement
 
         public void SetupLocalMultiplayer()
         {
-            DestroyOldPlayers();
-            activePlayerControllers = new List<PlayerSmoothController>();
+            // spawn players
+            Transform spawnedPlayer = Instantiate(playerPrefab, parent);
+            spawnedPlayer.position = CalculatePositionInRing(numberOfPlayers, activePlayerControllers.Count+1);
+            AddPlayerToActivePlayerList(spawnedPlayer.GetComponent<PlayerSmoothController>());
 
-            for (int i = 0; i < numberOfPlayers; i++)
-            {
-                // spawn players
-                Transform spawnedPlayer = Instantiate(playerPrefab, parent);
-                spawnedPlayer.position = CalculatePositionInRing(i, numberOfPlayers);
-                AddPlayerToActivePlayerList(spawnedPlayer.GetComponent<PlayerSmoothController>());
+            // Add player into the team
+            var playerCharacter = spawnedPlayer.GetComponent<PlayerCharacter>();
+            playerCharacter.SetTeam(team);
+            team.AddPlayer(playerCharacter);
 
-                // Add player into the team
-                var playerCharacter = spawnedPlayer.GetComponent<PlayerCharacter>();
-                playerCharacter.SetTeam(team);
-                team.AddPlayer(playerCharacter);
-            }
-
+            numberOfPlayers += 1;
             SetupActivePlayers();
         }
 
         private void SetupActivePlayers()
         {
+
             for (int i = 0; i < activePlayerControllers.Count; i++)
             {
-                activePlayerControllers[i].SetupPlayer(i);
+                //activePlayerControllers[i].SetupPlayer(i);
+                //InputDevice.deviceId;
             }
+        }
+
+        public void AddPlayerFromController()
+        {
+           if (Gamepad.current.selectButton.wasReleasedThisFrame)
+           {
+                SetupLocalMultiplayer();
+           }
         }
 
         private void Start()
         {
-            for (int i = 0; i < activePlayerControllers.Count; i++)
-            {
-                activePlayerControllers[i].SetupPlayer(i);
-            }
+            SetupActivePlayers();
         }
 
         private void AddPlayerToActivePlayerList(PlayerSmoothController newPlayer)

@@ -11,6 +11,8 @@ namespace BBO.BBO.PlayerManagement
         //Player ID
         private int playerID = default;
 
+        private int DeviceID = default;
+
         [SerializeField]
         private PlayerVisualsBehaviour playerVisualsBehaviour = default;
 
@@ -68,9 +70,10 @@ namespace BBO.BBO.PlayerManagement
             AnimatePlayerMovement();
         }
 
-        public void SetupPlayer(int newPlayerID)
+        public void SetupPlayer(int newPlayerID, int newDeviceID)
         {
             playerID = newPlayerID;
+            DeviceID = newDeviceID;
             currentControlScheme = playerInput.currentControlScheme;
             playerVisualsBehaviour.SetupBehaviour(playerID, playerInput);
         }
