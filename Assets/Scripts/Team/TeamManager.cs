@@ -45,12 +45,20 @@ namespace BBO.BBO.TeamManagement
             }
         }
 
-        public void SetupLocalMultiplayer()
+        public void SetupLocalMultiplayer(InputDevice input)
         {
+            if (IsAdded(input))
+            {
+                return;
+            }
+
             // spawn players
             Transform spawnedPlayer = Instantiate(playerPrefab, parent);
-            spawnedPlayer.position = CalculatePositionInRing(numberOfPlayers, activePlayerControllers.Count+1);
-            AddPlayerToActivePlayerList(spawnedPlayer.GetComponent<PlayerSmoothController>());
+            spawnedPlayer.position = CalculatePositionInRing(numberOfPlayers, activePlayerControllers.Count + 1);
+
+            PlayerSmoothController playerController = spawnedPlayer.GetComponent<PlayerSmoothController>();
+            AddPlayerToActivePlayerList(playerController);
+            playerController.SetupPlayer(numberOfPlayers, input.deviceId);
 
             // Add player into the team
             var playerCharacter = spawnedPlayer.GetComponent<PlayerCharacter>();
@@ -58,30 +66,29 @@ namespace BBO.BBO.TeamManagement
             team.AddPlayer(playerCharacter);
 
             numberOfPlayers += 1;
-            SetupActivePlayers();
-        }
-
-        private void SetupActivePlayers()
-        {
-
-            for (int i = 0; i < activePlayerControllers.Count; i++)
-            {
-                //activePlayerControllers[i].SetupPlayer(i);
-                //InputDevice.deviceId;
-            }
         }
 
         public void AddPlayerFromController()
         {
            if (Gamepad.current.selectButton.wasReleasedThisFrame)
            {
-                SetupLocalMultiplayer();
+                SetupLocalMultiplayer(Gamepad.current);
            }
         }
 
-        private void Start()
+        private bool IsAdded(InputDevice input)
         {
-            SetupActivePlayers();
+            int id = input.deviceId;
+
+            foreach (PlayerSmoothController playerController in activePlayerControllers)
+            {
+                if (playerController.DeviceId == id)
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         private void AddPlayerToActivePlayerList(PlayerSmoothController newPlayer)

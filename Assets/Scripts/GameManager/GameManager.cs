@@ -12,7 +12,8 @@ namespace BBO.BBO.GameManager
 
         private void Start()
         {
-            teamManager.SetupLocalMultiplayer();
+            InputDevice inputDevice = InputSystem.devices[0];
+            teamManager.SetupLocalMultiplayer(inputDevice);
         }
 
         private void Update()
