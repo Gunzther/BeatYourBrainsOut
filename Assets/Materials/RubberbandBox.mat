@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: TechArt_Unlit_KikiCharacter
-  m_Shader: {fileID: 4800000, guid: 9d1f806f2960b324a8e4b951ab19524a, type: 3}
+  m_Name: RubberbandBox
+  m_Shader: {fileID: 4800000, guid: 0e1965b4dd3d59a479bf1ee742ae1ca9, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -20,14 +20,11 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 457d2de1029c02d4eaf25443e2f63a5e, type: 3}
+        m_Texture: {fileID: 2800000, guid: 4b04350b827fb9340a9d527330a6d17b, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _Column: 4
+    - _Column: 3
     - _Frame: 1
-    - _LapValue: 0
-    - _Row: 3
-    m_Colors:
-    - _DissolveCol: {r: 1, g: 0, b: 0, a: 1}
-    - _LapCol: {r: 1, g: 0, b: 0, a: 0}
+    - _Row: 1
+    m_Colors: []
