@@ -8,7 +8,7 @@ namespace BBO.BBO.MonsterManagement
         private int damageValue = default;
 
         [SerializeField]
-        private bool isDamageInterval = false;
+        private bool isIntervalDamage = false;
 
         [SerializeField]
         private float intervalSeconds = default;
@@ -22,7 +22,7 @@ namespace BBO.BBO.MonsterManagement
 
         private void OnTriggerEnter(Collider other)
         {
-            if (!isDamageInterval && other.gameObject.GetComponent<MonsterCharacter>() is MonsterCharacter monster)
+            if (!isIntervalDamage && other.gameObject.GetComponent<MonsterCharacter>() is MonsterCharacter monster)
             {
                 monster.DecreaseMonsterHp(damageValue);
                 monster.OnAttacked();
@@ -31,7 +31,7 @@ namespace BBO.BBO.MonsterManagement
 
         private void OnTriggerStay(Collider other)
         {
-            if (isDamageInterval && other.gameObject.GetComponent<MonsterCharacter>() is MonsterCharacter monster)
+            if (isIntervalDamage && other.gameObject.GetComponent<MonsterCharacter>() is MonsterCharacter monster)
             {
                 monster.DecreaseMonsterHp(damageValue);
                 monster.OnAttacked();
@@ -40,12 +40,15 @@ namespace BBO.BBO.MonsterManagement
 
         private void Update()
         {
-            time += Time.deltaTime;
-
-            if (time > intervalSeconds)
+            if (isIntervalDamage)
             {
-                // TODO: change to pooling objects
-                Destroy(this.gameObject);
+                time += Time.deltaTime;
+
+                if (time > intervalSeconds)
+                {
+                    // TODO: change to pooling objects
+                    Destroy(this.gameObject);
+                }
             }
         }
     }
