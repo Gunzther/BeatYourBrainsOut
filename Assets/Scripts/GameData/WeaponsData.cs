@@ -1,10 +1,13 @@
-﻿public static class WeaponsData
+﻿namespace BBO.BBO.GameData
 {
-    public enum Type
+    public static class WeaponsData
     {
-        Normal,
-        IntervalDamage,
-        TimesDamage,
-        Protect
+        public enum Type
+        {
+            Normal,
+            IntervalDamage,
+            TimesDamage,
+            Protect
+        }
     }
 }

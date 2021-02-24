@@ -109,5 +109,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageValue: 5
-  isDamageInterval: 1
+  type: 1
   intervalSeconds: 5

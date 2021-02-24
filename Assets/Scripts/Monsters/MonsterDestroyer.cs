@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using BBO.BBO.GameData;
+using UnityEngine;
 
 namespace BBO.BBO.MonsterManagement
 {
@@ -8,11 +9,12 @@ namespace BBO.BBO.MonsterManagement
         private int damageValue = default;
 
         [SerializeField]
-        private bool isIntervalDamage = false;
+        private WeaponsData.Type type = default;
 
         [SerializeField]
         private float intervalSeconds = default;
 
+        private bool isIntervalDamage = false;
         private float time = default;
 
         public void SetDamageValue(int value)
@@ -36,6 +38,11 @@ namespace BBO.BBO.MonsterManagement
                 monster.DecreaseMonsterHp(damageValue);
                 monster.OnAttacked();
             }
+        }
+
+        private void Start()
+        {
+            isIntervalDamage = type == WeaponsData.Type.IntervalDamage;
         }
 
         private void Update()
