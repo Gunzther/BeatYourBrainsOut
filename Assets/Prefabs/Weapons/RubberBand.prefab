@@ -108,6 +108,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7831e1bdc7aedf44ca3be3b8cef9f069, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageValue: 1
-  type: 2
-  intervalSeconds: 0
+  Type: 2
+  DamageValue: 1
+  IntervalSeconds: 0
+  AttacksNumber: 1
+  HP: 0
