@@ -5,6 +5,9 @@ using System.Collections.Generic;
 public class MonstersSpawner : MonoBehaviour
 {
     [SerializeField]
+    private GameObject container = default;
+
+    [SerializeField]
     private Transform[] spawnPoints = default;
 
     private Queue<GameObject> monsters = default;
@@ -21,6 +24,11 @@ public class MonstersSpawner : MonoBehaviour
 
     public void StartSpawn()
     {
+        if (container == null)
+        { 
+            container = new GameObject("MonstersContainer");
+        }
+
         waitTime = new WaitForSecondsRealtime(spawnDelay);
         StartCoroutine(SpawnMonster());
     }
@@ -33,7 +41,7 @@ public class MonstersSpawner : MonoBehaviour
             {
                 var pointSelected = Random.Range(0, spawnPoints.Length);
                 var pointToSpawn = spawnPoints[pointSelected].position;
-                Instantiate(monsters.Dequeue(), pointToSpawn, Quaternion.identity);
+                Instantiate(monsters.Dequeue(), pointToSpawn, Quaternion.identity, container.transform);
             }
 
             yield return waitTime;

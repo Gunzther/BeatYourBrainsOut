@@ -30,6 +30,7 @@ public class WaveManager : MonoBehaviour
 
     private void Start()
     {
+        monstersQueue = new Queue<GameObject>();
         // TODO: change to call ActiveWavve in GameManager
         ActiveWave();
     }
