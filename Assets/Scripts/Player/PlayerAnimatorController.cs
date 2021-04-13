@@ -9,18 +9,12 @@ namespace BBO.BBO.PlayerManagement
         private Texture[] spriteList = default;
 
         [SerializeField]
-        private int spriteNumber = 0;
-
-        [SerializeField]
         private Animator playerAnimator = default;
 
         [SerializeField]
-        private GameObject weaponSprite = default;
+        private Weapon weaponCollider = default;
 
-        [SerializeField]
-        private MonsterDestroyer weaponCollider = default;
-
-        private Renderer renderer = default;
+        private Renderer spriteRenderer = default;
 
         public void SetTrigger(int triggerHash)
         {
@@ -40,8 +34,6 @@ namespace BBO.BBO.PlayerManagement
                 weaponCollider.SetDamageValue(shortWeaponDamageValue);
                 weaponCollider.gameObject.SetActive(true);
             }
-
-            weaponSprite.SetActive(false);
         }
 
         public void EndAttackAction(int isShortWeapon)
@@ -50,18 +42,27 @@ namespace BBO.BBO.PlayerManagement
             {
                 weaponCollider.gameObject.SetActive(false);
             }
-
-            weaponSprite.SetActive(true);
         }
 
         private void Awake()
         {
-            renderer = GetComponent<Renderer>();
+            spriteRenderer = GetComponent<Renderer>();
         }
 
-        private void Update()
+        // Change sprite with this fn() 
+        public void ChangePlayerMainTex(PlayerSprite player)
         {
-            renderer.material.SetTexture("_MainTex", spriteList[spriteNumber < spriteList.Length - 1 ? spriteNumber : spriteList.Length - 1]);
+            int spriteNumber = (int) player;
+            spriteRenderer.material.SetTexture("_MainTex", spriteList[spriteNumber]);
         }
+    }
+
+    public enum PlayerSprite
+    {
+        Default = 0,
+        Baseball,
+        Nail,
+        RubberBandDefault,
+        RubberBandAttack
     }
 }

@@ -11,6 +11,9 @@ namespace BBO.BBO.PlayerManagement
         //Player ID
         private int playerID = default;
 
+        private int deviceID = default;
+        public int DeviceId => deviceID;
+
         [SerializeField]
         private PlayerVisualsBehaviour playerVisualsBehaviour = default;
 
@@ -57,7 +60,6 @@ namespace BBO.BBO.PlayerManagement
         private void Update()
         {
             CalculateMovementInput();
-            CheckPlayerAttacking();
         }
 
         private void FixedUpdate()
@@ -68,24 +70,20 @@ namespace BBO.BBO.PlayerManagement
             AnimatePlayerMovement();
         }
 
-        public void SetupPlayer(int newPlayerID)
+        public void SetupPlayer(int newPlayerID, int newDeviceID)
         {
             playerID = newPlayerID;
+            deviceID = newDeviceID;
             currentControlScheme = playerInput.currentControlScheme;
             playerVisualsBehaviour.SetupBehaviour(playerID, playerInput);
         }
 
-        private void CheckPlayerAttacking()
+        public void OnAttack(InputAction.CallbackContext value)
         {
-            if (useOldInputManager && Input.GetKeyDown(KeyCode.F))
+            if (value.started)
             {
-                OnAttack();
+                playerAnimatorController.SetTrigger(playerCharacter.CurrentPlayerWeapon.WeaponHitTriggerHash);
             }
-        }
-
-        public void OnAttack()
-        {
-            playerAnimatorController.SetTrigger(playerCharacter.CurrentPlayerWeapon.WeaponHitTriggerHash);
         }
 
         private void CalculateMovementInput()

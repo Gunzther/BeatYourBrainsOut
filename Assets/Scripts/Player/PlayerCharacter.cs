@@ -48,10 +48,10 @@ namespace BBO.BBO.PlayerManagement
             CurrentPlayerStats = new PlayerStats(playerID);
             CurrentPlayerWeapon = new PlayerWeapon();
 
-            if (weaponSpriteRenderer.sprite is Sprite sprite)
+/*            if (weaponSpriteRenderer.sprite is Sprite sprite)
             {
                 CurrentPlayerWeapon.SetWeaponType(sprite.name);
-            }
+            }*/
         }
     }
 }

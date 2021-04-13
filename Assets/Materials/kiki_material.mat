@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: TechArt_Unlit_PlayerCharacter
+  m_Name: kiki_material
   m_Shader: {fileID: 4800000, guid: 9d1f806f2960b324a8e4b951ab19524a, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -20,14 +20,14 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: cbcf919b980a3db4e8204b1bbc28cfcf, type: 3}
+        m_Texture: {fileID: 2800000, guid: 457d2de1029c02d4eaf25443e2f63a5e, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _Column: 4
     - _Frame: 1
     - _LapValue: 0
-    - _Row: 3
+    - _Row: 4
     m_Colors:
-    - _DissolveCol: {r: 1, g: 0, b: 0.8378444, a: 1}
+    - _DissolveCol: {r: 1, g: 0, b: 0, a: 1}
     - _LapCol: {r: 1, g: 0, b: 0, a: 0}
