@@ -1143,11 +1143,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1920415610800266556, guid: cb2e5382f753b2c48a9228d5e89f2912,
         type: 3}
-      propertyPath: spawnPoints.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 1920415610800266556, guid: cb2e5382f753b2c48a9228d5e89f2912,
-        type: 3}
       propertyPath: spawnPoints.Array.data[0]
       value: 
       objectReference: {fileID: 950732169}
@@ -1220,37 +1215,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1920415610800266559, guid: cb2e5382f753b2c48a9228d5e89f2912,
-        type: 3}
-      propertyPath: waves.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1920415610800266559, guid: cb2e5382f753b2c48a9228d5e89f2912,
-        type: 3}
-      propertyPath: waves.Array.data[0].MonsterConfigs.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1920415610800266559, guid: cb2e5382f753b2c48a9228d5e89f2912,
-        type: 3}
-      propertyPath: waves.Array.data[0].SpawnDelay
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1920415610800266559, guid: cb2e5382f753b2c48a9228d5e89f2912,
-        type: 3}
-      propertyPath: waves.Array.data[0].MaxSpawnMonstersAmount
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1920415610800266559, guid: cb2e5382f753b2c48a9228d5e89f2912,
-        type: 3}
-      propertyPath: waves.Array.data[0].MonsterConfigs.Array.data[0].Monster
-      value: 
-      objectReference: {fileID: 2332957842240919011, guid: fd387d0b567060949942d5a2f4d352ff,
-        type: 3}
-    - target: {fileID: 1920415610800266559, guid: cb2e5382f753b2c48a9228d5e89f2912,
-        type: 3}
-      propertyPath: waves.Array.data[0].MonsterConfigs.Array.data[0].MonsterAmount
-      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cb2e5382f753b2c48a9228d5e89f2912, type: 3}

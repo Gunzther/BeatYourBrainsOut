@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BBO.BBO.MonsterManagement;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,27 +13,71 @@ public class WaveManager : MonoBehaviour
     [SerializeField]
     private WaveConfig[] waves = default;
 
+    // wave data
     private int currentWaveIndex = default;
     private WaveConfig currentWaveConfig = default;
-    private Queue<GameObject> monstersQueue = default;
+    private Queue<MonsterCharacter> monstersQueue = default;
+    private bool isCompleted => (currentDeadMonsterAmount == monsterAmount)
+                     && (currentWaveIndex >= waves.Length);
 
-    public void ActiveNextWave()
-    {
-        currentWaveIndex++;
-        ActiveWave();
-    }
+    // monster amount
+    private int monsterAmount = default;
+    private int currentDeadMonsterAmount = default;
+
+    // wave timer
+    private bool isCountdown = false;
+    private float timer = default;
 
     public void ActiveWave()
     {
         SetUpWave();
         spawner.StartSpawn();
+        isCountdown = true;
+    }
+
+    public void ActiveNextWave()
+    {
+        Debug.Log($"[{nameof(WaveManager)}] Active next wave!");
+        currentWaveIndex++;
+
+        if (currentWaveIndex < waves.Length)
+        {
+            ActiveWave();
+        }
+    }
+
+    public void OnMonsterDead()
+    {
+        currentDeadMonsterAmount++;
+
+        if (currentDeadMonsterAmount == monsterAmount)
+        {
+            ActiveNextWave();
+        }
+        if (isCompleted)
+        {
+            Debug.Log($"[{nameof(WaveManager)}] Stage Complete!");
+        }
     }
 
     private void Start()
     {
-        monstersQueue = new Queue<GameObject>();
-        // TODO: change to call ActiveWavve in GameManager
+        monstersQueue = new Queue<MonsterCharacter>();
+        // TODO: change to call ActiveWave in GameManager
         ActiveWave();
+    }
+
+    private void FixedUpdate()
+    {
+        if (isCountdown)
+        {
+            timer += Time.deltaTime;
+        }
+        if (timer > currentWaveConfig.WaveDuration)
+        {
+            ActiveNextWave();
+            timer = 0;
+        }
     }
 
     private void SetUpWave()
@@ -59,7 +104,7 @@ public class WaveManager : MonoBehaviour
         }
         else
         {
-            List<GameObject> monstersSorted = new List<GameObject>();
+            List<MonsterCharacter> monstersSorted = new List<MonsterCharacter>();
 
             foreach (MonsterConfig config in monsterConfigs)
             {
@@ -78,6 +123,8 @@ public class WaveManager : MonoBehaviour
                 monstersSorted.RemoveAt(index);
             }
         }
+
+        monsterAmount = monstersQueue.Count;
     }
 }
 
@@ -94,6 +141,6 @@ public class WaveConfig
 [Serializable]
 public class MonsterConfig
 {
-    public GameObject Monster = default;
+    public MonsterCharacter Monster = default;
     public int MonsterAmount = default;
 }

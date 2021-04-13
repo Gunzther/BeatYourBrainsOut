@@ -1,21 +1,25 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using BBO.BBO.MonsterManagement;
 
 public class MonstersSpawner : MonoBehaviour
 {
+    [SerializeField]
+    private WaveManager waveManager = default;
+
     [SerializeField]
     private GameObject container = default;
 
     [SerializeField]
     private Transform[] spawnPoints = default;
 
-    private Queue<GameObject> monsters = default;
+    private Queue<MonsterCharacter> monsters = default;
     private float spawnDelay = default;
     private int maxSpawnMonsterNumber = default;
     private WaitForSecondsRealtime waitTime = default;
 
-    public void SetSpawnerConfig(Queue<GameObject> monsters, WaveConfig config)
+    public void SetSpawnerConfig(Queue<MonsterCharacter> monsters, WaveConfig config)
     {
         this.monsters = monsters;
         spawnDelay = config.SpawnDelay;
@@ -41,7 +45,8 @@ public class MonstersSpawner : MonoBehaviour
             {
                 var pointSelected = Random.Range(0, spawnPoints.Length);
                 var pointToSpawn = spawnPoints[pointSelected].position;
-                Instantiate(monsters.Dequeue(), pointToSpawn, Quaternion.identity, container.transform);
+                MonsterCharacter monster = Instantiate(monsters.Dequeue(), pointToSpawn, Quaternion.identity, container.transform);
+                monster.Dead += waveManager.OnMonsterDead;
             }
 
             yield return waitTime;

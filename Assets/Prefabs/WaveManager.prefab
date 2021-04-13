@@ -44,8 +44,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab6d66920fa7e44d2b650cc6f87272f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  waveManager: {fileID: 1920415610800266559}
   container: {fileID: 0}
-  spawnPoints: []
+  spawnPoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &1920415610800266559
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -59,4 +64,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawner: {fileID: 1920415610800266556}
-  waves: []
+  waves:
+  - WaveDuration: 20
+    SpawnDelay: 5
+    MaxSpawnMonstersAmount: 2
+    IsSortSpawning: 0
+    MonsterConfigs:
+    - Monster: {fileID: 2332957842240919009, guid: fd387d0b567060949942d5a2f4d352ff,
+        type: 3}
+      MonsterAmount: 2
+  - WaveDuration: 25
+    SpawnDelay: 5
+    MaxSpawnMonstersAmount: 2
+    IsSortSpawning: 0
+    MonsterConfigs:
+    - Monster: {fileID: 2332957842240919009, guid: fd387d0b567060949942d5a2f4d352ff,
+        type: 3}
+      MonsterAmount: 2
+  - WaveDuration: 20
+    SpawnDelay: 5
+    MaxSpawnMonstersAmount: 2
+    IsSortSpawning: 0
+    MonsterConfigs:
+    - Monster: {fileID: 2332957842240919009, guid: fd387d0b567060949942d5a2f4d352ff,
+        type: 3}
+      MonsterAmount: 2
