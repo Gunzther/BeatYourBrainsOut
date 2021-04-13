@@ -1,51 +1,42 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class MonstersSpawner : MonoBehaviour
 {
-
     [SerializeField]
-    private int numbersOfMonsters = default;
+    private Transform[] spawnPoints = default;
 
-    [SerializeField]
-    private Transform[] SpawnPoints;
+    private Queue<GameObject> monsters = default;
+    private float spawnDelay = default;
+    private int maxSpawnMonsterNumber = default;
+    private WaitForSecondsRealtime waitTime = default;
 
-    [SerializeField]
-    private float _spawnDelay = default;
-
-    private WaitForSecondsRealtime _waitTime;
-
-    [SerializeField]
-    public GameObject monster;
-
-    private void Start()
+    public void SetSpawnerConfig(Queue<GameObject> monsters, WaveConfig config)
     {
-        _waitTime = new WaitForSecondsRealtime(_spawnDelay);
+        this.monsters = monsters;
+        spawnDelay = config.SpawnDelay;
+        maxSpawnMonsterNumber = config.MaxSpawnMonstersAmount;
+    }
 
+    public void StartSpawn()
+    {
+        waitTime = new WaitForSecondsRealtime(spawnDelay);
         StartCoroutine(SpawnMonster());
     }
 
     private IEnumerator SpawnMonster()
     {
-        while (numbersOfMonsters >= 1)
+        while (monsters.Count > 0)
         {
-            var pointSelected = Random.Range(0, 1); //To use as index for reaching array of spawn points.
-            var pointToSpawn = SpawnPoints[pointSelected].position;
-
-            var clonePrefab = Instantiate(monster, pointToSpawn, Quaternion.identity);
-
-            var monsterSprite = clonePrefab.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>();
-
-            if (monsterSprite != null)
+            for (int i = 0; i < Random.Range(1, maxSpawnMonsterNumber); i++)
             {
-                monsterSprite.flipX = pointSelected == 1;
+                var pointSelected = Random.Range(0, spawnPoints.Length);
+                var pointToSpawn = spawnPoints[pointSelected].position;
+                Instantiate(monsters.Dequeue(), pointToSpawn, Quaternion.identity);
             }
 
-            numbersOfMonsters--;
-
-            yield return _waitTime;
+            yield return waitTime;
         }
-
-        Destroy(gameObject);
     }
 }
