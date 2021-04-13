@@ -15,7 +15,7 @@ namespace BBO.BBO.MonsterManagement
         private float intervalSeconds = default;
 
         private bool isIntervalDamage = false;
-        private float time = default;
+        private float timer = default;
 
         public void SetDamageValue(int value)
         {
@@ -49,9 +49,9 @@ namespace BBO.BBO.MonsterManagement
         {
             if (isIntervalDamage)
             {
-                time += Time.deltaTime;
+                timer += Time.deltaTime;
 
-                if (time > intervalSeconds)
+                if (timer > intervalSeconds)
                 {
                     // TODO: change to pooling objects
                     Destroy(this.gameObject);
