@@ -12,7 +12,7 @@ namespace BBO.BBO.PlayerManagement
         private Animator playerAnimator = default;
 
         [SerializeField]
-        private MonsterDestroyer weaponCollider = default;
+        private Weapon weaponCollider = default;
 
         private Renderer spriteRenderer = default;
 
