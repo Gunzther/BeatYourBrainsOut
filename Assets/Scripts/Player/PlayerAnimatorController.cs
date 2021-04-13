@@ -1,5 +1,4 @@
-﻿using BBO.BBO.GameData;
-using BBO.BBO.MonsterManagement;
+﻿using BBO.BBO.MonsterManagement;
 using UnityEngine;
 
 namespace BBO.BBO.PlayerManagement
@@ -13,7 +12,7 @@ namespace BBO.BBO.PlayerManagement
         private Animator playerAnimator = default;
 
         [SerializeField]
-        private MonsterDestroyer weaponCollider = default;
+        private Weapon weaponCollider = default;
 
         private Renderer spriteRenderer = default;
 
