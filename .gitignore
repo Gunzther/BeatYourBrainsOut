@@ -39,3 +39,6 @@ sysinfo.txt
 #Sample files
 Assets/Samples/
 Assets/Samples.meta
+
+# ide
+.idea

@@ -13,12 +13,15 @@ namespace BBO.BBO.PlayerManagement
         [SerializeField]
         private SpriteRenderer weaponSpriteRenderer = default;
 
+        [SerializeField] private UI_Inventory uiInventory;
+
         public PlayerStats CurrentPlayerStats { get; private set; }
         public PlayerWeapon CurrentPlayerWeapon { get; private set; }
 
         private int playerID = default;
         private UIManager uiManager = default;
         private Team team = default;
+        private Inventory inventory;
 
         public void Reload()
         {
@@ -47,6 +50,8 @@ namespace BBO.BBO.PlayerManagement
             playerID = 0;
             CurrentPlayerStats = new PlayerStats(playerID);
             CurrentPlayerWeapon = new PlayerWeapon();
+            inventory = new Inventory();
+            uiInventory.SetInventory(inventory);
 
 /*            if (weaponSpriteRenderer.sprite is Sprite sprite)
             {

@@ -28,6 +28,8 @@ namespace BBO.BBO.TeamManagement
 
         public Team Team => team;
         private Team team = default;
+
+        [SerializeField]
         private int numberOfPlayers = 1;
 
         public override void Awake()
@@ -70,10 +72,10 @@ namespace BBO.BBO.TeamManagement
 
         public void AddPlayerFromController()
         {
-           if (Gamepad.current.selectButton.wasReleasedThisFrame)
-           {
-                SetupLocalMultiplayer(Gamepad.current);
-           }
+            if (Gamepad.current.selectButton.wasReleasedThisFrame)
+                {
+                    SetupLocalMultiplayer(Gamepad.current);
+                }
         }
 
         private bool IsAdded(InputDevice input)
