@@ -82,7 +82,17 @@ namespace BBO.BBO.PlayerManagement
         {
             if (value.started)
             {
-                playerAnimatorController.SetTrigger(playerCharacter.CurrentPlayerWeapon.WeaponHitTriggerHash);
+                Debug.Log($"[{nameof(PlayerSmoothController)}] attack!");
+                // TODO: add attacking function
+            }
+        }
+
+        public void OnPickObject(InputAction.CallbackContext value)
+        {
+            if (value.started)
+            {
+                Debug.Log($"[{nameof(PlayerSmoothController)}] pick!");
+                playerCharacter.OnPick();
             }
         }
 

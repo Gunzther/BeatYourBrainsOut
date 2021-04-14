@@ -12,10 +12,9 @@
 
         public enum Weapon
         {
-            baseballbat,
-            stickyband,
-            nailbox,
-            nail
+            Baseballbat,
+            Nail,
+            RubberBand
         }
     }
 }
