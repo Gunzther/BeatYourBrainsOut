@@ -1,31 +1,40 @@
 ﻿using BBO.BBO.GameData;
 using System;
-using UnityEngine;
 
 namespace BBO.BBO.PlayerManagement
 {
     public class PlayerWeapon
     {
-        public WeaponsData.Weapon CurrentType => type;
-        public Sprite WeaponSprite => weaponSprite;
-        public int WeaponHitTriggerHash => weaponHitTriggerHash;
+        public WeaponsData.Weapon CurrentType => weapon;
 
-        private WeaponsData.Weapon type = default;
-        private Sprite weaponSprite = default;
-        private int weaponHitTriggerHash = default;
+        private WeaponsData.Weapon weapon = default;
 
-        public void SetWeaponType(WeaponsData.Weapon type)
+        public PlayerData.PlayerSprite SetWeapon(WeaponsData.Weapon weapon)
         {
-            this.type = type;
-            weaponSprite = Resources.Load<Sprite>(type.ToString());
-            weaponHitTriggerHash = PlayerData.WeaponTriggerHash[(int)type];
+            this.weapon = weapon;
+            return GetPlayerSprite(weapon);
         }
 
-        public void SetWeaponType(string name)
+        public void SetWeapon(string name)
         {
-            if (Enum.TryParse(name, out WeaponsData.Weapon type))
+            if (Enum.TryParse(name, out WeaponsData.Weapon weapon))
             {
-                SetWeaponType(type);
+                SetWeapon(weapon);
+            }
+        }
+
+        private PlayerData.PlayerSprite GetPlayerSprite(WeaponsData.Weapon weapon)
+        {
+            switch (this.weapon)
+            {
+                case WeaponsData.Weapon.Baseballbat:
+                    return PlayerData.PlayerSprite.Baseball;
+                case WeaponsData.Weapon.Nail:
+                    return PlayerData.PlayerSprite.Nail;
+                case WeaponsData.Weapon.RubberBand:
+                    return PlayerData.PlayerSprite.RubberBandDefault;
+                default:
+                    return PlayerData.PlayerSprite.Default;
             }
         }
     }

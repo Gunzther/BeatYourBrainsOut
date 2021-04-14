@@ -10,15 +10,13 @@ namespace BBO.BBO.PlayerManagement
         [SerializeField]
         private PlayerAnimatorController playerAnimatorController = default;
 
-        [SerializeField]
-        private SpriteRenderer weaponSpriteRenderer = default;
-
         public PlayerStats CurrentPlayerStats { get; private set; }
         public PlayerWeapon CurrentPlayerWeapon { get; private set; }
 
         private int playerID = default;
         private UIManager uiManager = default;
         private Team team = default;
+        private bool isPicking = default;
 
         public void Reload()
         {
@@ -36,6 +34,11 @@ namespace BBO.BBO.PlayerManagement
             uiManager.SetTeamHpValue(team.CurrentTeamHealth);
         }
 
+        public void OnPick()
+        {
+            isPicking = true;
+        }
+
         public void TriggerHurtAnimation()
         {
             playerAnimatorController.SetTrigger(PlayerData.HurtTriggerHash);
@@ -47,11 +50,15 @@ namespace BBO.BBO.PlayerManagement
             playerID = 0;
             CurrentPlayerStats = new PlayerStats(playerID);
             CurrentPlayerWeapon = new PlayerWeapon();
+        }
 
-/*            if (weaponSpriteRenderer.sprite is Sprite sprite)
+        private void OnTriggerStay(Collider other)
+        {
+            if (isPicking && other.GetComponent<WeaponBox>() is WeaponBox weaponBox)
             {
-                CurrentPlayerWeapon.SetWeaponType(sprite.name);
-            }*/
+                playerAnimatorController.ChangePlayerMainTex(CurrentPlayerWeapon.SetWeapon(weaponBox.Weapon));
+                isPicking = false;
+            }
         }
     }
 }

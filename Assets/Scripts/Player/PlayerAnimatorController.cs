@@ -1,4 +1,5 @@
-﻿using BBO.BBO.MonsterManagement;
+﻿using BBO.BBO.GameData;
+using BBO.BBO.MonsterManagement;
 using UnityEngine;
 
 namespace BBO.BBO.PlayerManagement
@@ -50,19 +51,10 @@ namespace BBO.BBO.PlayerManagement
         }
 
         // Change sprite with this fn() 
-        public void ChangePlayerMainTex(PlayerSprite player)
+        public void ChangePlayerMainTex(PlayerData.PlayerSprite playerSprite)
         {
-            int spriteNumber = (int) player;
+            int spriteNumber = (int) playerSprite;
             spriteRenderer.material.SetTexture("_MainTex", spriteList[spriteNumber]);
         }
-    }
-
-    public enum PlayerSprite
-    {
-        Default = 0,
-        Baseball,
-        Nail,
-        RubberBandDefault,
-        RubberBandAttack
     }
 }

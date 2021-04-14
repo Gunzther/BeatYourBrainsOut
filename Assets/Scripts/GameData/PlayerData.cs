@@ -12,12 +12,15 @@ namespace BBO.BBO.GameData
         public static readonly int WalkSideTriggerHash = Animator.StringToHash("WalkSide");
         public static readonly int DeadTriggerHash = Animator.StringToHash("Dead");
         public static readonly int HurtTriggerHash = Animator.StringToHash("Hurt");
-        public static readonly int BaseballHitTriggerHash = Animator.StringToHash("CastAttack");
 
-        public static readonly int[] WeaponTriggerHash =
+        public enum PlayerSprite
         {
-            BaseballHitTriggerHash
-        };
+            Default = 0,
+            Baseball,
+            Nail,
+            RubberBandDefault,
+            RubberBandAttack
+        }
     }
    
 }
