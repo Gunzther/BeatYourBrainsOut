@@ -31,6 +31,7 @@ namespace BBO.BBO.MonsterMovement
         private IEnumerable<PlayerCharacter> players = default;
         private float timer = default;
         private Transform target = default;
+        private bool timeToMove;
 
         public override void OnAttackMovement()
         {
@@ -51,6 +52,7 @@ namespace BBO.BBO.MonsterMovement
             players = teamManager.Team.PlayerCharacters;
             timer = 0;
             target = GetClosetPlayer();
+            timeToMove = true;
         }
 
         private void Update()
@@ -59,6 +61,7 @@ namespace BBO.BBO.MonsterMovement
             {
                 target = GetClosetPlayer();
                 timer = 0;
+                timeToMove = false;
             }
 
             timer += Time.deltaTime;
@@ -73,11 +76,10 @@ namespace BBO.BBO.MonsterMovement
         {
             float step = speed * Time.deltaTime;
             float moveDistance = Vector3.Distance(transform.position, target.position);
-            if (moveDistance < stop_distance)
+            if (moveDistance > stop_distance)
             {
-                step = 0;
+                transform.position = Vector3.MoveTowards(transform.position, target.position, step);
             }
-            transform.position = Vector3.MoveTowards(transform.position, target.position, step);
             AnimateEeeMovement(transform.position.x, target.position.x);
         }
         
@@ -103,10 +105,16 @@ namespace BBO.BBO.MonsterMovement
 
         private void AnimateEeeMovement(float eeeXPos, float targetXPos)
         {
+            
             int triggerHash = MonstersData.IdleTriggerHash;
             transform.localScale = new Vector3(1, 1, 1);
-
-            if (eeeXPos < targetXPos)
+            
+            if (Vector3.Distance(transform.position, target.position) <= stop_distance)
+            {
+                triggerHash = MonstersData.IdleTriggerHash;
+                transform.localScale = new Vector3(1, 1, 1);
+            }
+            else if (eeeXPos < targetXPos)
             {
                 triggerHash = MonstersData.WalkSideTriggerHash;
                 transform.localScale = new Vector3(-1, 1, 1);
