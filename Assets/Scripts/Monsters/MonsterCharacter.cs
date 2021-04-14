@@ -1,4 +1,5 @@
 ﻿using BBO.BBO.MonsterMovement;
+using System;
 using UnityEngine;
 
 namespace BBO.BBO.MonsterManagement
@@ -11,12 +12,15 @@ namespace BBO.BBO.MonsterManagement
         [SerializeField]
         private int hp = default;
 
+        public Action Dead = default;
+
         public void DecreaseMonsterHp(int value)
         {
             hp -= value;
 
             if (hp <= 0)
             {
+                Dead?.Invoke();
                 Destroy(gameObject);
             }
         }
