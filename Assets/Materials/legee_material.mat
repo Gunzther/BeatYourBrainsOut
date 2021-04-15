@@ -27,7 +27,7 @@ Material:
     - _Column: 4
     - _Frame: 1
     - _LapValue: 0
-    - _Row: 1
+    - _Row: 3
     m_Colors:
     - _DissolveCol: {r: 1, g: 0, b: 0, a: 1}
     - _LapCol: {r: 1, g: 0, b: 0, a: 0}
