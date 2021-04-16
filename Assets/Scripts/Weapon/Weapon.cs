@@ -14,11 +14,16 @@ namespace BBO.BBO.WeaponManagement
         public int AttacksNumber = default;
         public int HP = default;
 
+        // IntervalDamage
         private bool isIntervalDamage = false;
         private float timer = default;
 
+        // LimitAttacksNumber
         private bool isLimitAttacksNumber = false;
         private int attacksCount = default;
+
+        // Stupid
+        private bool stupid = false;
 
         public void SetDamageValue(int value)
         {
@@ -33,7 +38,7 @@ namespace BBO.BBO.WeaponManagement
 
         private void OnTriggerEnter(Collider other)
         {
-            if (!isIntervalDamage && other.gameObject.GetComponent<MonsterCharacter>() is MonsterCharacter monster)
+            if (!stupid && !isIntervalDamage && other.gameObject.GetComponent<MonsterCharacter>() is MonsterCharacter monster)
             {
                 monster.DecreaseMonsterHp(DamageValue);
                 monster.OnAttacked();
@@ -63,6 +68,7 @@ namespace BBO.BBO.WeaponManagement
         {
             isIntervalDamage = Type == WeaponData.Type.IntervalDamage;
             isLimitAttacksNumber = Type == WeaponData.Type.LimitAttacksNumber;
+            stupid = Type == WeaponData.Type.Stupid;
         }
 
         private void Update()
@@ -104,6 +110,8 @@ namespace BBO.BBO.WeaponManagement
                     break;
                 case WeaponData.Type.Protected:
                     ShowHP();
+                    break;
+                case WeaponData.Type.Stupid:
                     break;
                 default:
                     ShowDamageValue();

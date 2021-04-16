@@ -391,6 +391,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerAnimatorController: {fileID: 7510636998256204326}
+  stupidWeapons:
+  - Weapon: 1
+    StupidPrefab: {fileID: 6617222608611167847, guid: c0e2f0303f6a77a4fac6bd1ce2ad31b9,
+      type: 3}
+  - Weapon: 2
+    StupidPrefab: {fileID: 896939178005117703, guid: ba86de7042c58fa4687056b61c9b3036,
+      type: 3}
+  - Weapon: 3
+    StupidPrefab: {fileID: 2168545729610353427, guid: 34a27211eed11ef4ca3a2479894e40a9,
+      type: 3}
 --- !u!114 &4784475903516044564
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -8,7 +8,7 @@ namespace BBO.BBO.GameManager
     public class GameManager : MonoSingleton<GameManager>
     {
         [SerializeField]
-        TeamManager teamManager = default;
+        private TeamManager teamManager = default;
 
         private void Start()
         {

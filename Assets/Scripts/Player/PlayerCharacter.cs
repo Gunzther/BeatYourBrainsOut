@@ -2,6 +2,8 @@
 using BBO.BBO.TeamManagement;
 using BBO.BBO.TeamManagement.UI;
 using BBO.BBO.WeaponManagement;
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace BBO.BBO.PlayerManagement
@@ -10,6 +12,10 @@ namespace BBO.BBO.PlayerManagement
     {
         [SerializeField]
         private PlayerAnimatorController playerAnimatorController = default;
+
+        // TODO: [too lazy todo] move to another class
+        [SerializeField]
+        private StupidWeapon[] stupidWeapons = default;
 
         public PlayerStats CurrentPlayerStats { get; private set; }
         public PlayerWeapon CurrentPlayerWeapon { get; private set; }
@@ -24,6 +30,10 @@ namespace BBO.BBO.PlayerManagement
         private bool nearCraftSlot = false;
         private bool canPick => CurrentPlayerWeapon.CurrentWeapon == WeaponData.Weapon.NoWeapon;
         private bool canPlace => CurrentPlayerWeapon.CurrentWeapon != WeaponData.Weapon.NoWeapon;
+
+        // stupid weapon
+        private Dictionary<WeaponData.Weapon, GameObject> stupidWeaponPrototypes = default;
+        private GameObject stupidContainer = default;
 
         public void Reload()
         {
@@ -56,7 +66,7 @@ namespace BBO.BBO.PlayerManagement
                 }
                 else
                 {
-                    // TODO: place weapon on the floor
+                    PlaceStupidWeapon();
                 }
             }
         }
@@ -72,6 +82,12 @@ namespace BBO.BBO.PlayerManagement
             playerID = 0;
             CurrentPlayerStats = new PlayerStats(playerID);
             CurrentPlayerWeapon = new PlayerWeapon();
+            stupidWeaponPrototypes = new Dictionary<WeaponData.Weapon, GameObject>();
+        }
+
+        private void OnEnable()
+        {
+            GenerateStupidWeaponDictionary();
         }
 
         private void OnTriggerStay(Collider other)
@@ -114,5 +130,38 @@ namespace BBO.BBO.PlayerManagement
             isPicking = false;
             isPlacing = false;
         }
+
+        private void GenerateStupidWeaponDictionary()
+        {
+            foreach (StupidWeapon weapon in stupidWeapons)
+            {
+                stupidWeaponPrototypes.Add(weapon.Weapon, weapon.StupidPrefab);
+            }
+        }
+
+        private void PlaceStupidWeapon()
+        {
+            if (stupidContainer == null)
+            {
+                stupidContainer = new GameObject("StupidContainer");
+            }
+
+            if (stupidWeaponPrototypes.TryGetValue(CurrentPlayerWeapon.CurrentWeapon, out GameObject weaponPrototype))
+            {
+                var newStupidWeapon = Instantiate(weaponPrototype, stupidContainer.transform);
+                newStupidWeapon.transform.position = transform.position;
+            }
+
+            playerAnimatorController.ChangePlayerMainTex(CurrentPlayerWeapon.SetWeapon(WeaponData.Weapon.NoWeapon));
+            isPlacing = false;
+        }
+    }
+
+    // TODO: [too lazy todo] move to another class
+    [Serializable]
+    public class StupidWeapon
+    {
+        public WeaponData.Weapon Weapon = default;
+        public GameObject StupidPrefab = default;
     }
 }
