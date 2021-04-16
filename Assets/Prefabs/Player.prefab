@@ -180,6 +180,7 @@ GameObject:
   - component: {fileID: 4018970313251512849}
   - component: {fileID: 6311386286687350204}
   - component: {fileID: 2931017039494346268}
+  - component: {fileID: 4196438410929681986}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -357,6 +358,21 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: d29eb468-2e6d-4989-bc29-66649d5ee16d
     m_ActionName: Player/Pick[/Keyboard/r]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4784475903516044564}
+        m_MethodName: OnPlaceObject
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: f42d8734-9925-4944-b5ba-538ae889df7d
+    m_ActionName: Player/Place[/Keyboard/f]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard&Mouse
   m_DefaultActionMap: Player
@@ -375,6 +391,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerAnimatorController: {fileID: 7510636998256204326}
+  stupidWeapons:
+  - Weapon: 1
+    StupidPrefab: {fileID: 6617222608611167847, guid: c0e2f0303f6a77a4fac6bd1ce2ad31b9,
+      type: 3}
+  - Weapon: 2
+    StupidPrefab: {fileID: 896939178005117703, guid: ba86de7042c58fa4687056b61c9b3036,
+      type: 3}
+  - Weapon: 3
+    StupidPrefab: {fileID: 2168545729610353427, guid: 34a27211eed11ef4ca3a2479894e40a9,
+      type: 3}
 --- !u!114 &4784475903516044564
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -438,9 +464,23 @@ CapsuleCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.3
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.2, z: 0}
+--- !u!136 &4196438410929681986
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2624934328494790055}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.3
   m_Height: 1
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0.7, z: 0}
 --- !u!1 &8430702934923623142
 GameObject:
   m_ObjectHideFlags: 0
@@ -547,6 +587,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7831e1bdc7aedf44ca3be3b8cef9f069, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  WeaponGO: 0
   Type: 0
   DamageValue: 0
   IntervalSeconds: 0

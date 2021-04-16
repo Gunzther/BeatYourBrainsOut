@@ -96,6 +96,15 @@ namespace BBO.BBO.PlayerManagement
             }
         }
 
+        public void OnPlaceObject(InputAction.CallbackContext value)
+        {
+            if (value.started)
+            {
+                Debug.Log($"[{nameof(PlayerSmoothController)}] place!");
+                playerCharacter.OnPlace();
+            }
+        }
+
         private void CalculateMovementInput()
         {
             if (useOldInputManager)

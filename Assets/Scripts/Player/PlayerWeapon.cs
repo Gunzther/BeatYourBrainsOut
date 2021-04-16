@@ -5,11 +5,11 @@ namespace BBO.BBO.PlayerManagement
 {
     public class PlayerWeapon
     {
-        public WeaponsData.Weapon CurrentType => weapon;
+        public WeaponData.Weapon CurrentWeapon => weapon;
 
-        private WeaponsData.Weapon weapon = default;
+        private WeaponData.Weapon weapon = default;
 
-        public PlayerData.PlayerSprite SetWeapon(WeaponsData.Weapon weapon)
+        public PlayerData.PlayerSprite SetWeapon(WeaponData.Weapon weapon)
         {
             this.weapon = weapon;
             return GetPlayerSprite(weapon);
@@ -17,21 +17,21 @@ namespace BBO.BBO.PlayerManagement
 
         public void SetWeapon(string name)
         {
-            if (Enum.TryParse(name, out WeaponsData.Weapon weapon))
+            if (Enum.TryParse(name, out WeaponData.Weapon weapon))
             {
                 SetWeapon(weapon);
             }
         }
 
-        private PlayerData.PlayerSprite GetPlayerSprite(WeaponsData.Weapon weapon)
+        private PlayerData.PlayerSprite GetPlayerSprite(WeaponData.Weapon weapon)
         {
             switch (this.weapon)
             {
-                case WeaponsData.Weapon.Baseballbat:
+                case WeaponData.Weapon.Baseballbat:
                     return PlayerData.PlayerSprite.Baseball;
-                case WeaponsData.Weapon.Nail:
+                case WeaponData.Weapon.Nail:
                     return PlayerData.PlayerSprite.Nail;
-                case WeaponsData.Weapon.RubberBand:
+                case WeaponData.Weapon.RubberBand:
                     return PlayerData.PlayerSprite.RubberBandDefault;
                 default:
                     return PlayerData.PlayerSprite.Default;

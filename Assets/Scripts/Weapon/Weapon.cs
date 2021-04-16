@@ -1,36 +1,49 @@
 ﻿using BBO.BBO.GameData;
+using BBO.BBO.MonsterManagement;
 using UnityEditor;
 using UnityEngine;
 
-namespace BBO.BBO.MonsterManagement
+namespace BBO.BBO.WeaponManagement
 {
     public class Weapon : MonoBehaviour
     {
-        public WeaponsData.Type Type = default;
+        public WeaponData.Weapon WeaponGO = default;
+        public WeaponData.Type Type = default;
         public int DamageValue = default;
         public float IntervalSeconds = default;
         public int AttacksNumber = default;
         public int HP = default;
 
+        // IntervalDamage
         private bool isIntervalDamage = false;
         private float timer = default;
 
+        // LimitAttacksNumber
         private bool isLimitAttacksNumber = false;
         private int attacksCount = default;
+
+        // Stupid
+        private bool stupid = false;
 
         public void SetDamageValue(int value)
         {
             DamageValue = value;
         }
 
+        public void OnPicked()
+        {
+            // TODO: change to pooling object
+            Destroy(gameObject);
+        }
+
         private void OnTriggerEnter(Collider other)
         {
-            if (!isIntervalDamage && other.gameObject.GetComponent<MonsterCharacter>() is MonsterCharacter monster)
+            if (!stupid && !isIntervalDamage && other.gameObject.GetComponent<MonsterCharacter>() is MonsterCharacter monster)
             {
                 monster.DecreaseMonsterHp(DamageValue);
                 monster.OnAttacked();
             }
-            if (isLimitAttacksNumber)
+            if (isLimitAttacksNumber && other.gameObject.GetComponent<MonsterCharacter>() is MonsterCharacter)
             {
                 attacksCount++;
 
@@ -53,8 +66,9 @@ namespace BBO.BBO.MonsterManagement
 
         private void Start()
         {
-            isIntervalDamage = Type == WeaponsData.Type.IntervalDamage;
-            isLimitAttacksNumber = Type == WeaponsData.Type.LimitAttacksNumber;
+            isIntervalDamage = Type == WeaponData.Type.IntervalDamage;
+            isLimitAttacksNumber = Type == WeaponData.Type.LimitAttacksNumber;
+            stupid = Type == WeaponData.Type.Stupid;
         }
 
         private void Update()
@@ -81,20 +95,23 @@ namespace BBO.BBO.MonsterManagement
         public override void OnInspectorGUI()
         {
             weaponScript = target as Weapon;
-            weaponScript.Type = (WeaponsData.Type)EditorGUILayout.EnumPopup("Type", weaponScript.Type);
+            weaponScript.WeaponGO = (WeaponData.Weapon)EditorGUILayout.EnumPopup("Weapon", weaponScript.WeaponGO);
+            weaponScript.Type = (WeaponData.Type)EditorGUILayout.EnumPopup("Type", weaponScript.Type);
 
             switch (weaponScript.Type)
             {
-                case WeaponsData.Type.IntervalDamage:
+                case WeaponData.Type.IntervalDamage:
                     ShowDamageValue();
                     ShowIntervalSeconds();
                     break;
-                case WeaponsData.Type.LimitAttacksNumber:
+                case WeaponData.Type.LimitAttacksNumber:
                     ShowDamageValue();
                     ShowAttacksNumber();
                     break;
-                case WeaponsData.Type.Protected:
+                case WeaponData.Type.Protected:
                     ShowHP();
+                    break;
+                case WeaponData.Type.Stupid:
                     break;
                 default:
                     ShowDamageValue();
