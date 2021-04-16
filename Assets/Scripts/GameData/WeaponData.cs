@@ -1,6 +1,6 @@
 ﻿namespace BBO.BBO.GameData
 {
-    public static class WeaponsData
+    public static class WeaponData
     {
         public enum Type
         {
@@ -12,6 +12,7 @@
 
         public enum Weapon
         {
+            NoWeapon,
             Baseballbat,
             Nail,
             RubberBand

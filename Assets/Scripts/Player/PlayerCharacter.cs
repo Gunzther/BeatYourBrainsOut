@@ -22,6 +22,8 @@ namespace BBO.BBO.PlayerManagement
         private bool isPicking = false;
         private bool isPlacing = false;
         private bool nearCraftSlot = false;
+        private bool canPick => CurrentPlayerWeapon.CurrentWeapon == WeaponData.Weapon.NoWeapon;
+        private bool canPlace => CurrentPlayerWeapon.CurrentWeapon != WeaponData.Weapon.NoWeapon;
 
         public void Reload()
         {
@@ -46,13 +48,16 @@ namespace BBO.BBO.PlayerManagement
 
         public void OnPlace()
         {
-            if (nearCraftSlot)
+            if (canPlace)
             {
-                isPlacing = true;
-            }
-            else
-            {
-
+                if (nearCraftSlot)
+                {
+                    isPlacing = true;
+                }
+                else
+                {
+                    // TODO: place weapon on the floor
+                }
             }
         }
 
@@ -71,18 +76,21 @@ namespace BBO.BBO.PlayerManagement
 
         private void OnTriggerStay(Collider other)
         {
-            if (isPicking)
+            if (isPicking && canPick)
             {
-                print("picking: " + other.name);
                 if (other.GetComponent<WeaponBox>() is WeaponBox weaponBox)
                 {
                     playerAnimatorController.ChangePlayerMainTex(CurrentPlayerWeapon.SetWeapon(weaponBox.Weapon));
                 }
                 else if (other.GetComponent<Weapon>() is Weapon weapon)
                 {
-                    print("near weapon");
                     playerAnimatorController.ChangePlayerMainTex(CurrentPlayerWeapon.SetWeapon(weapon.WeaponGO));
                     weapon.OnPicked();
+                }
+                else if (other.GetComponent<CraftSlot>() is CraftSlot slot && slot.CanPick)
+                {
+                    WeaponData.Weapon pickedWeapon = slot.OnPicked();
+                    playerAnimatorController.ChangePlayerMainTex(CurrentPlayerWeapon.SetWeapon(pickedWeapon));
                 }
 
                 isPicking = false;
@@ -91,9 +99,10 @@ namespace BBO.BBO.PlayerManagement
             {
                 nearCraftSlot = true;
 
-                if (isPlacing)
+                if (isPlacing && craftSlot.CanPlace && CurrentPlayerWeapon.CurrentWeapon != WeaponData.Weapon.NoWeapon)
                 {
                     craftSlot.OnPlaced(CurrentPlayerWeapon.CurrentWeapon);
+                    playerAnimatorController.ChangePlayerMainTex(CurrentPlayerWeapon.SetWeapon(WeaponData.Weapon.NoWeapon));
                     isPlacing = false;
                 }
             }
@@ -101,10 +110,9 @@ namespace BBO.BBO.PlayerManagement
 
         private void OnTriggerExit(Collider other)
         {
-            if (other.GetComponent<CraftSlot>() is CraftSlot)
-            {
-                nearCraftSlot = false;
-            }
+            nearCraftSlot = false;
+            isPicking = false;
+            isPlacing = false;
         }
     }
 }

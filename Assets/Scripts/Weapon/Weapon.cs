@@ -7,8 +7,8 @@ namespace BBO.BBO.WeaponManagement
 {
     public class Weapon : MonoBehaviour
     {
-        public WeaponsData.Weapon WeaponGO = default;
-        public WeaponsData.Type Type = default;
+        public WeaponData.Weapon WeaponGO = default;
+        public WeaponData.Type Type = default;
         public int DamageValue = default;
         public float IntervalSeconds = default;
         public int AttacksNumber = default;
@@ -61,8 +61,8 @@ namespace BBO.BBO.WeaponManagement
 
         private void Start()
         {
-            isIntervalDamage = Type == WeaponsData.Type.IntervalDamage;
-            isLimitAttacksNumber = Type == WeaponsData.Type.LimitAttacksNumber;
+            isIntervalDamage = Type == WeaponData.Type.IntervalDamage;
+            isLimitAttacksNumber = Type == WeaponData.Type.LimitAttacksNumber;
         }
 
         private void Update()
@@ -89,20 +89,20 @@ namespace BBO.BBO.WeaponManagement
         public override void OnInspectorGUI()
         {
             weaponScript = target as Weapon;
-            weaponScript.WeaponGO = (WeaponsData.Weapon)EditorGUILayout.EnumPopup("Weapon", weaponScript.WeaponGO);
-            weaponScript.Type = (WeaponsData.Type)EditorGUILayout.EnumPopup("Type", weaponScript.Type);
+            weaponScript.WeaponGO = (WeaponData.Weapon)EditorGUILayout.EnumPopup("Weapon", weaponScript.WeaponGO);
+            weaponScript.Type = (WeaponData.Type)EditorGUILayout.EnumPopup("Type", weaponScript.Type);
 
             switch (weaponScript.Type)
             {
-                case WeaponsData.Type.IntervalDamage:
+                case WeaponData.Type.IntervalDamage:
                     ShowDamageValue();
                     ShowIntervalSeconds();
                     break;
-                case WeaponsData.Type.LimitAttacksNumber:
+                case WeaponData.Type.LimitAttacksNumber:
                     ShowDamageValue();
                     ShowAttacksNumber();
                     break;
-                case WeaponsData.Type.Protected:
+                case WeaponData.Type.Protected:
                     ShowHP();
                     break;
                 default:
