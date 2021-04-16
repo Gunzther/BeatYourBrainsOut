@@ -1,6 +1,7 @@
 ﻿using BBO.BBO.GameData;
 using BBO.BBO.TeamManagement;
 using BBO.BBO.TeamManagement.UI;
+using BBO.BBO.WeaponManagement;
 using UnityEngine;
 
 namespace BBO.BBO.PlayerManagement
@@ -16,7 +17,11 @@ namespace BBO.BBO.PlayerManagement
         private int playerID = default;
         private UIManager uiManager = default;
         private Team team = default;
-        private bool isPicking = default;
+
+        // object interaction
+        private bool isPicking = false;
+        private bool isPlacing = false;
+        private bool nearCraftSlot = false;
 
         public void Reload()
         {
@@ -39,6 +44,18 @@ namespace BBO.BBO.PlayerManagement
             isPicking = true;
         }
 
+        public void OnPlace()
+        {
+            if (nearCraftSlot)
+            {
+                isPlacing = true;
+            }
+            else
+            {
+
+            }
+        }
+
         public void TriggerHurtAnimation()
         {
             playerAnimatorController.SetTrigger(PlayerData.HurtTriggerHash);
@@ -54,10 +71,39 @@ namespace BBO.BBO.PlayerManagement
 
         private void OnTriggerStay(Collider other)
         {
-            if (isPicking && other.GetComponent<WeaponBox>() is WeaponBox weaponBox)
+            if (isPicking)
             {
-                playerAnimatorController.ChangePlayerMainTex(CurrentPlayerWeapon.SetWeapon(weaponBox.Weapon));
+                print("picking: " + other.name);
+                if (other.GetComponent<WeaponBox>() is WeaponBox weaponBox)
+                {
+                    playerAnimatorController.ChangePlayerMainTex(CurrentPlayerWeapon.SetWeapon(weaponBox.Weapon));
+                }
+                else if (other.GetComponent<Weapon>() is Weapon weapon)
+                {
+                    print("near weapon");
+                    playerAnimatorController.ChangePlayerMainTex(CurrentPlayerWeapon.SetWeapon(weapon.WeaponGO));
+                    weapon.OnPicked();
+                }
+
                 isPicking = false;
+            }
+            if (other.GetComponent<CraftSlot>() is CraftSlot craftSlot)
+            {
+                nearCraftSlot = true;
+
+                if (isPlacing)
+                {
+                    craftSlot.OnPlaced(CurrentPlayerWeapon.CurrentWeapon);
+                    isPlacing = false;
+                }
+            }
+        }
+
+        private void OnTriggerExit(Collider other)
+        {
+            if (other.GetComponent<CraftSlot>() is CraftSlot)
+            {
+                nearCraftSlot = false;
             }
         }
     }

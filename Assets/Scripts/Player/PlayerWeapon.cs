@@ -5,7 +5,7 @@ namespace BBO.BBO.PlayerManagement
 {
     public class PlayerWeapon
     {
-        public WeaponsData.Weapon CurrentType => weapon;
+        public WeaponsData.Weapon CurrentWeapon => weapon;
 
         private WeaponsData.Weapon weapon = default;
 

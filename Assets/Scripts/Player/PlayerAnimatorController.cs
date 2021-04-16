@@ -1,5 +1,5 @@
 ﻿using BBO.BBO.GameData;
-using BBO.BBO.MonsterManagement;
+using BBO.BBO.WeaponManagement;
 using UnityEngine;
 
 namespace BBO.BBO.PlayerManagement

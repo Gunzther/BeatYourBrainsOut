@@ -1,11 +1,13 @@
 ﻿using BBO.BBO.GameData;
+using BBO.BBO.MonsterManagement;
 using UnityEditor;
 using UnityEngine;
 
-namespace BBO.BBO.MonsterManagement
+namespace BBO.BBO.WeaponManagement
 {
     public class Weapon : MonoBehaviour
     {
+        public WeaponsData.Weapon WeaponGO = default;
         public WeaponsData.Type Type = default;
         public int DamageValue = default;
         public float IntervalSeconds = default;
@@ -23,6 +25,12 @@ namespace BBO.BBO.MonsterManagement
             DamageValue = value;
         }
 
+        public void OnPicked()
+        {
+            // TODO: change to pooling object
+            Destroy(gameObject);
+        }
+
         private void OnTriggerEnter(Collider other)
         {
             if (!isIntervalDamage && other.gameObject.GetComponent<MonsterCharacter>() is MonsterCharacter monster)
@@ -30,7 +38,7 @@ namespace BBO.BBO.MonsterManagement
                 monster.DecreaseMonsterHp(DamageValue);
                 monster.OnAttacked();
             }
-            if (isLimitAttacksNumber)
+            if (isLimitAttacksNumber && other.gameObject.GetComponent<MonsterCharacter>() is MonsterCharacter)
             {
                 attacksCount++;
 
@@ -81,6 +89,7 @@ namespace BBO.BBO.MonsterManagement
         public override void OnInspectorGUI()
         {
             weaponScript = target as Weapon;
+            weaponScript.WeaponGO = (WeaponsData.Weapon)EditorGUILayout.EnumPopup("Weapon", weaponScript.WeaponGO);
             weaponScript.Type = (WeaponsData.Type)EditorGUILayout.EnumPopup("Type", weaponScript.Type);
 
             switch (weaponScript.Type)
