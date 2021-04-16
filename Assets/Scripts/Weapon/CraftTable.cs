@@ -9,6 +9,6 @@ namespace BBO.BBO.WeaponManagement
         private WeaponData.Weapon[] slots = default;
         private Dictionary<WeaponData.Weapon, int> slotItems = default;
 
-
+        // TODO: craft table
     }
 }
