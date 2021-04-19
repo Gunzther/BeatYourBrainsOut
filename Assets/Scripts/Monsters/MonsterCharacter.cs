@@ -12,6 +12,12 @@ namespace BBO.BBO.MonsterManagement
         [SerializeField]
         private int hp = default;
 
+        [SerializeField] 
+        private GameObject bullet;
+
+        [SerializeField]
+        private Transform BulletSpawnPoint;
+        
         public Action Dead = default;
 
         public void DecreaseMonsterHp(int value)

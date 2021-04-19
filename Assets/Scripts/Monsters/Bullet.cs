@@ -1,31 +1,47 @@
+using System;
+using System.Collections.Generic;
+using BBO.BBO.PlayerManagement;
 using UnityEngine;
-using System.Collections;
 
-public class Bullet : MonoBehaviour
-{
-    //Explosion Effect
-    public GameObject Explosion;
+    public class Bullet : MonoBehaviour {
+    [SerializeField]
+    private float moveSpeed = default;
+    
+    private IEnumerable<PlayerCharacter> players = default;
+    private Transform target = default;
 
-    public float Speed = 600.0f;
-    public float LifeTime = 3.0f;
-    public int damage = 50;
-
-    void Start()
+    private void Start()
     {
-        Destroy(gameObject, LifeTime);
+        target = GetClosetPlayer();
     }
-
-    void Update()
+    
+    private void FixedUpdate()
     {
-        transform.position += 
-            transform.forward * Speed * Time.deltaTime;
+        MoveToTarget();
     }
-
-    void OnCollisionEnter(Collision collision)
+    
+    private void MoveToTarget()
     {
-        ContactPoint contact = collision.contacts[0];
-        Instantiate(Explosion, contact.point, 
-            Quaternion.identity);
-        Destroy(gameObject);
+        transform.position = Vector3.MoveTowards(transform.position, target.position, moveSpeed);
+    }
+    
+    private Transform GetClosetPlayer()
+    {
+        PlayerCharacter closetPlayer = null;
+        float minDist = Mathf.Infinity;
+        Vector3 currentPos = transform.position;
+
+        foreach (PlayerCharacter player in players)
+        {
+            float dist = Vector3.Distance(player.transform.position, currentPos);
+
+            if (dist < minDist)
+            {
+                closetPlayer = player;
+                minDist = dist;
+            }
+        }
+
+        return closetPlayer.transform;
     }
 }

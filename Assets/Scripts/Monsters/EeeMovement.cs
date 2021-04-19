@@ -3,6 +3,7 @@ using BBO.BBO.GameData;
 using BBO.BBO.PlayerManagement;
 using BBO.BBO.TeamManagement;
 using System.Collections.Generic;
+using BBO.BBO.MonsterManagement;
 using UnityEngine;
 
 namespace BBO.BBO.MonsterMovement
@@ -31,12 +32,16 @@ namespace BBO.BBO.MonsterMovement
         private IEnumerable<PlayerCharacter> players = default;
         private float timer = default;
         private Transform target = default;
-        private bool timeToMove;
+        private bool timeToFire;
 
         public override void OnAttackMovement()
         {
             base.OnAttackMovement();
             rb.AddForce(target.transform.position * -bounceForce, ForceMode.Impulse);
+            if (timeToFire)
+            {
+                fire();
+            }
         }
 
         public override void OnAttackedMovement()
@@ -52,7 +57,7 @@ namespace BBO.BBO.MonsterMovement
             players = teamManager.Team.PlayerCharacters;
             timer = 0;
             target = GetClosetPlayer();
-            timeToMove = true;
+            timeToFire = false;
         }
 
         private void Update()
@@ -61,7 +66,6 @@ namespace BBO.BBO.MonsterMovement
             {
                 target = GetClosetPlayer();
                 timer = 0;
-                timeToMove = false;
             }
 
             timer += Time.deltaTime;
@@ -72,6 +76,11 @@ namespace BBO.BBO.MonsterMovement
             MoveToTarget();
         }
 
+        private void fire()
+        {
+            // Instantiate(MonsterCharacter., Transform.position, Quaternion.identity);
+        }
+
         private void MoveToTarget()
         {
             float step = speed * Time.deltaTime;
@@ -79,6 +88,10 @@ namespace BBO.BBO.MonsterMovement
             if (moveDistance > stop_distance)
             {
                 transform.position = Vector3.MoveTowards(transform.position, target.position, step);
+            }
+            else
+            {
+                timeToFire = true;
             }
             AnimateEeeMovement(transform.position.x, target.position.x);
         }
