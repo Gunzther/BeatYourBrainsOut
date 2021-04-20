@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4446215497228470874}
   m_Layer: 0
-  m_Name: CraftTableBaseballBat
+  m_Name: CraftTableShield
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -55,13 +55,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8665763484337012832}
-  m_LocalRotation: {x: 0.46193978, y: 0.19134171, z: -0.33141357, w: 0.8001032}
+  m_LocalRotation: {x: 0.46193978, y: -0.19134171, z: 0.33141357, w: 0.8001032}
   m_LocalPosition: {x: 0, y: 0.2, z: 0}
   m_LocalScale: {x: 0.35, y: 0.35, z: 0.35}
   m_Children: []
   m_Father: {fileID: 4446215497228470874}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 60, y: 0, z: -45}
+  m_LocalEulerAnglesHint: {x: 60.000004, y: 0, z: 45.000004}
 --- !u!212 &3012998840199782817
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -101,7 +101,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -5685065291085327547, guid: 74b31208413a7da49a7e9520b3bbdc17,
+  m_Sprite: {fileID: 6802622778494075923, guid: 74b31208413a7da49a7e9520b3bbdc17,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
