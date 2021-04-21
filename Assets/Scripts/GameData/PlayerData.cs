@@ -22,7 +22,9 @@ namespace BBO.BBO.GameData
             RubberBandAttack,
             MorningStar,
             Shield,
-            ShieldActive
+            ShieldActive,
+            Sling,
+            SlingActive
         }
     }
    

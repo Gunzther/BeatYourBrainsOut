@@ -25,7 +25,7 @@ namespace BBO.BBO.PlayerManagement
 
         private PlayerData.PlayerSprite GetPlayerSprite(WeaponData.Weapon weapon)
         {
-            switch (this.weapon)
+            switch (weapon)
             {
                 case WeaponData.Weapon.Baseballbat:
                     return PlayerData.PlayerSprite.Baseball;
@@ -37,6 +37,8 @@ namespace BBO.BBO.PlayerManagement
                     return PlayerData.PlayerSprite.MorningStar;
                 case WeaponData.Weapon.Shield:
                     return PlayerData.PlayerSprite.Shield;
+                case WeaponData.Weapon.Sling:
+                    return PlayerData.PlayerSprite.Sling;
                 default:
                     return PlayerData.PlayerSprite.Default;
             }
