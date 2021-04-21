@@ -163,6 +163,19 @@ MonoBehaviour:
   - {fileID: 2800000, guid: 11ad26cfa145a4e4181184d500035531, type: 3}
   - {fileID: 2800000, guid: c02eb479174404b4aae3747b7790182c, type: 3}
   - {fileID: 2800000, guid: 63fcec759120b3f4b8ce0e54fc87cef4, type: 3}
+  - {fileID: 2800000, guid: 3bf803c1aeea5e7409acd0c070f5fd9f, type: 3}
+  - {fileID: 2800000, guid: c0018b1b11596434bbfee021adce5e2c, type: 3}
+  - {fileID: 2800000, guid: 2a87a57b3999f4e41a7d1a3bc32689df, type: 3}
+  - {fileID: 2800000, guid: 17c9d26a0a8b50a4d8e36463b04d450a, type: 3}
+  spriteSecondList:
+  - {fileID: 2800000, guid: 245f92a294d0e064c838f4ad4c76e1b9, type: 3}
+  - {fileID: 2800000, guid: e57bcf09bdbcd524d9bcd7936ef4315e, type: 3}
+  - {fileID: 2800000, guid: 7acfa9305e547e24e92ee77a34de6fca, type: 3}
+  - {fileID: 2800000, guid: 636a1798d69b47544a52ad04c0b9b681, type: 3}
+  - {fileID: 2800000, guid: 76fc140c0862d3441b1aa3abd2673365, type: 3}
+  - {fileID: 2800000, guid: e57bcf09bdbcd524d9bcd7936ef4315e, type: 3}
+  - {fileID: 2800000, guid: e86c242914ed9d94ba9af6b9232aee35, type: 3}
+  - {fileID: 2800000, guid: 68129f83fefe9f14d95a942b2260de81, type: 3}
   playerAnimator: {fileID: 4542186820259572506}
   weaponCollider: {fileID: 622178082472614362}
 --- !u!1 &2624934328494790055
@@ -461,12 +474,12 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2624934328494790055}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.3
-  m_Height: 2
+  m_Radius: 0.4
+  m_Height: 1.5
   m_Direction: 1
-  m_Center: {x: 0, y: 0.2, z: 0}
+  m_Center: {x: 0, y: 0.6, z: 0}
 --- !u!136 &4196438410929681986
 CapsuleCollider:
   m_ObjectHideFlags: 0
