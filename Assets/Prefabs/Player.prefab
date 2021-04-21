@@ -386,6 +386,21 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: f42d8734-9925-4944-b5ba-538ae889df7d
     m_ActionName: Player/Place[/Keyboard/f]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4784475903516044564}
+        m_MethodName: OnCraft
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 3f3eff39-de6d-4bbc-94a6-b8efab1c739f
+    m_ActionName: Player/Craft[/Keyboard/c]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard&Mouse
   m_DefaultActionMap: Player
@@ -413,6 +428,15 @@ MonoBehaviour:
       type: 3}
   - Weapon: 3
     StupidPrefab: {fileID: 2168545729610353427, guid: 34a27211eed11ef4ca3a2479894e40a9,
+      type: 3}
+  - Weapon: 4
+    StupidPrefab: {fileID: 6617222608611167847, guid: 786211c733e7f5c4695519251c5ee7f0,
+      type: 3}
+  - Weapon: 5
+    StupidPrefab: {fileID: 6617222608611167847, guid: 84b403fe04de86245814daab2e18590b,
+      type: 3}
+  - Weapon: 6
+    StupidPrefab: {fileID: 6617222608611167847, guid: c4f95d7edbf45b84da1220a52af57f50,
       type: 3}
 --- !u!114 &4784475903516044564
 MonoBehaviour:
@@ -474,7 +498,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2624934328494790055}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.4
   m_Height: 1.5
