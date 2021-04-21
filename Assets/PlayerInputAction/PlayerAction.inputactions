@@ -44,6 +44,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "Craft",
+                    "type": "Button",
+                    "id": "3f3eff39-de6d-4bbc-94a6-b8efab1c739f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -286,6 +294,28 @@
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
                     "action": "Place",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "cd36a58d-cd17-4670-b5b0-b9b67c15a3bc",
+                    "path": "<Gamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
+                    "action": "Craft",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ee9a1069-28ab-4f43-9ff0-c327ff55e364",
+                    "path": "<Keyboard>/c",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "Craft",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
