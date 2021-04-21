@@ -4,8 +4,10 @@
 	{
 		_Frame("Frame", Int) = 1
 		[NoScaleOffset] _MainTex("Main Tex", 2D) = "white" {}
+		[NoScaleOffset] _SecondTex("Second Tex", 2D) = "white" {}
 		_Row("Row", Int) = 1
 		_Column("Column", Int) = 1
+		_PlayerCol("Player Color", Color) = (1, 0, 0, 0)
 		_DissolveCol("Dissolve Color", Color) = (1, 0, 0, 0)
 		_LapValue("Overlap Color Value", Range(0,1)) = 0
 	}
@@ -45,11 +47,13 @@
 				};
 
 				sampler2D _MainTex;
+				sampler2D _SecondTex;
 				float _Row;
 				float _Column;
 				float _Frame;
 				fixed4 _DissolveCol;
 				float _LapValue;
+				fixed4 _PlayerCol;
 
 				v2f vert(appdata v)
 				{
@@ -77,6 +81,10 @@
 					fixed4 col = tex2D(_MainTex, i.uv);
 					float cutoff = 0.5;
 					clip(col.a - cutoff);
+
+					fixed4 playerCol = tex2D(_SecondTex, i.uv);
+					col.rgb = lerp(col, _PlayerCol, playerCol.r);
+
 					col.a = lerp(0.0, col.a, _DissolveCol.a);
 					return fixed4(lerp(col.rgb, red, _LapValue), col.a);
 				}

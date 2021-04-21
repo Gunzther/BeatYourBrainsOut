@@ -11,6 +11,24 @@ TextureImporter:
   - first:
       213: 6802622778494075923
     second: weapon_craftTable_2
+  - first:
+      213: 893392473737320337
+    second: weapon_craftTable_0
+  - first:
+      213: -4326636385364781790
+    second: weapon_craftTable_1
+  - first:
+      213: -7855302795687342423
+    second: weapon_craftTable_2
+  - first:
+      213: 962176519049729814
+    second: weapon_craftTable_3
+  - first:
+      213: 2938235227859796761
+    second: weapon_craftTable_4
+  - first:
+      213: 8477487464522336784
+    second: weapon_craftTable_5
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -100,8 +118,8 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 205
-        width: 300
+        y: 405
+        width: 301
         height: 95
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -110,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 543d4ff0d379a11b0800000000000000
-      internalID: -5685065291085327547
+      spriteID: 197de12b8b7f56c00800000000000000
+      internalID: 893392473737320337
       vertices: []
       indices: 
       edges: []
@@ -120,8 +138,50 @@ TextureImporter:
       name: weapon_craftTable_1
       rect:
         serializedVersion: 2
+        x: 342
+        y: 177
+        width: 133
+        height: 321
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2255d0a8123b4f3c0800000000000000
+      internalID: -4326636385364781790
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: weapon_craftTable_2
+      rect:
+        serializedVersion: 2
         x: 3
-        y: 16
+        y: 191
+        width: 278
+        height: 201
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9ae4cebf9bb5cf290800000000000000
+      internalID: -7855302795687342423
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: weapon_craftTable_3
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 19
         width: 114
         height: 162
       alignment: 0
@@ -131,18 +191,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: da9e75c5d68ceb840800000000000000
-      internalID: 5241847388332091821
+      spriteID: 6175e2d32765a5d00800000000000000
+      internalID: 962176519049729814
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: weapon_craftTable_2
+      name: weapon_craftTable_4
       rect:
         serializedVersion: 2
-        x: 128
-        y: 32
+        x: 122
+        y: 35
         width: 147
         height: 125
       alignment: 0
@@ -152,8 +212,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 314ce1d0065c76e50800000000000000
-      internalID: 6802622778494075923
+      spriteID: 9134f1f4f55b6c820800000000000000
+      internalID: 2938235227859796761
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: weapon_craftTable_5
+      rect:
+        serializedVersion: 2
+        x: 278
+        y: 23
+        width: 215
+        height: 132
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 01a4eaeeee516a570800000000000000
+      internalID: 8477487464522336784
       vertices: []
       indices: 
       edges: []
