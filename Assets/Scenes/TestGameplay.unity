@@ -1161,6 +1161,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 289613051}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &298037183 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 50513026878274612, guid: 814e81069f392ab43af0477732bab961,
+    type: 3}
+  m_PrefabInstance: {fileID: 3974681133484146839}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12b1eff71aaebf648a204660ca0f3f8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &302647974
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3356,6 +3368,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1276344129}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1279544987 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8882573777363457545, guid: 814e81069f392ab43af0477732bab961,
+    type: 3}
+  m_PrefabInstance: {fileID: 3974681133484146839}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12b1eff71aaebf648a204660ca0f3f8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1294133744
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3783,6 +3807,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 122206905}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1448605036 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5874953907638567398, guid: 814e81069f392ab43af0477732bab961,
+    type: 3}
+  m_PrefabInstance: {fileID: 3974681133484146839}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12b1eff71aaebf648a204660ca0f3f8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1456414485
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4827,6 +4863,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1729486612}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1734280674 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 556588095453216317, guid: 814e81069f392ab43af0477732bab961,
+    type: 3}
+  m_PrefabInstance: {fileID: 3974681133484146839}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12b1eff71aaebf648a204660ca0f3f8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1765388030
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5951,6 +5999,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2057734915}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2060006848 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2764156719677844737, guid: 814e81069f392ab43af0477732bab961,
+    type: 3}
+  m_PrefabInstance: {fileID: 3974681133484146839}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12b1eff71aaebf648a204660ca0f3f8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2085204503
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6198,6 +6258,36 @@ PrefabInstance:
       propertyPath: m_Name
       value: SimpleHouse
       objectReference: {fileID: 0}
+    - target: {fileID: 4397373757718247943, guid: 814e81069f392ab43af0477732bab961,
+        type: 3}
+      propertyPath: craftSlots.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4397373757718247943, guid: 814e81069f392ab43af0477732bab961,
+        type: 3}
+      propertyPath: craftSlots.Array.data[0]
+      value: 
+      objectReference: {fileID: 2060006848}
+    - target: {fileID: 4397373757718247943, guid: 814e81069f392ab43af0477732bab961,
+        type: 3}
+      propertyPath: craftSlots.Array.data[1]
+      value: 
+      objectReference: {fileID: 1734280674}
+    - target: {fileID: 4397373757718247943, guid: 814e81069f392ab43af0477732bab961,
+        type: 3}
+      propertyPath: craftSlots.Array.data[2]
+      value: 
+      objectReference: {fileID: 1448605036}
+    - target: {fileID: 4397373757718247943, guid: 814e81069f392ab43af0477732bab961,
+        type: 3}
+      propertyPath: craftSlots.Array.data[3]
+      value: 
+      objectReference: {fileID: 1279544987}
+    - target: {fileID: 4397373757718247943, guid: 814e81069f392ab43af0477732bab961,
+        type: 3}
+      propertyPath: craftSlots.Array.data[4]
+      value: 
+      objectReference: {fileID: 298037183}
     - target: {fileID: 5874953907638567398, guid: 814e81069f392ab43af0477732bab961,
         type: 3}
       propertyPath: craftTable
