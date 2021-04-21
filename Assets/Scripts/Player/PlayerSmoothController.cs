@@ -105,6 +105,15 @@ namespace BBO.BBO.PlayerManagement
             }
         }
 
+        public void OnCraft(InputAction.CallbackContext value)
+        {
+            if (value.started)
+            {
+                Debug.Log($"[{nameof(PlayerSmoothController)}] craft!");
+                playerCharacter.OnCraft();
+            }
+        }
+
         private void CalculateMovementInput()
         {
             if (useOldInputManager)

@@ -1,10 +1,9 @@
 ﻿using BBO.BBO.GameData;
-using System;
 using UnityEngine;
 
 namespace BBO.BBO.WeaponManagement
 {
-    public class CraftSlot : MonoBehaviour
+    public class CraftSlot : BaseCraftPlace
     {
         [SerializeField]
         private CraftTable craftTable = default;
@@ -20,8 +19,7 @@ namespace BBO.BBO.WeaponManagement
         public WeaponData.Weapon OnPicked()
         {
             WeaponData.Weapon pickedWeapon = currentWeapon;
-            currentWeapon = default;
-            HideWeapon();
+            Clear();
 
             return pickedWeapon;
         }
@@ -29,37 +27,14 @@ namespace BBO.BBO.WeaponManagement
         public void OnPlaced(WeaponData.Weapon weapon)
         {
             currentWeapon = weapon;
-            ShowWeapon(weapon);
+            base.ShowWeapon(weapon, items);
+            craftTable.AddSlotItems(weapon, 1);
         }
 
-        private void ShowWeapon(WeaponData.Weapon weapon)
+        public void Clear()
         {
-            foreach (SlotItem item in items)
-            {
-                if (item.Weapon == weapon)
-                {
-                    item.weaponModel.SetActive(true);
-                }
-                else
-                {
-                    item.weaponModel.SetActive(false);
-                }
-            }
+            currentWeapon = default;
+            base.HideWeapon(items);
         }
-
-        private void HideWeapon()
-        {
-            foreach (SlotItem item in items)
-            {
-                item.weaponModel.SetActive(false);
-            }
-        }
-    }
-
-    [Serializable]
-    public class SlotItem
-    {
-        public WeaponData.Weapon Weapon = default;
-        public GameObject weaponModel = default;
     }
 }
