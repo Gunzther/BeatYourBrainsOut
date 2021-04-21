@@ -24,6 +24,11 @@ namespace BBO.BBO.WeaponManagement
 
         public void AddSlotItems(WeaponData.Weapon weaponKey, int amount)
         {
+            if (slotItems == null)
+            {
+                slotItems = new Dictionary<WeaponData.Weapon, int>();
+            }
+
             if (slotItems.TryGetValue(weaponKey, out int currentAmount))
             {
                 slotItems[weaponKey] = currentAmount + amount;
@@ -42,6 +47,7 @@ namespace BBO.BBO.WeaponManagement
                 {
                     ShowWeapon(recipe.Weapon, items);
                     currentWeapon = recipe.Weapon;
+                    ClearSlots();
                 }
             }
         }
@@ -88,6 +94,16 @@ namespace BBO.BBO.WeaponManagement
         {
             base.HideWeapon(items);
             noWeaponObject.SetActive(true);
+        }
+
+        private void ClearSlots()
+        {
+            foreach (CraftSlot slot in craftSlots)
+            {
+                slot.Clear();
+            }
+
+            slotItems.Clear();
         }
     }
 }
