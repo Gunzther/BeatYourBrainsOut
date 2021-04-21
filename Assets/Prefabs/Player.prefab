@@ -167,6 +167,8 @@ MonoBehaviour:
   - {fileID: 2800000, guid: c0018b1b11596434bbfee021adce5e2c, type: 3}
   - {fileID: 2800000, guid: 2a87a57b3999f4e41a7d1a3bc32689df, type: 3}
   - {fileID: 2800000, guid: 17c9d26a0a8b50a4d8e36463b04d450a, type: 3}
+  - {fileID: 2800000, guid: 1471802a96e814345a40b848f8b73175, type: 3}
+  - {fileID: 2800000, guid: 8dc94b2835dc4684fa9938b55065243e, type: 3}
   spriteSecondList:
   - {fileID: 2800000, guid: 245f92a294d0e064c838f4ad4c76e1b9, type: 3}
   - {fileID: 2800000, guid: e57bcf09bdbcd524d9bcd7936ef4315e, type: 3}
@@ -176,6 +178,8 @@ MonoBehaviour:
   - {fileID: 2800000, guid: e57bcf09bdbcd524d9bcd7936ef4315e, type: 3}
   - {fileID: 2800000, guid: e86c242914ed9d94ba9af6b9232aee35, type: 3}
   - {fileID: 2800000, guid: 68129f83fefe9f14d95a942b2260de81, type: 3}
+  - {fileID: 2800000, guid: dfaaa872b7170a648887a49c9ffa635e, type: 3}
+  - {fileID: 2800000, guid: 0da23cd950acf1c469063783386a7ae0, type: 3}
   playerAnimator: {fileID: 4542186820259572506}
   weaponCollider: {fileID: 622178082472614362}
 --- !u!1 &2624934328494790055
