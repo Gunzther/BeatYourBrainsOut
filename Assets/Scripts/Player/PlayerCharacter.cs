@@ -35,6 +35,9 @@ namespace BBO.BBO.PlayerManagement
         private Dictionary<WeaponData.Weapon, GameObject> stupidWeaponPrototypes = default;
         private GameObject stupidContainer = default;
 
+        // crafting
+        private CraftTable craftTable = default;
+
         public void Reload()
         {
             uiManager = FindObjectOfType<UIManager>();
@@ -68,6 +71,14 @@ namespace BBO.BBO.PlayerManagement
                 {
                     PlaceStupidWeapon();
                 }
+            }
+        }
+
+        public void OnCraft()
+        {
+            if (craftTable != null && craftTable.CanCraft)
+            {
+                craftTable.Craft();
             }
         }
 
@@ -105,8 +116,11 @@ namespace BBO.BBO.PlayerManagement
                 }
                 else if (other.GetComponent<CraftSlot>() is CraftSlot slot && slot.CanPick)
                 {
-                    WeaponData.Weapon pickedWeapon = slot.OnPicked();
-                    playerAnimatorController.ChangePlayerMainTex(CurrentPlayerWeapon.SetWeapon(pickedWeapon));
+                    playerAnimatorController.ChangePlayerMainTex(CurrentPlayerWeapon.SetWeapon(slot.OnPicked()));
+                }
+                else if (other.GetComponent<CraftTable>() is CraftTable table && table.CanPick)
+                {
+                    playerAnimatorController.ChangePlayerMainTex(CurrentPlayerWeapon.SetWeapon(table.OnPicked()));
                 }
 
                 isPicking = false;
@@ -122,6 +136,10 @@ namespace BBO.BBO.PlayerManagement
                     isPlacing = false;
                 }
             }
+            if (other.GetComponent<CraftTable>() is CraftTable craftTable)
+            {
+                this.craftTable = craftTable;
+            }
         }
 
         private void OnTriggerExit(Collider other)
@@ -129,6 +147,7 @@ namespace BBO.BBO.PlayerManagement
             nearCraftSlot = false;
             isPicking = false;
             isPlacing = false;
+            craftTable = null;
         }
 
         private void GenerateStupidWeaponDictionary()

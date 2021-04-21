@@ -1,4 +1,6 @@
-﻿namespace BBO.BBO.GameData
+﻿using System.Collections.Generic;
+
+namespace BBO.BBO.GameData
 {
     public static class WeaponData
     {
@@ -16,7 +18,42 @@
             NoWeapon,
             Baseballbat,
             Nail,
-            RubberBand
+            RubberBand,
+            BaseballbatWithNails,
+            Shield,
+            Sling
+        }
+
+        public static CraftedWeaponRecipe[] CraftedWeaponRecipes =
+        {
+            new CraftedWeaponRecipe(Weapon.BaseballbatWithNails, new Dictionary<Weapon, int>() 
+            {
+                { Weapon.Baseballbat, 1 },
+                { Weapon.Nail, 1 }
+            }),
+            new CraftedWeaponRecipe(Weapon.Shield, new Dictionary<Weapon, int>()
+            {
+                { Weapon.Baseballbat, 2 },
+                { Weapon.Nail, 3 }
+            }),
+            new CraftedWeaponRecipe(Weapon.Sling, new Dictionary<Weapon, int>()
+            {
+                { Weapon.Baseballbat, 1 },
+                { Weapon.RubberBand, 1},
+                { Weapon.Nail, 1 }
+            })
+        };
+    }
+
+    public class CraftedWeaponRecipe
+    {
+        public WeaponData.Weapon Weapon { get; private set; }
+        public Dictionary<WeaponData.Weapon, int> Recipe { get; private set; }
+
+        public CraftedWeaponRecipe(WeaponData.Weapon weapon, Dictionary<WeaponData.Weapon, int> recipe)
+        {
+            Weapon = weapon;
+            Recipe = recipe;
         }
     }
 }
