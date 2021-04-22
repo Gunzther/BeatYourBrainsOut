@@ -3,7 +3,7 @@ using BBO.BBO.Utilities;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace BBO.BBO.GameManager
+namespace BBO.BBO.GameManagement
 {
     public class GameManager : MonoSingleton<GameManager>
     {
@@ -19,16 +19,17 @@ namespace BBO.BBO.GameManager
         private void Update()
         {
             teamManager.AddPlayerFromController();
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                StartCoroutine(BBOSceneManager.LoadSceneAsync("Gameplay",
-                    () =>
-                    {
-                        teamManager.Reload();
-                        StopAllCoroutines();
-                    }
-                    ));
-            }
+        }
+
+        public void LoadSceneCoroutine(string name)
+        {
+            StartCoroutine(BBOSceneManager.LoadSceneAsync(name,
+                () =>
+                {
+                    teamManager.Reload();
+                    StopAllCoroutines();
+                }
+                ));
         }
     }
 }
