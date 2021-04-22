@@ -1,15 +1,12 @@
 ﻿using BBO.BBO.TeamManagement;
 using BBO.BBO.Utilities;
-using UnityEngine;
+using System;
 using UnityEngine.InputSystem;
 
 namespace BBO.BBO.GameManagement
 {
     public class GameManager : MonoSingleton<GameManager>
     {
-        [SerializeField]
-        private TeamManager teamManager = default;
-
         private bool activeSelectMap = false;
         public bool ActiveSelectMap
         {
@@ -20,12 +17,12 @@ namespace BBO.BBO.GameManagement
         private void Start()
         {
             InputDevice inputDevice = InputSystem.devices[0];
-            teamManager.SetupLocalMultiplayer(inputDevice);
+            TeamManager.Instance.SetupLocalMultiplayer(inputDevice);
         }
 
         private void Update()
         {
-            teamManager.AddPlayerFromController();
+            TeamManager.Instance.AddPlayerFromController();
 
             if (activeSelectMap)
             {
@@ -33,12 +30,12 @@ namespace BBO.BBO.GameManagement
             }
         }
 
-        public void LoadSceneCoroutine(string name)
+        public void LoadSceneCoroutine(string name, Action action)
         {
             StartCoroutine(BBOSceneManager.LoadSceneAsync(name,
                 () =>
                 {
-                    teamManager.Reload();
+                    action?.Invoke();
                     StopAllCoroutines();
                 }
                 ));
