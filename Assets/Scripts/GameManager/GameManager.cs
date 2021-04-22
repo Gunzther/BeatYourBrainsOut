@@ -10,6 +10,13 @@ namespace BBO.BBO.GameManagement
         [SerializeField]
         private TeamManager teamManager = default;
 
+        private bool activeSelectMap = false;
+        public bool ActiveSelectMap
+        {
+            get => activeSelectMap;
+            set => activeSelectMap = value;
+        }
+
         private void Start()
         {
             InputDevice inputDevice = InputSystem.devices[0];
@@ -19,6 +26,11 @@ namespace BBO.BBO.GameManagement
         private void Update()
         {
             teamManager.AddPlayerFromController();
+
+            if (activeSelectMap)
+            {
+
+            }
         }
 
         public void LoadSceneCoroutine(string name)

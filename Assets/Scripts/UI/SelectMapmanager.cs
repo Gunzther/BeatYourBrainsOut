@@ -1,4 +1,5 @@
 ﻿using BBO.BBO.GameManagement;
+using BBO.BBO.InterfaceManagement;
 using BBO.BBO.Utilities;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,16 @@ using UnityEngine.InputSystem;
 
 public class SelectMapmanager : InterfaceManager
 {
+    [Header("Previous Page")]
+    [SerializeField]
+    private GameObject previousCanvas = default;
+    [SerializeField]
+    private Camera previousCamera = default;
+
+    [Header("Next Page")]
+    [SerializeField]
+    private Camera nextCamera = default;
+
     public override void Next()
     {
         mainCamera.transform.position = nextCamera.transform.position;
@@ -15,10 +26,19 @@ public class SelectMapmanager : InterfaceManager
         GameManager.Instance.LoadSceneCoroutine("Gameplay");
     }
 
+    public override void Back()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            mainCamera.transform.position = previousCamera.transform.position;
+            mainCamera.transform.rotation = previousCamera.transform.rotation;
+            SetActiveCanvas(previousCanvas, currentCanvas);
+        }
+    }
+
     void Update()
     {
         Back();
-        CameraTransition();
 
         if (Input.GetKeyDown(KeyCode.Space))
         {

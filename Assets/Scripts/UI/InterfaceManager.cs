@@ -2,74 +2,64 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InterfaceManager : MonoBehaviour
+namespace BBO.BBO.InterfaceManagement
 {
-    [Header("Canvas Settings")]
-    [SerializeField]
-    protected GameObject currentCanvas = default;
-    [SerializeField]
-    protected GameObject previousCanvas = default;
-    [SerializeField]
-    protected GameObject nextCanvas = default;
-    [Header("Camera Settings")]
-    [SerializeField]
-    protected Camera mainCamera = default;
-    [SerializeField]
-    protected Camera previousCamera = default;
-    [SerializeField]
-    protected Camera nextCamera = default;
-    [SerializeField]
-    protected InterfaceManager previousManager = default;
-    [SerializeField]
-    protected InterfaceManager nextManager = default;
-
-    protected float cameraSmoothingSpeed = 4;
-
-    public void SetChangeCameraPos(bool value) => changeCameraPos = value;
-    protected bool changeCameraPos = false;
-    protected Vector3 cameraToPos = default;
-    protected Quaternion cameraToRotate = default;
-
-    public void ChangeCameraTransition(Camera cam)
+    public class InterfaceManager : MonoBehaviour
     {
-        cameraToPos = cam.transform.position;
-        cameraToRotate = cam.transform.rotation;
-        changeCameraPos = true;
-    }
+        [Header("Canvas Settings")]
+        [SerializeField]
+        protected GameObject currentCanvas = default;
 
-    public void CameraTransition()
-    {
-        Vector3 tempPos = mainCamera.transform.position;
-        Quaternion tempRotate = mainCamera.transform.rotation;
+        [Header("Camera Settings")]
+        [SerializeField]
+        protected Camera mainCamera = default;
 
-        if (changeCameraPos && tempPos != cameraToPos)
+        public void SetChangeCameraPos(bool value) => changeCameraPos = value;
+        protected bool changeCameraPos = false;
+        protected float cameraSmoothingSpeed = 4;
+        protected Vector3 cameraToPos = default;
+        protected Quaternion cameraToRotate = default;
+
+        public void ChangeCameraTransition(Camera cam)
         {
-            if (tempPos == cameraToPos)
+            cameraToPos = cam.transform.position;
+            cameraToRotate = cam.transform.rotation;
+            changeCameraPos = true;
+        }
+
+        public void SetActiveCanvas(GameObject activate, GameObject deactivate)
+        {
+            activate.SetActive(true);
+            deactivate.SetActive(false);
+        }
+
+        public void CameraTransition()
+        {
+            Vector3 tempPos = mainCamera.transform.position;
+            Quaternion tempRotate = mainCamera.transform.rotation;
+
+            if (changeCameraPos && tempPos != cameraToPos)
             {
-                changeCameraPos = false;
-            }
-            else
-            {
-                mainCamera.transform.position = Vector3.Lerp(tempPos, cameraToPos, Time.deltaTime * cameraSmoothingSpeed);
-                mainCamera.transform.rotation = Quaternion.Lerp(tempRotate, cameraToRotate, Time.deltaTime * cameraSmoothingSpeed);
+                if (tempPos == cameraToPos)
+                {
+                    changeCameraPos = false;
+                }
+                else
+                {
+                    mainCamera.transform.position = Vector3.Lerp(tempPos, cameraToPos, Time.deltaTime * cameraSmoothingSpeed);
+                    mainCamera.transform.rotation = Quaternion.Lerp(tempRotate, cameraToRotate, Time.deltaTime * cameraSmoothingSpeed);
+                }
             }
         }
-    }
 
-    public virtual void Back()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        public virtual void Back()
         {
-            previousManager.ChangeCameraTransition(previousCamera);
-            currentCanvas.SetActive(false);
-            previousCanvas.SetActive(true);
-        }
-    }
 
-    public virtual void Next()
-    {
-        currentCanvas.SetActive(false);
-        nextCanvas.SetActive(true);
-        nextManager.ChangeCameraTransition(nextCamera);
+        }
+
+        public virtual void Next()
+        {
+
+        }
     }
 }
