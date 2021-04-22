@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace BBO.BBO.InterfaceManagement
 {
@@ -9,10 +7,6 @@ namespace BBO.BBO.InterfaceManagement
         [Header("Canvas Settings")]
         [SerializeField]
         protected GameObject currentCanvas = default;
-
-        [Header("Camera Settings")]
-        [SerializeField]
-        protected Camera mainCamera = default;
 
         public void SetChangeCameraPos(bool value) => changeCameraPos = value;
         protected bool changeCameraPos = false;
@@ -35,8 +29,8 @@ namespace BBO.BBO.InterfaceManagement
 
         public void CameraTransition()
         {
-            Vector3 tempPos = mainCamera.transform.position;
-            Quaternion tempRotate = mainCamera.transform.rotation;
+            Vector3 tempPos = Camera.main.transform.position;
+            Quaternion tempRotate = Camera.main.transform.rotation;
 
             if (changeCameraPos && tempPos != cameraToPos)
             {
@@ -46,8 +40,8 @@ namespace BBO.BBO.InterfaceManagement
                 }
                 else
                 {
-                    mainCamera.transform.position = Vector3.Lerp(tempPos, cameraToPos, Time.deltaTime * cameraSmoothingSpeed);
-                    mainCamera.transform.rotation = Quaternion.Lerp(tempRotate, cameraToRotate, Time.deltaTime * cameraSmoothingSpeed);
+                    Camera.main.transform.position = Vector3.Lerp(tempPos, cameraToPos, Time.deltaTime * cameraSmoothingSpeed);
+                    Camera.main.transform.rotation = Quaternion.Lerp(tempRotate, cameraToRotate, Time.deltaTime * cameraSmoothingSpeed);
                 }
             }
         }
