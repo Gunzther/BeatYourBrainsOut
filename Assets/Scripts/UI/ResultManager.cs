@@ -8,7 +8,7 @@ public class ResultManager : InterfaceManager
 {
     public override void Next()
     {
-        GameManager.Instance.LoadSceneCoroutine("StartGame");
+        GameManager.Instance.LoadSceneCoroutine("StartGame", null);
         GameManager.Instance.ActiveSelectMap = true;
     }
 

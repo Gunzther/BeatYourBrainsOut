@@ -1,5 +1,6 @@
 ﻿using BBO.BBO.GameManagement;
 using BBO.BBO.InterfaceManagement;
+using BBO.BBO.TeamManagement;
 using BBO.BBO.Utilities;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,7 +24,7 @@ public class SelectMapmanager : InterfaceManager
         mainCamera.transform.position = nextCamera.transform.position;
         mainCamera.transform.rotation = nextCamera.transform.rotation;
         currentCanvas.SetActive(false);
-        GameManager.Instance.LoadSceneCoroutine("Gameplay");
+        GameManager.Instance.LoadSceneCoroutine("Gameplay", () => TeamManager.Instance.Reload());
     }
 
     public override void Back()
@@ -42,7 +43,7 @@ public class SelectMapmanager : InterfaceManager
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            GameManager.Instance.LoadSceneCoroutine("Gameplay");
+            GameManager.Instance.LoadSceneCoroutine("Gameplay", () => TeamManager.Instance.Reload());
         }
     }
 }
