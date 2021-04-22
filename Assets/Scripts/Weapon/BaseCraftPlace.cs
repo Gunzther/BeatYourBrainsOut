@@ -10,14 +10,7 @@ namespace BBO.BBO.WeaponManagement
         {
             foreach (SlotItem item in items)
             {
-                if (item.Weapon == weapon)
-                {
-                    item.weaponModel.SetActive(true);
-                }
-                else
-                {
-                    item.weaponModel.SetActive(false);
-                }
+                item.weaponModel.SetActive(item.Weapon == weapon);
             }
         }
 
