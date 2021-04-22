@@ -10,6 +10,7 @@ public class SelectMapmanager : InterfaceManager
     public override void Next()
     {
         mainCamera.transform.position = nextCamera.transform.position;
+        mainCamera.transform.rotation = nextCamera.transform.rotation;
         currentCanvas.SetActive(false);
         GameManager.Instance.LoadSceneCoroutine("Gameplay");
     }
