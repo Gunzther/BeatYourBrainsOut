@@ -38,6 +38,9 @@ namespace BBO.BBO.PlayerManagement
 
         // crafting
         private CraftTable craftTable = default;
+        
+        [SerializeField] 
+        private AudioSource playerHurtingSound = default;
 
         public void Reload()
         {
@@ -86,6 +89,7 @@ namespace BBO.BBO.PlayerManagement
         public void TriggerHurtAnimation()
         {
             playerAnimatorController.SetTrigger(PlayerData.HurtTriggerHash);
+            playerHurtingSound.Play();
         }
 
         private void Awake()
