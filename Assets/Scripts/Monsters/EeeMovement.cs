@@ -32,7 +32,6 @@ namespace BBO.BBO.MonsterMovement
         private IEnumerable<PlayerCharacter> players = default;
         private float timer = default;
         private Transform target = default;
-        private bool timeToMove;
 
         public override void OnAttackMovement()
         {
@@ -58,7 +57,6 @@ namespace BBO.BBO.MonsterMovement
             players = teamManager.Team.PlayerCharacters;
             timer = 0;
             target = GetClosetPlayer();
-            timeToMove = true;
         }
 
         private void Update()
@@ -67,7 +65,6 @@ namespace BBO.BBO.MonsterMovement
             {
                 target = GetClosetPlayer();
                 timer = 0;
-                timeToMove = false;
             }
 
             timer += Time.deltaTime;
