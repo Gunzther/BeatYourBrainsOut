@@ -20,7 +20,7 @@ namespace BBO.BBO.PlayerManagement
 
         private void OnTriggerStay(Collider other)
         {
-            if (other.gameObject.GetComponent<PlayerCharacter>() is PlayerCharacter player)
+            if (other.gameObject.GetComponent<PlayerCharacter>() is PlayerCharacter)
             {
                 if (gameObject.GetComponent<MonsterCharacter>() is MonsterCharacter monster)
                 {
