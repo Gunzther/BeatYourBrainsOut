@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2332957842240919009}
   - component: {fileID: 7716297010599108313}
   - component: {fileID: 8253063854933107793}
-  - component: {fileID: 7193226743392034409}
+  - component: {fileID: 6153085081303129043}
   m_Layer: 0
   m_Name: Legee
   m_TagString: Untagged
@@ -33,6 +33,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 888602809592860810}
+  - {fileID: 6213920705074838000}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -64,7 +65,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1800777fe8be04f4d8ad02bf2ef9c03a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monsterMovement: {fileID: 0}
+  monsterMovement: {fileID: 6153085081303129043}
   hp: 100
 --- !u!114 &7716297010599108313
 MonoBehaviour:
@@ -92,7 +93,7 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.35
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &7193226743392034409
+--- !u!114 &6153085081303129043
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -101,15 +102,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 2332957842240919011}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 61688da61413488a8a287f8fb2461faa, type: 3}
+  m_Script: {fileID: 11500000, guid: e9e683753decb9241afa21ee0f0f7d51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 6024544657107004920}
   speed: 2
   stop_distance: 2
-  EeeAnimator: {fileID: 0}
-  bullet: {fileID: 0}
-  bulletSpawnPoint: {fileID: 0}
+  legeeAnimator: {fileID: 9140735231360631251}
+  bullet: {fileID: 850465745720011697, guid: 99a54e8dc2bd43946ae3a3929eee1b41, type: 3}
+  bulletSpawnPoint: {fileID: 6213920705074838000}
   bulletChargeSecond: 2
 --- !u!1 &6847169185593724269
 GameObject:
@@ -225,3 +226,33 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!1 &7364188003017657786
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6213920705074838000}
+  m_Layer: 0
+  m_Name: Cube
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6213920705074838000
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7364188003017657786}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.25, y: 2, z: -0.1}
+  m_LocalScale: {x: 0.10000001, y: 0.10000001, z: 0.10000001}
+  m_Children: []
+  m_Father: {fileID: 2332957842240919015}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

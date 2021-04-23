@@ -5,8 +5,8 @@ namespace BBO.BBO.BulletManagement
     public class Bullet : MonoBehaviour
     {
         [SerializeField]
-        private float moveSpeed = default;
-        private Vector3 target = default;
+        protected float moveSpeed = default;
+        protected Vector3 target = default;
         public Vector3 Target
         {
             get => target;
@@ -18,7 +18,7 @@ namespace BBO.BBO.BulletManagement
             MoveToTarget();
         }
 
-        private void MoveToTarget()
+        protected virtual void MoveToTarget()
         {
             Vector3 currentPos = transform.position;
 

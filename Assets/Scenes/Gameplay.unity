@@ -3320,13 +3320,13 @@ PrefabInstance:
         type: 3}
       propertyPath: waves.Array.data[0].MonsterConfigs.Array.data[0].Monster
       value: 
-      objectReference: {fileID: 2332957842240919009, guid: bdd91515713624569bcdbb36ca0c0e70,
+      objectReference: {fileID: 2332957842240919009, guid: 37ced9818c40eb34d8b37c59714c795d,
         type: 3}
     - target: {fileID: 1920415610800266559, guid: cb2e5382f753b2c48a9228d5e89f2912,
         type: 3}
       propertyPath: waves.Array.data[2].MonsterConfigs.Array.data[0].Monster
       value: 
-      objectReference: {fileID: 2332957842240919009, guid: bdd91515713624569bcdbb36ca0c0e70,
+      objectReference: {fileID: 2332957842240919009, guid: 37ced9818c40eb34d8b37c59714c795d,
         type: 3}
     - target: {fileID: 1920415610800266559, guid: cb2e5382f753b2c48a9228d5e89f2912,
         type: 3}
