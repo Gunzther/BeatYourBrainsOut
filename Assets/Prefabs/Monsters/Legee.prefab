@@ -65,7 +65,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   monsterMovement: {fileID: 0}
-  hp: 20
+  hp: 100
 --- !u!114 &7716297010599108313
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -108,6 +108,9 @@ MonoBehaviour:
   speed: 2
   stop_distance: 2
   EeeAnimator: {fileID: 0}
+  bullet: {fileID: 0}
+  bulletSpawnPoint: {fileID: 0}
+  bulletChargeSecond: 2
 --- !u!1 &6847169185593724269
 GameObject:
   m_ObjectHideFlags: 0
