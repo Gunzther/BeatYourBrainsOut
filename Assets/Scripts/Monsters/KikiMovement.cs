@@ -17,6 +17,8 @@ namespace BBO.BBO.MonsterMovement
         [SerializeField]
         private float speed = default;
 
+        [SerializeField] 
+        private AudioSource kikiIdleSound;
 
         [Header("Animation")]
         public Animator KikiAnimator = default;
@@ -56,6 +58,7 @@ namespace BBO.BBO.MonsterMovement
             {
                 target = GetClosetPlayer();
                 timer = 0;
+                kikiIdleSound.Play();
             }
 
             timer += Time.deltaTime;
