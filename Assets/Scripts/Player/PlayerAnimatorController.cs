@@ -56,7 +56,7 @@ namespace BBO.BBO.PlayerManagement
         // Change sprite with this fn() 
         public void ChangePlayerMainTex(PlayerData.PlayerSprite playerSprite)
         {
-            int spriteNumber = (int) playerSprite;
+            int spriteNumber = (int)playerSprite;
             spriteRenderer.material.SetTexture("_MainTex", spriteList[spriteNumber]);
             spriteRenderer.material.SetTexture("_SecondTex", spriteSecondList[spriteNumber]);
         }

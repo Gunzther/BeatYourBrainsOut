@@ -1,6 +1,6 @@
-﻿using UnityEngine;
+﻿using BBO.BBO.Utilities;
+using UnityEngine;
 using UnityEngine.InputSystem;
-using BBO.BBO.Utilities;
 
 namespace BBO.BBO.PlayerInputSystem
 {

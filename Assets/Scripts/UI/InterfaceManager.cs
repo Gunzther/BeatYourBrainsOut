@@ -32,7 +32,7 @@ namespace BBO.BBO.InterfaceManagement
             Vector3 tempPos = Camera.main.transform.position;
             Quaternion tempRotate = Camera.main.transform.rotation;
 
-            if (changeCameraPos && tempPos != cameraToPos)
+            if (changeCameraPos)
             {
                 if (tempPos == cameraToPos)
                 {

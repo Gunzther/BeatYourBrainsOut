@@ -1,5 +1,5 @@
-﻿using BBO.BBO.InterfaceManagement;
-using BBO.BBO.GameManagement;
+﻿using BBO.BBO.GameManagement;
+using BBO.BBO.InterfaceManagement;
 using UnityEngine;
 
 public class ResultManager : InterfaceManager
@@ -12,7 +12,8 @@ public class ResultManager : InterfaceManager
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space)) {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
             Next();
         }
     }
