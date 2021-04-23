@@ -55,6 +55,11 @@ namespace BBO.BBO.PlayerManagement
             uiManager.SetTeamHpValue(team.CurrentTeamHealth);
         }
 
+        public void OnAttack()
+        {
+
+        }
+
         public void OnPick()
         {
             isPicking = true;
