@@ -1,6 +1,6 @@
-﻿using UnityEngine;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace BBO.BBO.Utilities

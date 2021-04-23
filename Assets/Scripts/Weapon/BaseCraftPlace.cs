@@ -6,22 +6,15 @@ namespace BBO.BBO.WeaponManagement
 {
     public class BaseCraftPlace : MonoBehaviour
     {
-        protected virtual void ShowWeapon(WeaponData.Weapon weapon, SlotItem[] items) 
+        protected virtual void ShowWeapon(WeaponData.Weapon weapon, SlotItem[] items)
         {
             foreach (SlotItem item in items)
             {
-                if (item.Weapon == weapon)
-                {
-                    item.weaponModel.SetActive(true);
-                }
-                else
-                {
-                    item.weaponModel.SetActive(false);
-                }
+                item.weaponModel.SetActive(item.Weapon == weapon);
             }
         }
 
-        protected virtual void HideWeapon(SlotItem[] items) 
+        protected virtual void HideWeapon(SlotItem[] items)
         {
             foreach (SlotItem item in items)
             {

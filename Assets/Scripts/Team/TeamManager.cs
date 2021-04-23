@@ -70,10 +70,10 @@ namespace BBO.BBO.TeamManagement
 
         public void AddPlayerFromController()
         {
-           if (Gamepad.current != null && Gamepad.current.selectButton.wasReleasedThisFrame)
-           {
+            if (Gamepad.current != null && Gamepad.current.selectButton.wasReleasedThisFrame)
+            {
                 SetupLocalMultiplayer(Gamepad.current);
-           }
+            }
         }
 
         private bool IsAdded(InputDevice input)
