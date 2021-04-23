@@ -19,7 +19,12 @@ namespace BBO.BBO.GameData
             Baseball,
             Nail,
             RubberBandDefault,
-            RubberBandAttack
+            RubberBandAttack,
+            MorningStar,
+            Shield,
+            ShieldActive,
+            Sling,
+            SlingActive
         }
     }
    

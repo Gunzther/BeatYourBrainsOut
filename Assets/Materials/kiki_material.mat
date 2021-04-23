@@ -23,6 +23,10 @@ Material:
         m_Texture: {fileID: 2800000, guid: 457d2de1029c02d4eaf25443e2f63a5e, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _SecondTex:
+        m_Texture: {fileID: 2800000, guid: ecd64366e39930f45a1964df44b1b7e8, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Floats:
     - _Column: 4
     - _Frame: 1
@@ -31,3 +35,4 @@ Material:
     m_Colors:
     - _DissolveCol: {r: 1, g: 0, b: 0, a: 1}
     - _LapCol: {r: 1, g: 0, b: 0, a: 0}
+    - _PlayerCol: {r: 1, g: 0, b: 0, a: 0}

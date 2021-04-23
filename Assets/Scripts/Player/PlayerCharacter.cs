@@ -28,6 +28,7 @@ namespace BBO.BBO.PlayerManagement
         private bool isPicking = false;
         private bool isPlacing = false;
         private bool nearCraftSlot = false;
+        private CraftSlot currentCraftSlot = default;
         private bool canPick => CurrentPlayerWeapon.CurrentWeapon == WeaponData.Weapon.NoWeapon;
         private bool canPlace => CurrentPlayerWeapon.CurrentWeapon != WeaponData.Weapon.NoWeapon;
 
@@ -35,8 +36,12 @@ namespace BBO.BBO.PlayerManagement
         private Dictionary<WeaponData.Weapon, GameObject> stupidWeaponPrototypes = default;
         private GameObject stupidContainer = default;
 
+        // crafting
+        private CraftTable craftTable = default;
+
         public void Reload()
         {
+            CurrentPlayerStats.Reset();
             uiManager = FindObjectOfType<UIManager>();
             uiManager.SetTeamHpMaxValue(team.CurrentTeamHealth);
         }
@@ -71,6 +76,14 @@ namespace BBO.BBO.PlayerManagement
             }
         }
 
+        public void OnCraft()
+        {
+            if (craftTable != null && craftTable.CanCraft)
+            {
+                craftTable.Craft();
+            }
+        }
+
         public void TriggerHurtAnimation()
         {
             playerAnimatorController.SetTrigger(PlayerData.HurtTriggerHash);
@@ -90,10 +103,24 @@ namespace BBO.BBO.PlayerManagement
             GenerateStupidWeaponDictionary();
         }
 
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.GetComponent<CraftSlot>() is CraftSlot craftSlot)
+            {
+                currentCraftSlot = craftSlot;
+                nearCraftSlot = true;
+            }
+            if (other.GetComponent<CraftTable>() is CraftTable craftTable)
+            {
+                this.craftTable = craftTable;
+            }
+        }
+
         private void OnTriggerStay(Collider other)
         {
             if (isPicking && canPick)
             {
+                print(other.name);
                 if (other.GetComponent<WeaponBox>() is WeaponBox weaponBox)
                 {
                     playerAnimatorController.ChangePlayerMainTex(CurrentPlayerWeapon.SetWeapon(weaponBox.Weapon));
@@ -105,19 +132,20 @@ namespace BBO.BBO.PlayerManagement
                 }
                 else if (other.GetComponent<CraftSlot>() is CraftSlot slot && slot.CanPick)
                 {
-                    WeaponData.Weapon pickedWeapon = slot.OnPicked();
-                    playerAnimatorController.ChangePlayerMainTex(CurrentPlayerWeapon.SetWeapon(pickedWeapon));
+                    playerAnimatorController.ChangePlayerMainTex(CurrentPlayerWeapon.SetWeapon(slot.OnPicked()));
+                }
+                else if (other.GetComponent<CraftTable>() is CraftTable table && table.CanPick)
+                {
+                    playerAnimatorController.ChangePlayerMainTex(CurrentPlayerWeapon.SetWeapon(table.OnPicked()));
                 }
 
                 isPicking = false;
             }
-            if (other.GetComponent<CraftSlot>() is CraftSlot craftSlot)
+            if (isPlacing && canPlace)
             {
-                nearCraftSlot = true;
-
-                if (isPlacing && craftSlot.CanPlace && CurrentPlayerWeapon.CurrentWeapon != WeaponData.Weapon.NoWeapon)
+                if (currentCraftSlot.CanPlace)
                 {
-                    craftSlot.OnPlaced(CurrentPlayerWeapon.CurrentWeapon);
+                    currentCraftSlot.OnPlaced(CurrentPlayerWeapon.CurrentWeapon);
                     playerAnimatorController.ChangePlayerMainTex(CurrentPlayerWeapon.SetWeapon(WeaponData.Weapon.NoWeapon));
                     isPlacing = false;
                 }
@@ -129,6 +157,15 @@ namespace BBO.BBO.PlayerManagement
             nearCraftSlot = false;
             isPicking = false;
             isPlacing = false;
+
+            if (other.GetComponent<CraftSlot>())
+            {
+                currentCraftSlot = null;
+            }
+            if (other.GetComponent<CraftTable>())
+            {
+                craftTable = null;
+            }
         }
 
         private void GenerateStupidWeaponDictionary()

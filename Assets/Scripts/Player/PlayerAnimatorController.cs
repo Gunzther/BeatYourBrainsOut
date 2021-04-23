@@ -10,6 +10,9 @@ namespace BBO.BBO.PlayerManagement
         private Texture[] spriteList = default;
 
         [SerializeField]
+        private Texture[] spriteSecondList = default;
+
+        [SerializeField]
         private Animator playerAnimator = default;
 
         [SerializeField]
@@ -55,6 +58,7 @@ namespace BBO.BBO.PlayerManagement
         {
             int spriteNumber = (int) playerSprite;
             spriteRenderer.material.SetTexture("_MainTex", spriteList[spriteNumber]);
+            spriteRenderer.material.SetTexture("_SecondTex", spriteSecondList[spriteNumber]);
         }
     }
 }

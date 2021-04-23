@@ -22,6 +22,7 @@ using UnityEngine;
     
     private void MoveToTarget()
     {
+        Debug.Log(target);
         transform.position = Vector3.MoveTowards(transform.position, target.position, moveSpeed);
     }
     
