@@ -26,21 +26,18 @@ namespace BBO.BBO.MonsterMovement
         [SerializeField]
         private GameObject bullet = default;
         [SerializeField]
-        private Transform bulletSpawnPoint;
+        private GameObject bulletSpawnPoint;
         [SerializeField]
         private float bulletChargeSecond = 2f;
 
-        private const float waitSec = 1;
         private const float bounceForce = 2f;
         private const float bounceAttackedForce = 1.5f;
         private const float targetOffset = 0.05f;
 
         private IEnumerable<PlayerCharacter> players = default;
         private Transform target = default;
-        private int counter = 0;
-        private LineRenderer line = default;
+        private float timer = 0f;
         private bool isAttack = false;
-
 
         public override void OnAttackMovement()
         {
@@ -67,30 +64,43 @@ namespace BBO.BBO.MonsterMovement
             target = GetClosetPlayer().transform;
         }
 
-        private void Update()
-        {
-        }
-
         private void FixedUpdate()
         {
-            if (!isAttack) MoveToTarget();
-            else Laser();
+            if (isAttack)
+            {
+                if (timer == 0)
+                {
+                    Laser();
+                }
+                else if (timer >= MonstersData.LaserLifeTime)
+                {
+                    timer = 0;
+                    isAttack = false;
+
+                    return;
+                }
+                timer += Time.deltaTime;
+            }
+            else
+            {
+                MoveToTarget();
+            }
+
+            if (target.position.x - transform.position.x >= 0)
+            {
+                transform.localScale = new Vector3(-1, 1, 1);
+            }
+            else
+            {
+                transform.localScale = new Vector3(1, 1, 1);
+            }
         }
 
         private void Laser()
         {
-            if (counter == 0)
-            {
-                GameObject obj = Instantiate(bullet, bulletSpawnPoint.transform.position, Quaternion.identity);
-                Laser tmp = obj.GetComponent<Laser>();
-                line = tmp?.LineRenderer;
-                counter++;
-            }
-
-            Vector3 b = bulletSpawnPoint.transform.position;
-            Vector3 p = GetClosetPlayer().transform.position;
-            line?.SetPosition(1, new Vector3(p.x - b.x, -1.5f, p.z - b.z));
-
+            GameObject obj = Instantiate(bullet, new Vector3(0, 0, 0), Quaternion.identity);
+            Laser tmp = obj.GetComponent<Laser>();
+            tmp?.SetLaserTarget(bulletSpawnPoint, GetClosetPlayer());
         }
 
         private void MoveToTarget()
@@ -101,7 +111,6 @@ namespace BBO.BBO.MonsterMovement
             {
                 transform.position = Vector3.MoveTowards(transform.position, target.position, step);
             }
-
             AnimateLegeeMovement(transform.position.x, target.position.x);
         }
 
@@ -131,12 +140,12 @@ namespace BBO.BBO.MonsterMovement
 
             if (Vector3.Distance(transform.position, target.position) <= stop_distance)
             {
-                isAttack = true;
                 triggerHash = MonstersData.AttackTriggerHash;
                 if (target.position.x - transform.position.x >= 0)
                 {
                     transform.localScale = new Vector3(-1, 1, 1);
                 }
+                isAttack = true;
             }
             else if (eeeXPos < targetXPos)
             {
