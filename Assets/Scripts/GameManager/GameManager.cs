@@ -1,34 +1,44 @@
 ﻿using BBO.BBO.TeamManagement;
 using BBO.BBO.Utilities;
-using UnityEngine;
+using System;
 using UnityEngine.InputSystem;
 
-namespace BBO.BBO.GameManager
+namespace BBO.BBO.GameManagement
 {
     public class GameManager : MonoSingleton<GameManager>
     {
-        [SerializeField]
-        private TeamManager teamManager = default;
+        private bool activeSelectMap = false;
+        public bool ActiveSelectMap
+        {
+            get => activeSelectMap;
+            set => activeSelectMap = value;
+        }
 
         private void Start()
         {
             InputDevice inputDevice = InputSystem.devices[0];
-            teamManager.SetupLocalMultiplayer(inputDevice);
+            TeamManager.Instance.SetupLocalMultiplayer(inputDevice);
         }
 
         private void Update()
         {
-            teamManager.AddPlayerFromController();
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (activeSelectMap)
             {
-                StartCoroutine(BBOSceneManager.LoadSceneAsync("Gameplay",
-                    () =>
-                    {
-                        teamManager.Reload();
-                        StopAllCoroutines();
-                    }
-                    ));
+                TeamManager.Instance.AddPlayerFromController();
+                StartGameManager sgm = FindObjectOfType<StartGameManager>();
+                sgm?.SelectMap();
             }
+        }
+
+        public void LoadSceneCoroutine(string name, Action action)
+        {
+            StartCoroutine(BBOSceneManager.LoadSceneAsync(name,
+                () =>
+                {
+                    action?.Invoke();
+                    StopAllCoroutines();
+                }
+                ));
         }
     }
 }

@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine.SceneManagement;
 
-namespace BBO.BBO.GameManager
+namespace BBO.BBO.GameManagement
 {
     public static class BBOSceneManager
     {

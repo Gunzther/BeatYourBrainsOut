@@ -41,6 +41,7 @@ namespace BBO.BBO.PlayerManagement
 
         public void Reload()
         {
+            CurrentPlayerStats.Reset();
             uiManager = FindObjectOfType<UIManager>();
             uiManager.SetTeamHpMaxValue(team.CurrentTeamHealth);
         }
