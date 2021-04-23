@@ -313,7 +313,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentCanvas: {fileID: 114899686}
-  mainCamera: {fileID: 0}
   teamHpSlider: {fileID: 1188512576}
   teamHpText: {fileID: 804202418}
   resultCanvas: {fileID: 823904373}
@@ -1291,7 +1290,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentCanvas: {fileID: 0}
-  mainCamera: {fileID: 0}
 --- !u!1 &917954024
 GameObject:
   m_ObjectHideFlags: 0
@@ -2000,7 +1998,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 114899691}
         m_MethodName: Back
         m_Mode: 1
         m_Arguments:
