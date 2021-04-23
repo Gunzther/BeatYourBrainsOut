@@ -1,7 +1,5 @@
 ﻿using BBO.BBO.InterfaceManagement;
 using BBO.BBO.GameManagement;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ResultManager : InterfaceManager

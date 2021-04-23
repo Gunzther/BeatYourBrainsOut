@@ -1,6 +1,4 @@
 ﻿using BBO.BBO.InterfaceManagement;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class IngameManager : InterfaceManager
