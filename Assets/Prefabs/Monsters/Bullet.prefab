@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1139655561169819017}
   - component: {fileID: -697170980488573895}
   - component: {fileID: 8234644234908030453}
+  - component: {fileID: 8313005144979989286}
   m_Layer: 0
   m_Name: Bullet
   m_TagString: Untagged
@@ -76,6 +77,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 1
+--- !u!114 &8313005144979989286
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 850465745720011697}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8ea5356a29a1ab479f08bf389a4d3ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageValue: 10
 --- !u!1 &7867631569908533279
 GameObject:
   m_ObjectHideFlags: 0
@@ -102,7 +116,7 @@ Transform:
   m_GameObject: {fileID: 7867631569908533279}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2465898933321490727}
   m_RootOrder: 0
@@ -146,7 +160,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: bae9a18ecfc5058478517b212ec0880f, type: 3}
+  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

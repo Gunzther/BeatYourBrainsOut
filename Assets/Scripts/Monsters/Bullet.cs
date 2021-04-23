@@ -8,13 +8,13 @@ using UnityEngine;
     private float moveSpeed = default;
     
     private IEnumerable<PlayerCharacter> players = default;
-    private Transform target = default;
-
-    private void Start()
+    private Vector3 target = default;
+    public Vector3 Target
     {
-        target = GetClosetPlayer();
+        get => target;
+        set => target = value;
     }
-    
+
     private void FixedUpdate()
     {
         MoveToTarget();
@@ -22,27 +22,14 @@ using UnityEngine;
     
     private void MoveToTarget()
     {
-        Debug.Log(target);
-        transform.position = Vector3.MoveTowards(transform.position, target.position, moveSpeed);
-    }
-    
-    private Transform GetClosetPlayer()
-    {
-        PlayerCharacter closetPlayer = null;
-        float minDist = Mathf.Infinity;
         Vector3 currentPos = transform.position;
 
-        foreach (PlayerCharacter player in players)
+        if (currentPos == target)
         {
-            float dist = Vector3.Distance(player.transform.position, currentPos);
-
-            if (dist < minDist)
-            {
-                closetPlayer = player;
-                minDist = dist;
-            }
+            Destroy(gameObject);
         }
 
-        return closetPlayer.transform;
+        transform.position = Vector3.MoveTowards(transform.position, target, moveSpeed);
+
     }
 }
