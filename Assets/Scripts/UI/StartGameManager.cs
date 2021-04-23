@@ -1,5 +1,5 @@
 ﻿using BBO.BBO.InterfaceManagement;
-using System.Collections;
+using BBO.BBO.GameManagement;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -25,7 +25,17 @@ public class StartGameManager : InterfaceManager
         nextManager.ChangeCameraTransition(nextCamera);
     }
 
-    public void Setting(){
+    public void SelectMap()
+    {
+        ConnectPlayerManager cpm = nextCanvas.gameObject.GetComponent<ConnectPlayerManager>();
+        GameObject temp = cpm?.NextCanvas;
+        SetActiveCanvas(temp, currentCanvas);
+
+        GameManager.Instance.ActiveSelectMap = false;
+    }
+
+    public void Setting()
+    {
         Debug.Log("Setting button press");
     }
 

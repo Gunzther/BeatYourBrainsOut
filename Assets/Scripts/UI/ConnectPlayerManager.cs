@@ -21,6 +21,8 @@ public class ConnectPlayerManager : InterfaceManager
     [SerializeField]
     private InterfaceManager nextManager = default;
 
+    public GameObject NextCanvas => nextCanvas;
+
     public override void Back()
     {
         if (Input.GetKeyDown(KeyCode.Escape))

@@ -1,6 +1,7 @@
 ﻿using BBO.BBO.TeamManagement;
 using BBO.BBO.Utilities;
 using System;
+using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace BBO.BBO.GameManagement
@@ -22,11 +23,11 @@ namespace BBO.BBO.GameManagement
 
         private void Update()
         {
-            TeamManager.Instance.AddPlayerFromController();
-
             if (activeSelectMap)
             {
-
+                TeamManager.Instance.AddPlayerFromController();
+                StartGameManager sgm = FindObjectOfType<StartGameManager>();
+                sgm?.SelectMap();
             }
         }
 
