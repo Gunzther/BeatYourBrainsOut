@@ -27,5 +27,5 @@ namespace BBO.BBO.GameData
             SlingActive
         }
     }
-   
+
 }

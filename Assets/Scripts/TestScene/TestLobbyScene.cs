@@ -1,17 +1,17 @@
 ﻿using BBO.BBO.GameManagement;
 using BBO.BBO.TeamManagement;
-
 using UnityEngine;
 
-public class TestLobbyScene : MonoBehaviour
+namespace BBO.BBO.TestScene
 {
-
-    // Update is called once per frame
-    void Update()
+    public class TestLobbyScene : MonoBehaviour
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        void Update()
         {
-            GameManager.Instance.LoadSceneCoroutine("Gameplay", () => TeamManager.Instance.Reload());
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                GameManager.Instance.LoadSceneCoroutine("Gameplay", () => TeamManager.Instance.Reload());
+            }
         }
     }
 }

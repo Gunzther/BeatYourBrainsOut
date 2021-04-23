@@ -1,9 +1,8 @@
-using System.Collections;
+using BBO.BBO.BulletManagement;
 using BBO.BBO.GameData;
 using BBO.BBO.PlayerManagement;
 using BBO.BBO.TeamManagement;
 using System.Collections.Generic;
-using BBO.BBO.MonsterManagement;
 using UnityEngine;
 
 namespace BBO.BBO.MonsterMovement
@@ -22,7 +21,7 @@ namespace BBO.BBO.MonsterMovement
         private float stop_distance = default;
 
         [Header("Animation")]
-        public Animator EeeAnimator = default;
+        private Animator EeeAnimator = default;
 
         [Header("Bullet")]
         [SerializeField]
@@ -41,7 +40,6 @@ namespace BBO.BBO.MonsterMovement
         private bool timeToFire = default;
         private int bulletStorage = 0;
         private float bulletTimer = default;
-
 
         public override void OnAttackMovement()
         {
@@ -73,11 +71,12 @@ namespace BBO.BBO.MonsterMovement
                 timer = 0;
             }
 
-            if(bulletTimer >= bulletChargeSecond && bulletStorage == 0) {
+            if (bulletTimer >= bulletChargeSecond && bulletStorage == 0)
+            {
                 bulletStorage++;
                 bulletTimer = 0;
             }
-            
+
             timer += Time.deltaTime;
             bulletTimer += Time.deltaTime;
         }

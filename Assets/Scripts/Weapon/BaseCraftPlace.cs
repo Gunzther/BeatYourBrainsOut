@@ -6,7 +6,7 @@ namespace BBO.BBO.WeaponManagement
 {
     public class BaseCraftPlace : MonoBehaviour
     {
-        protected virtual void ShowWeapon(WeaponData.Weapon weapon, SlotItem[] items) 
+        protected virtual void ShowWeapon(WeaponData.Weapon weapon, SlotItem[] items)
         {
             foreach (SlotItem item in items)
             {
@@ -14,7 +14,7 @@ namespace BBO.BBO.WeaponManagement
             }
         }
 
-        protected virtual void HideWeapon(SlotItem[] items) 
+        protected virtual void HideWeapon(SlotItem[] items)
         {
             foreach (SlotItem item in items)
             {

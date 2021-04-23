@@ -1,33 +1,33 @@
-using System;
-using System.Collections.Generic;
-using BBO.BBO.PlayerManagement;
 using UnityEngine;
 
-    public class Bullet : MonoBehaviour {
-    [SerializeField]
-    private float moveSpeed = default;
-    private Vector3 target = default;
-    public Vector3 Target
+namespace BBO.BBO.BulletManagement
+{
+    public class Bullet : MonoBehaviour
     {
-        get => target;
-        set => target = value;
-    }
-
-    private void FixedUpdate()
-    {
-        MoveToTarget();
-    }
-    
-    private void MoveToTarget()
-    {
-        Vector3 currentPos = transform.position;
-
-        if (currentPos == target)
+        [SerializeField]
+        private float moveSpeed = default;
+        private Vector3 target = default;
+        public Vector3 Target
         {
-            Destroy(gameObject);
+            get => target;
+            set => target = value;
         }
 
-        transform.position = Vector3.MoveTowards(transform.position, target, moveSpeed);
+        private void FixedUpdate()
+        {
+            MoveToTarget();
+        }
 
+        private void MoveToTarget()
+        {
+            Vector3 currentPos = transform.position;
+
+            if (currentPos == target)
+            {
+                Destroy(gameObject);
+            }
+
+            transform.position = Vector3.MoveTowards(transform.position, target, moveSpeed);
+        }
     }
 }

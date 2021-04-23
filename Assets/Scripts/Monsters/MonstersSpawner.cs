@@ -1,7 +1,7 @@
-﻿using UnityEngine;
+﻿using BBO.BBO.MonsterManagement;
 using System.Collections;
 using System.Collections.Generic;
-using BBO.BBO.MonsterManagement;
+using UnityEngine;
 
 public class MonstersSpawner : MonoBehaviour
 {
@@ -29,7 +29,7 @@ public class MonstersSpawner : MonoBehaviour
     public void StartSpawn()
     {
         if (container == null)
-        { 
+        {
             container = new GameObject("MonstersContainer");
         }
 
