@@ -25,8 +25,9 @@ namespace BBO.BBO.MonsterMovement
         public Animator EeeAnimator = default;
 
         private const float waitSec = 1;
-        private const float bounceForce = 0.1f;
+        private const float bounceForce = 2f;
         private const float bounceAttackedForce = 1.5f;
+        private const float targetOffset = 0.05f;
 
         private IEnumerable<PlayerCharacter> players = default;
         private float timer = default;
@@ -36,7 +37,12 @@ namespace BBO.BBO.MonsterMovement
         public override void OnAttackMovement()
         {
             base.OnAttackMovement();
-            rb.AddForce(target.transform.position * -bounceForce, ForceMode.Impulse);
+            var forceDirection = (target.transform.position - transform.position);
+
+            if (forceDirection.x >= targetOffset || forceDirection.x <= -targetOffset || forceDirection.z >= targetOffset || forceDirection.z <= -targetOffset)
+            {
+                rb.AddForce(forceDirection * -bounceForce, ForceMode.Impulse);
+            }
         }
 
         public override void OnAttackedMovement()
@@ -80,7 +86,8 @@ namespace BBO.BBO.MonsterMovement
             {
                 transform.position = Vector3.MoveTowards(transform.position, target.position, step);
             }
-            AnimateEeeMovement(transform.position.x, target.position.x);
+
+            AnimateEeeMovement(transform.position.x, transform.position.z, target.position.x, target.position.z);
         }
         
         private Transform GetClosetPlayer()
@@ -103,16 +110,14 @@ namespace BBO.BBO.MonsterMovement
             return closetPlayer.transform;
         }
 
-        private void AnimateEeeMovement(float eeeXPos, float targetXPos)
+        private void AnimateEeeMovement(float eeeXPos, float eeeZPos, float targetXPos, float targetZPos)
         {
-            
             int triggerHash = MonstersData.IdleTriggerHash;
             transform.localScale = new Vector3(1, 1, 1);
             
             if (Vector3.Distance(transform.position, target.position) <= stop_distance)
             {
                 triggerHash = MonstersData.IdleTriggerHash;
-                transform.localScale = new Vector3(1, 1, 1);
             }
             else if (eeeXPos < targetXPos)
             {
@@ -122,6 +127,10 @@ namespace BBO.BBO.MonsterMovement
             else if (eeeXPos > targetXPos)
             {
                 triggerHash = MonstersData.WalkSideTriggerHash;
+            }
+            else
+            {
+                triggerHash = eeeZPos >= targetZPos ? MonstersData.WalkFrontTriggerHash : MonstersData.WalkBackTriggerHash;
             }
 
             if (!EeeAnimator.GetCurrentAnimatorStateInfo(0).IsName(triggerHash.ToString()))
