@@ -1,5 +1,5 @@
-﻿using BBO.BBO.InterfaceManagement;
-using BBO.BBO.GameManagement;
+﻿using BBO.BBO.GameManagement;
+using BBO.BBO.InterfaceManagement;
 using UnityEngine;
 
 public class StartGameManager : InterfaceManager
