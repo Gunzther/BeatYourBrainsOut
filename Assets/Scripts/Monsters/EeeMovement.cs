@@ -26,7 +26,7 @@ namespace BBO.BBO.MonsterMovement
 
         [Header("Bullet")]
         [SerializeField]
-        private GameObject bullet;
+        private GameObject bullet = default;
         [SerializeField]
         private Transform bulletSpawnPoint;
         public float bulletChargeSecond = 2f;

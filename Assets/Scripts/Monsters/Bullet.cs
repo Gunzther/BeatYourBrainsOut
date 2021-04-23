@@ -6,8 +6,6 @@ using UnityEngine;
     public class Bullet : MonoBehaviour {
     [SerializeField]
     private float moveSpeed = default;
-    
-    private IEnumerable<PlayerCharacter> players = default;
     private Vector3 target = default;
     public Vector3 Target
     {
