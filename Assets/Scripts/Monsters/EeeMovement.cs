@@ -21,6 +21,7 @@ namespace BBO.BBO.MonsterMovement
         private float stop_distance = default;
 
         [Header("Animation")]
+        [SerializeField]
         private Animator EeeAnimator = default;
 
         [Header("Bullet")]
