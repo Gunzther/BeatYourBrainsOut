@@ -1,4 +1,5 @@
-﻿using BBO.BBO.PlayerManagement;
+﻿using BBO.BBO.GameManagement;
+using BBO.BBO.PlayerManagement;
 using BBO.BBO.Utilities;
 using System.Collections.Generic;
 using UnityEngine;
@@ -28,7 +29,7 @@ namespace BBO.BBO.TeamManagement
 
         public Team Team => team;
         private Team team = default;
-        private int numberOfPlayers = 1;
+        private int numberOfPlayers = 0;
 
         public override void Awake()
         {
@@ -68,12 +69,11 @@ namespace BBO.BBO.TeamManagement
             numberOfPlayers += 1;
         }
 
-        public void AddPlayerFromController()
+        public void RemovePlayer(PlayerSmoothController player)
         {
-            if (Gamepad.current != null && Gamepad.current.selectButton.wasReleasedThisFrame)
-            {
-                SetupLocalMultiplayer(Gamepad.current);
-            }
+            GameManager.Instance.RemovePlayer(player.DeviceId);
+            activePlayerControllers.Remove(player);
+            Destroy(player.gameObject);
         }
 
         private bool IsAdded(InputDevice input)

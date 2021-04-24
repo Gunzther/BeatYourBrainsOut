@@ -1,5 +1,6 @@
 ﻿using BBO.BBO.GameData;
 using BBO.BBO.PlayerInputSystem;
+using BBO.BBO.TeamManagement;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -10,7 +11,6 @@ namespace BBO.BBO.PlayerManagement
     {
         //Player ID
         private int playerID = default;
-
         private int deviceID = default;
         public int DeviceId => deviceID;
 
@@ -220,12 +220,13 @@ namespace BBO.BBO.PlayerManagement
 
         public void OnDeviceLost()
         {
-            playerVisualsBehaviour.SetDisconnectedDeviceVisuals();
+            TeamManager.Instance.RemovePlayer(this);
+            //playerVisualsBehaviour.SetDisconnectedDeviceVisuals();
         }
 
         public void OnDeviceRegained()
         {
-            StartCoroutine(WaitForDeviceToBeRegained());
+            //StartCoroutine(WaitForDeviceToBeRegained());
         }
 
         private IEnumerator WaitForDeviceToBeRegained()
