@@ -83,7 +83,7 @@ namespace BBO.BBO.PlayerManagement
             if (value.started)
             {
                 Debug.Log($"[{nameof(PlayerSmoothController)}] attack!");
-                // TODO: add attacking function
+                playerCharacter.OnAttack();
             }
         }
 
