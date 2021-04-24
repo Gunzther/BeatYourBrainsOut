@@ -1,4 +1,5 @@
 ﻿using BBO.BBO.GameData;
+using BBO.BBO.GameManagement;
 using BBO.BBO.TeamManagement;
 using BBO.BBO.TeamManagement.UI;
 using BBO.BBO.WeaponManagement;
@@ -38,9 +39,9 @@ namespace BBO.BBO.PlayerManagement
 
         // crafting
         private CraftTable craftTable = default;
-        
-        [SerializeField] 
-        private AudioSource playerHurtingSound = default;
+
+        //sound
+        SoundManager soundManager = default;
 
         public void Reload()
         {
@@ -90,7 +91,11 @@ namespace BBO.BBO.PlayerManagement
         public void TriggerHurtAnimation()
         {
             playerAnimatorController.SetTrigger(PlayerData.HurtTriggerHash);
-            playerHurtingSound.Play();
+        }
+
+        public void PlayHurtSound()
+        {
+            soundManager.PlayPlayerHurt();
         }
 
         private void Awake()
@@ -100,6 +105,8 @@ namespace BBO.BBO.PlayerManagement
             CurrentPlayerStats = new PlayerStats(playerID);
             CurrentPlayerWeapon = new PlayerWeapon();
             stupidWeaponPrototypes = new Dictionary<WeaponData.Weapon, GameObject>();
+
+            soundManager = FindObjectOfType<SoundManager>();
         }
 
         private void OnEnable()

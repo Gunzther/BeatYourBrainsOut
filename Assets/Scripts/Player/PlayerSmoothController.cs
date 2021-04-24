@@ -1,4 +1,5 @@
 ﻿using BBO.BBO.GameData;
+using BBO.BBO.GameManagement;
 using BBO.BBO.PlayerInputSystem;
 using System.Collections;
 using UnityEngine;
@@ -35,9 +36,6 @@ namespace BBO.BBO.PlayerManagement
         [SerializeField]
         private float smoothingSpeed = 1;
 
-        [SerializeField] 
-        private AudioSource walkingSound = default;
-        
         private Vector3 rawDirection = default;
         private Vector3 smoothDirection = default;
         private Vector3 movement = default;
@@ -55,9 +53,13 @@ namespace BBO.BBO.PlayerManagement
         //Current Control Scheme
         private string currentControlScheme = default;
 
+        //sound
+        SoundManager soundManager = default;
+
         private void Start()
         {
             mainCamera = Camera.main;
+            soundManager = FindObjectOfType<SoundManager>();
         }
 
         private void Update()
@@ -163,14 +165,10 @@ namespace BBO.BBO.PlayerManagement
         {
             if (hasCurrentInput)
             {
-                walkingSound.Play();
+                soundManager.PlayPlayerWalking();
                 movement.Set(smoothDirection.x, 0f, smoothDirection.z);
                 movement = movement.normalized * movementSpeed * Time.deltaTime;
                 playerRigidbody.MovePosition(transform.position + movement);
-            }
-            else
-            {
-                walkingSound.Stop();
             }
         }
 

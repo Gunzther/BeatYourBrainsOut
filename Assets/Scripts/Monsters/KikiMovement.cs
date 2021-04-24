@@ -1,7 +1,7 @@
 ﻿using BBO.BBO.GameData;
+using BBO.BBO.GameManagement;
 using BBO.BBO.PlayerManagement;
 using BBO.BBO.TeamManagement;
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -18,9 +18,6 @@ namespace BBO.BBO.MonsterMovement
         [SerializeField]
         private float speed = default;
 
-        [SerializeField] 
-        private AudioSource kikiIdleSound;
-
         [Header("Animation")]
         public Animator KikiAnimator = default;
 
@@ -32,6 +29,9 @@ namespace BBO.BBO.MonsterMovement
         private IEnumerable<PlayerCharacter> players = default;
         private float timer = default;
         private Transform target = default;
+
+        //sound
+        SoundManager soundManager = default;
 
         public override void OnAttackMovement()
         {
@@ -57,6 +57,8 @@ namespace BBO.BBO.MonsterMovement
             players = teamManager.Team.PlayerCharacters;
             timer = 0;
             target = GetClosetPlayer();
+
+            soundManager = FindObjectOfType<SoundManager>();
         }
 
         private void Update()
@@ -65,7 +67,7 @@ namespace BBO.BBO.MonsterMovement
             {
                 target = GetClosetPlayer();
                 timer = 0;
-                kikiIdleSound.Play();
+                soundManager.PlayKikiWalking();
             }
 
             timer += Time.deltaTime;
@@ -120,7 +122,7 @@ namespace BBO.BBO.MonsterMovement
             }
             else
             {
-                triggerHash = kikiZPos >= targetZPos ? MonstersData.WalkFrontTriggerHash: MonstersData.WalkBackTriggerHash;
+                triggerHash = kikiZPos >= targetZPos ? MonstersData.WalkFrontTriggerHash : MonstersData.WalkBackTriggerHash;
             }
 
             if (!KikiAnimator.GetCurrentAnimatorStateInfo(0).IsName(triggerHash.ToString()))
