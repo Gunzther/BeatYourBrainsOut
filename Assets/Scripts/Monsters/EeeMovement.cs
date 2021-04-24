@@ -27,11 +27,14 @@ namespace BBO.BBO.MonsterMovement
 
         [Header("Bullet")]
         [SerializeField]
-        private GameObject bullet = default;
-
+        private GameObject firePoint = default;
         [SerializeField]
-        private Transform bulletSpawnPoint;
+        private List<GameObject> vfx = new List<GameObject>();
+        [SerializeField]
         public float bulletChargeSecond = 2f;
+        private GameObject effectToSpawn;
+        [SerializeField] 
+        private GameObject muzzlePrefab;
 
         private const float waitSec = 1;
         private const float bounceForce = 2f;
@@ -44,7 +47,7 @@ namespace BBO.BBO.MonsterMovement
         private bool timeToFire = default;
         private int bulletStorage = 0;
         private float bulletTimer = default;
-
+        
         public override void OnAttackMovement()
         {
             base.OnAttackMovement();
@@ -70,6 +73,7 @@ namespace BBO.BBO.MonsterMovement
             timer = 0;
             target = GetClosetPlayer();
             timeToFire = false;
+            effectToSpawn = vfx[0];
         }
 
         private void Update()
@@ -103,9 +107,12 @@ namespace BBO.BBO.MonsterMovement
 
         private void fire()
         {
-            GameObject obj = Instantiate(bullet, gameObject.transform.position, Quaternion.identity);
-            Bullet b = obj.GetComponent<Bullet>();
+            GameObject vfx;
+            vfx = Instantiate(effectToSpawn, firePoint.transform.position, Quaternion.identity);
+            Bullet b = vfx.GetComponent<Bullet>();
             b.Target = target.transform.position;
+            // var muzzleVFX = Instantiate(muzzlePrefab, transform.position, Quaternion.identity);
+            // muzzleVFX.transform.forward = gameObject.transform.forward;
         }
 
         private void MoveToTarget()
