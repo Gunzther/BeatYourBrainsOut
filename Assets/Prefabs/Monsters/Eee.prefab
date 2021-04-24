@@ -33,6 +33,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 888602809592860810}
+  - {fileID: 4318264487686954528}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -64,8 +65,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1800777fe8be04f4d8ad02bf2ef9c03a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monsterMovement: {fileID: 0}
-  hp: 20
+  monsterMovement: {fileID: 7193226743392034409}
+  hp: 15
 --- !u!114 &7716297010599108313
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -106,8 +107,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 6024544657107004920}
   speed: 2
-  stop_distance: 2
-  EeeAnimator: {fileID: 0}
+  stop_distance: 5
+  EeeAnimator: {fileID: 9140735231360631251}
+  firePoint: {fileID: 9069585180913961065}
+  vfx:
+  - {fileID: 1213795575542490557, guid: 9100d66b64ddf43d9b5807b022168c18, type: 3}
+  bulletChargeSecond: 2
+  muzzlePrefab: {fileID: 8385974661095492317, guid: ceb6003da878b4062ad08362f9dfdcb3,
+    type: 3}
 --- !u!1 &6847169185593724269
 GameObject:
   m_ObjectHideFlags: 0
@@ -222,3 +229,33 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!1 &9069585180913961065
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4318264487686954528}
+  m_Layer: 0
+  m_Name: Bullte Spawn Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4318264487686954528
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9069585180913961065}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.593, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_Children: []
+  m_Father: {fileID: 2332957842240919015}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

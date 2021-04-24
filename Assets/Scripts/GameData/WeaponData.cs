@@ -26,7 +26,7 @@ namespace BBO.BBO.GameData
 
         public static CraftedWeaponRecipe[] CraftedWeaponRecipes =
         {
-            new CraftedWeaponRecipe(Weapon.BaseballbatWithNails, new Dictionary<Weapon, int>() 
+            new CraftedWeaponRecipe(Weapon.BaseballbatWithNails, new Dictionary<Weapon, int>()
             {
                 { Weapon.Baseballbat, 1 },
                 { Weapon.Nail, 1 }
