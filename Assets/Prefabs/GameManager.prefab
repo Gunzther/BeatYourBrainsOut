@@ -43,4 +43,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 401d3aff2a51b37418ae7f49b1fb5c93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  teamManager: {fileID: 0}
+  maxPlayerNumber: 4

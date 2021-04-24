@@ -1,4 +1,5 @@
-﻿using BBO.BBO.PlayerManagement;
+﻿using BBO.BBO.GameManagement;
+using BBO.BBO.PlayerManagement;
 using BBO.BBO.Utilities;
 using System.Collections.Generic;
 using UnityEngine;
@@ -28,7 +29,7 @@ namespace BBO.BBO.TeamManagement
 
         public Team Team => team;
         private Team team = default;
-        private int numberOfPlayers = 1;
+        private int numberOfPlayers = 0;
 
         public override void Awake()
         {
@@ -58,22 +59,23 @@ namespace BBO.BBO.TeamManagement
 
             PlayerSmoothController playerController = spawnedPlayer.GetComponent<PlayerSmoothController>();
             AddPlayerToActivePlayerList(playerController);
-            playerController.SetupPlayer(numberOfPlayers, input.deviceId);
+            playerController.SetupPlayer(input.deviceId);
 
             // Add player into the team
             var playerCharacter = spawnedPlayer.GetComponent<PlayerCharacter>();
             playerCharacter.SetTeam(team);
             team.AddPlayer(playerCharacter);
 
-            numberOfPlayers += 1;
+            numberOfPlayers++;
         }
 
-        public void AddPlayerFromController()
+        public void RemovePlayer(PlayerSmoothController player)
         {
-            if (Gamepad.current != null && Gamepad.current.selectButton.wasReleasedThisFrame)
-            {
-                SetupLocalMultiplayer(Gamepad.current);
-            }
+            GameManager.Instance.RemovePlayer(player.DeviceId);
+            activePlayerControllers.Remove(player);
+            Destroy(player.gameObject);
+
+            numberOfPlayers--;
         }
 
         private bool IsAdded(InputDevice input)
@@ -94,14 +96,6 @@ namespace BBO.BBO.TeamManagement
         private void AddPlayerToActivePlayerList(PlayerSmoothController newPlayer)
         {
             activePlayerControllers.Add(newPlayer);
-        }
-
-        private void DestroyOldPlayers()
-        {
-            foreach (Transform child in parent)
-            {
-                Destroy(child.gameObject);
-            }
         }
 
         //Spawn Utilities
