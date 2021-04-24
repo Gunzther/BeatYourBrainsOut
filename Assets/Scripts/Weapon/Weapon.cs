@@ -7,7 +7,7 @@ namespace BBO.BBO.WeaponManagement
 {
     public class Weapon : MonoBehaviour
     {
-        public WeaponData.Weapon WeaponGO = default;
+        public WeaponData.Weapon WeaponName = default;
         public WeaponData.Type Type = default;
         public int DamageValue = default;
         public float IntervalSeconds = default;
@@ -95,7 +95,7 @@ namespace BBO.BBO.WeaponManagement
         public override void OnInspectorGUI()
         {
             weaponScript = target as Weapon;
-            weaponScript.WeaponGO = (WeaponData.Weapon)EditorGUILayout.EnumPopup("Weapon", weaponScript.WeaponGO);
+            weaponScript.WeaponName = (WeaponData.Weapon)EditorGUILayout.EnumPopup("Weapon", weaponScript.WeaponName);
             weaponScript.Type = (WeaponData.Type)EditorGUILayout.EnumPopup("Type", weaponScript.Type);
 
             switch (weaponScript.Type)

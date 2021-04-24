@@ -195,6 +195,7 @@ GameObject:
   - component: {fileID: 5387966283118922947}
   - component: {fileID: 4784475903516044564}
   - component: {fileID: 4018970313251512849}
+  - component: {fileID: 7726185639309162993}
   - component: {fileID: 6311386286687350204}
   - component: {fileID: 2010779642248060349}
   - component: {fileID: 6245256469774556971}
@@ -478,6 +479,20 @@ MonoBehaviour:
   deviceDisplaySettings: {fileID: 11400000, guid: 05f01a30e7d054be0aa1eed74f3ba906,
     type: 2}
   playerUIDisplayBehaviour: {fileID: 5309740423339311925}
+--- !u!114 &7726185639309162993
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2624934328494790055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba7f5bb35564f804791f451e8cf73274, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerHurtingSound: {fileID: 0}
+  walkingSound: {fileID: 0}
 --- !u!54 &6311386286687350204
 Rigidbody:
   m_ObjectHideFlags: 0

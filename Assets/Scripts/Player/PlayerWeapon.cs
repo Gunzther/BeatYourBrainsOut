@@ -1,31 +1,29 @@
 ﻿using BBO.BBO.GameData;
-using System;
+using BBO.BBO.WeaponManagement;
 
 namespace BBO.BBO.PlayerManagement
 {
     public class PlayerWeapon
     {
-        public WeaponData.Weapon CurrentWeapon => weapon;
+        public WeaponData.Weapon CurrentWeaponName => weaponName;
 
-        private WeaponData.Weapon weapon = default;
+        private WeaponData.Weapon weaponName = default;
+        private Weapon weapon = default;
 
-        public PlayerData.PlayerSprite SetWeapon(WeaponData.Weapon weapon)
+        public PlayerData.PlayerSprite SetWeapon(WeaponData.Weapon weaponName, Weapon interactWeapon)
         {
-            this.weapon = weapon;
-            return GetPlayerSprite(weapon);
-        }
-
-        public void SetWeapon(string name)
-        {
-            if (Enum.TryParse(name, out WeaponData.Weapon weapon))
+            if (weaponName != WeaponData.Weapon.NoWeapon && interactWeapon == null) //player did not pick weapon that have already been used
             {
-                SetWeapon(weapon);
+                // TODO: create new Weapon
             }
+
+            this.weaponName = weaponName;
+            return GetPlayerSprite(weaponName);
         }
 
-        private PlayerData.PlayerSprite GetPlayerSprite(WeaponData.Weapon weapon)
+        private PlayerData.PlayerSprite GetPlayerSprite(WeaponData.Weapon weaponName)
         {
-            switch (weapon)
+            switch (weaponName)
             {
                 case WeaponData.Weapon.Baseballbat:
                     return PlayerData.PlayerSprite.Baseball;

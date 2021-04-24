@@ -16,11 +16,11 @@ namespace BBO.BBO.WeaponManagement
         [SerializeField]
         private SlotItem[] items = default;
 
-        public bool CanPick => currentWeapon != WeaponData.Weapon.NoWeapon;
-        public bool CanCraft => currentWeapon == WeaponData.Weapon.NoWeapon;
+        public bool CanPick => currentWeaponName != WeaponData.Weapon.NoWeapon;
+        public bool CanCraft => currentWeaponName == WeaponData.Weapon.NoWeapon;
 
         private Dictionary<WeaponData.Weapon, int> slotItems = default;
-        private WeaponData.Weapon currentWeapon = default;
+        private WeaponData.Weapon currentWeaponName = default;
 
         public void AddSlotItems(WeaponData.Weapon weaponKey, int amount)
         {
@@ -45,8 +45,8 @@ namespace BBO.BBO.WeaponManagement
             {
                 if (IsMatchedRecipe(recipe.Recipe, slotItems))
                 {
-                    ShowWeapon(recipe.Weapon, items);
-                    currentWeapon = recipe.Weapon;
+                    ShowWeapon(recipe.WeaponName, items);
+                    currentWeaponName = recipe.WeaponName;
                     ClearSlots();
                 }
             }
@@ -72,22 +72,22 @@ namespace BBO.BBO.WeaponManagement
 
         public WeaponData.Weapon OnPicked()
         {
-            WeaponData.Weapon pickedWeapon = currentWeapon;
+            WeaponData.Weapon pickedWeaponName = currentWeaponName;
             Clear();
 
-            return pickedWeapon;
+            return pickedWeaponName;
         }
 
         public void Clear()
         {
-            currentWeapon = default;
+            currentWeaponName = default;
             HideWeapon(items);
         }
 
-        protected override void ShowWeapon(WeaponData.Weapon weapon, SlotItem[] items)
+        protected override void ShowWeapon(WeaponData.Weapon weaponName, SlotItem[] items)
         {
             noWeaponObject.SetActive(false);
-            base.ShowWeapon(weapon, items);
+            base.ShowWeapon(weaponName, items);
         }
 
         protected override void HideWeapon(SlotItem[] items)

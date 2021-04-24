@@ -11,29 +11,29 @@ namespace BBO.BBO.WeaponManagement
         [SerializeField]
         private SlotItem[] items = default;
 
-        public bool CanPick => currentWeapon != WeaponData.Weapon.NoWeapon;
-        public bool CanPlace => currentWeapon == WeaponData.Weapon.NoWeapon;
+        public bool CanPick => currentWeaponName != WeaponData.Weapon.NoWeapon;
+        public bool CanPlace => currentWeaponName == WeaponData.Weapon.NoWeapon;
 
-        private WeaponData.Weapon currentWeapon = default;
+        private WeaponData.Weapon currentWeaponName = default;
 
         public WeaponData.Weapon OnPicked()
         {
-            WeaponData.Weapon pickedWeapon = currentWeapon;
+            WeaponData.Weapon pickedWeaponName = currentWeaponName;
             Clear();
 
-            return pickedWeapon;
+            return pickedWeaponName;
         }
 
-        public void OnPlaced(WeaponData.Weapon weapon)
+        public void OnPlaced(WeaponData.Weapon weaponName)
         {
-            currentWeapon = weapon;
-            base.ShowWeapon(weapon, items);
-            craftTable.AddSlotItems(weapon, 1);
+            currentWeaponName = weaponName;
+            base.ShowWeapon(weaponName, items);
+            craftTable.AddSlotItems(weaponName, 1);
         }
 
         public void Clear()
         {
-            currentWeapon = default;
+            currentWeaponName = default;
             base.HideWeapon(items);
         }
     }
