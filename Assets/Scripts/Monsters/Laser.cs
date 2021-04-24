@@ -10,6 +10,8 @@ namespace BBO.BBO.BulletManagement
         private LineRenderer lineRenderer = default;
         [SerializeField]
         private GameObject collider = default;
+        [SerializeField]
+        private TrailRenderer laserTrace = default;
 
         private float timer = 0;
         private GameObject startPosition = default;
@@ -26,6 +28,8 @@ namespace BBO.BBO.BulletManagement
         protected override void MoveToTarget()
         {
             if (!lineRenderer.enabled) lineRenderer.enabled = true;
+            if (!laserTrace.enabled) laserTrace.enabled = true;
+
             Vector3 s = startPosition.transform.position;
             Vector3 p = playerTarget.transform.position;
             Vector3 endLine = Vector3.MoveTowards(playerOldPos, p, moveSpeed);
