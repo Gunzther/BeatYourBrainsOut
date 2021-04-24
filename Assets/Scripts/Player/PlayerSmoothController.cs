@@ -1,4 +1,5 @@
 ﻿using BBO.BBO.GameData;
+using BBO.BBO.GameManagement;
 using BBO.BBO.PlayerInputSystem;
 using System.Collections;
 using UnityEngine;
@@ -52,9 +53,13 @@ namespace BBO.BBO.PlayerManagement
         //Current Control Scheme
         private string currentControlScheme = default;
 
+        //sound
+        SoundManager soundManager = default;
+
         private void Start()
         {
             mainCamera = Camera.main;
+            soundManager = FindObjectOfType<SoundManager>();
         }
 
         private void Update()
@@ -160,6 +165,7 @@ namespace BBO.BBO.PlayerManagement
         {
             if (hasCurrentInput)
             {
+                soundManager.PlayPlayerWalking();
                 movement.Set(smoothDirection.x, 0f, smoothDirection.z);
                 movement = movement.normalized * movementSpeed * Time.deltaTime;
                 playerRigidbody.MovePosition(transform.position + movement);

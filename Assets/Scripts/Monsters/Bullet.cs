@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace BBO.BBO.BulletManagement
@@ -6,7 +7,10 @@ namespace BBO.BBO.BulletManagement
     {
         [SerializeField]
         private float moveSpeed = default;
+        [SerializeField]
+        private GameObject hitPrefab;
         private Vector3 target = default;
+        private Quaternion rot;
         public Vector3 Target
         {
             get => target;
@@ -24,10 +28,21 @@ namespace BBO.BBO.BulletManagement
 
             if (currentPos == target)
             {
+                if (hitPrefab != null)
+                {
+                    var hitVFX = Instantiate(hitPrefab,target, rot);
+                }
                 Destroy(gameObject);
             }
 
             transform.position = Vector3.MoveTowards(transform.position, target, moveSpeed);
+        }
+
+        private void OnCollisionEnter(Collision co)
+        {
+            ContactPoint contact = co.contacts[0];
+            Quaternion tempRot = Quaternion.FromToRotation(Vector3.up, contact.normal);
+            rot = tempRot;
         }
     }
 }
