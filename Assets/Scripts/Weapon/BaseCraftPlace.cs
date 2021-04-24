@@ -6,11 +6,11 @@ namespace BBO.BBO.WeaponManagement
 {
     public class BaseCraftPlace : MonoBehaviour
     {
-        protected virtual void ShowWeapon(WeaponData.Weapon weapon, SlotItem[] items) 
+        protected virtual void ShowWeapon(WeaponData.Weapon weaponName, SlotItem[] items) 
         {
             foreach (SlotItem item in items)
             {
-                if (item.Weapon == weapon)
+                if (item.WeaponName == weaponName)
                 {
                     item.weaponModel.SetActive(true);
                 }
@@ -33,7 +33,7 @@ namespace BBO.BBO.WeaponManagement
     [Serializable]
     public class SlotItem
     {
-        public WeaponData.Weapon Weapon = default;
+        public WeaponData.Weapon WeaponName = default;
         public GameObject weaponModel = default;
     }
 }

@@ -47,12 +47,12 @@ namespace BBO.BBO.GameData
 
     public class CraftedWeaponRecipe
     {
-        public WeaponData.Weapon Weapon { get; private set; }
+        public WeaponData.Weapon WeaponName { get; private set; }
         public Dictionary<WeaponData.Weapon, int> Recipe { get; private set; }
 
-        public CraftedWeaponRecipe(WeaponData.Weapon weapon, Dictionary<WeaponData.Weapon, int> recipe)
+        public CraftedWeaponRecipe(WeaponData.Weapon weaponName, Dictionary<WeaponData.Weapon, int> recipe)
         {
-            Weapon = weapon;
+            WeaponName = weaponName;
             Recipe = recipe;
         }
     }

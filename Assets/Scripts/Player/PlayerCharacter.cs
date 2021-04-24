@@ -29,8 +29,8 @@ namespace BBO.BBO.PlayerManagement
         private bool isPlacing = false;
         private bool nearCraftSlot = false;
         private CraftSlot currentCraftSlot = default;
-        private bool canPick => CurrentPlayerWeapon.CurrentWeapon == WeaponData.Weapon.NoWeapon;
-        private bool canPlace => CurrentPlayerWeapon.CurrentWeapon != WeaponData.Weapon.NoWeapon;
+        private bool canPick => CurrentPlayerWeapon.CurrentWeaponName == WeaponData.Weapon.NoWeapon;
+        private bool canPlace => CurrentPlayerWeapon.CurrentWeaponName != WeaponData.Weapon.NoWeapon;
 
         // stupid weapon
         private Dictionary<WeaponData.Weapon, GameObject> stupidWeaponPrototypes = default;
@@ -57,7 +57,7 @@ namespace BBO.BBO.PlayerManagement
 
         public void OnAttack()
         {
-
+            playerAnimatorController.ChangePlayerMainTex(PlayerData.PlayerSprite.RubberBandAttack);
         }
 
         public void OnPick()
@@ -127,20 +127,20 @@ namespace BBO.BBO.PlayerManagement
                 print(other.name);
                 if (other.GetComponent<WeaponBox>() is WeaponBox weaponBox)
                 {
-                    playerAnimatorController.ChangePlayerMainTex(CurrentPlayerWeapon.SetWeapon(weaponBox.Weapon));
+                    playerAnimatorController.ChangePlayerMainTex(CurrentPlayerWeapon.SetWeapon(weaponBox.WeaponName, null));
                 }
                 else if (other.GetComponent<Weapon>() is Weapon weapon)
                 {
-                    playerAnimatorController.ChangePlayerMainTex(CurrentPlayerWeapon.SetWeapon(weapon.WeaponGO));
+                    playerAnimatorController.ChangePlayerMainTex(CurrentPlayerWeapon.SetWeapon(weapon.WeaponName, weapon));
                     weapon.OnPicked();
                 }
                 else if (other.GetComponent<CraftSlot>() is CraftSlot slot && slot.CanPick)
                 {
-                    playerAnimatorController.ChangePlayerMainTex(CurrentPlayerWeapon.SetWeapon(slot.OnPicked()));
+                    playerAnimatorController.ChangePlayerMainTex(CurrentPlayerWeapon.SetWeapon(slot.OnPicked(), null));
                 }
                 else if (other.GetComponent<CraftTable>() is CraftTable table && table.CanPick)
                 {
-                    playerAnimatorController.ChangePlayerMainTex(CurrentPlayerWeapon.SetWeapon(table.OnPicked()));
+                    playerAnimatorController.ChangePlayerMainTex(CurrentPlayerWeapon.SetWeapon(table.OnPicked(), null));
                 }
 
                 isPicking = false;
@@ -149,8 +149,8 @@ namespace BBO.BBO.PlayerManagement
             {
                 if (currentCraftSlot.CanPlace)
                 {
-                    currentCraftSlot.OnPlaced(CurrentPlayerWeapon.CurrentWeapon);
-                    playerAnimatorController.ChangePlayerMainTex(CurrentPlayerWeapon.SetWeapon(WeaponData.Weapon.NoWeapon));
+                    currentCraftSlot.OnPlaced(CurrentPlayerWeapon.CurrentWeaponName);
+                    playerAnimatorController.ChangePlayerMainTex(CurrentPlayerWeapon.SetWeapon(WeaponData.Weapon.NoWeapon, null));
                     isPlacing = false;
                 }
             }
@@ -187,13 +187,13 @@ namespace BBO.BBO.PlayerManagement
                 stupidContainer = new GameObject("StupidContainer");
             }
 
-            if (stupidWeaponPrototypes.TryGetValue(CurrentPlayerWeapon.CurrentWeapon, out GameObject weaponPrototype))
+            if (stupidWeaponPrototypes.TryGetValue(CurrentPlayerWeapon.CurrentWeaponName, out GameObject weaponPrototype))
             {
                 var newStupidWeapon = Instantiate(weaponPrototype, stupidContainer.transform);
                 newStupidWeapon.transform.position = transform.position;
             }
 
-            playerAnimatorController.ChangePlayerMainTex(CurrentPlayerWeapon.SetWeapon(WeaponData.Weapon.NoWeapon));
+            playerAnimatorController.ChangePlayerMainTex(CurrentPlayerWeapon.SetWeapon(WeaponData.Weapon.NoWeapon, null));
             isPlacing = false;
         }
     }
