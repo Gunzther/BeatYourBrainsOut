@@ -1,6 +1,7 @@
 ﻿using BBO.BBO.GameData;
 using BBO.BBO.PlayerManagement;
 using BBO.BBO.TeamManagement;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -22,8 +23,9 @@ namespace BBO.BBO.MonsterMovement
         public Animator KikiAnimator = default;
 
         private const float waitSec = 1;
-        private const float bounceForce = 0.2f;
+        private const float bounceForce = 2f;
         private const float bounceAttackedForce = 1.5f;
+        private const float targetOffset = 0.05f;
 
         private IEnumerable<PlayerCharacter> players = default;
         private float timer = default;
@@ -32,7 +34,12 @@ namespace BBO.BBO.MonsterMovement
         public override void OnAttackMovement()
         {
             base.OnAttackMovement();
-            rb.AddForce(target.transform.position * -bounceForce, ForceMode.Impulse);
+            var forceDirection = (target.transform.position - transform.position);
+
+            if (forceDirection.x >= targetOffset || forceDirection.x <= -targetOffset || forceDirection.z >= targetOffset || forceDirection.z <= -targetOffset)
+            {
+                rb.AddForce(forceDirection * -bounceForce, ForceMode.Impulse);
+            }
         }
 
         public override void OnAttackedMovement()
@@ -71,7 +78,7 @@ namespace BBO.BBO.MonsterMovement
             float step = speed * Time.deltaTime;
             transform.position = Vector3.MoveTowards(transform.position, target.position, step);
 
-            AnimateKikiMovement(transform.position.x, target.position.x);
+            AnimateKikiMovement(transform.position.x, transform.position.z, target.position.x, target.position.z);
         }
 
         private Transform GetClosetPlayer()
@@ -94,7 +101,7 @@ namespace BBO.BBO.MonsterMovement
             return closetPlayer.transform;
         }
 
-        private void AnimateKikiMovement(float kikiXPos, float targetXPos)
+        private void AnimateKikiMovement(float kikiXPos, float kikiZPos, float targetXPos, float targetZPos)
         {
             int triggerHash = MonstersData.IdleTriggerHash;
             transform.localScale = new Vector3(1, 1, 1);
@@ -107,6 +114,10 @@ namespace BBO.BBO.MonsterMovement
             else if (kikiXPos > targetXPos)
             {
                 triggerHash = MonstersData.WalkSideTriggerHash;
+            }
+            else
+            {
+                triggerHash = kikiZPos >= targetZPos ? MonstersData.WalkFrontTriggerHash: MonstersData.WalkBackTriggerHash;
             }
 
             if (!KikiAnimator.GetCurrentAnimatorStateInfo(0).IsName(triggerHash.ToString()))

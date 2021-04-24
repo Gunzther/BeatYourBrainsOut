@@ -12,11 +12,12 @@ namespace BBO.BBO.MonsterMovement
     /// </summary>
     public class EeeMovement : MonstersMovement
     {
-
         [SerializeField]
         private Rigidbody rb = default;
+
         [SerializeField]
         private float speed = default;
+
         [SerializeField]
         private float stop_distance = default;
 
@@ -26,14 +27,19 @@ namespace BBO.BBO.MonsterMovement
 
         [Header("Bullet")]
         [SerializeField]
-        private GameObject bullet = default;
+        private GameObject firePoint = default;
         [SerializeField]
-        private Transform bulletSpawnPoint;
+        private List<GameObject> vfx = new List<GameObject>();
+        [SerializeField]
         public float bulletChargeSecond = 2f;
+        private GameObject effectToSpawn;
+        [SerializeField] 
+        private GameObject muzzlePrefab;
 
         private const float waitSec = 1;
-        private const float bounceForce = 0.1f;
+        private const float bounceForce = 2f;
         private const float bounceAttackedForce = 1.5f;
+        private const float targetOffset = 0.05f;
 
         private IEnumerable<PlayerCharacter> players = default;
         private float timer = default;
@@ -41,11 +47,16 @@ namespace BBO.BBO.MonsterMovement
         private bool timeToFire = default;
         private int bulletStorage = 0;
         private float bulletTimer = default;
-
+        
         public override void OnAttackMovement()
         {
             base.OnAttackMovement();
-            rb.AddForce(target.transform.position * -bounceForce, ForceMode.Impulse);
+            var forceDirection = (target.transform.position - transform.position);
+
+            if (forceDirection.x >= targetOffset || forceDirection.x <= -targetOffset || forceDirection.z >= targetOffset || forceDirection.z <= -targetOffset)
+            {
+                rb.AddForce(forceDirection * -bounceForce, ForceMode.Impulse);
+            }
         }
 
         public override void OnAttackedMovement()
@@ -62,6 +73,7 @@ namespace BBO.BBO.MonsterMovement
             timer = 0;
             target = GetClosetPlayer();
             timeToFire = false;
+            effectToSpawn = vfx[0];
         }
 
         private void Update()
@@ -95,9 +107,12 @@ namespace BBO.BBO.MonsterMovement
 
         private void fire()
         {
-            GameObject obj = Instantiate(bullet, gameObject.transform.position, Quaternion.identity);
-            Bullet b = obj.GetComponent<Bullet>();
+            GameObject vfx;
+            vfx = Instantiate(effectToSpawn, firePoint.transform.position, Quaternion.identity);
+            Bullet b = vfx.GetComponent<Bullet>();
             b.Target = target.transform.position;
+            // var muzzleVFX = Instantiate(muzzlePrefab, transform.position, Quaternion.identity);
+            // muzzleVFX.transform.forward = gameObject.transform.forward;
         }
 
         private void MoveToTarget()
@@ -116,7 +131,8 @@ namespace BBO.BBO.MonsterMovement
                     bulletStorage = 0;
                 }
             }
-            AnimateEeeMovement(transform.position.x, target.position.x);
+            
+            AnimateEeeMovement(transform.position.x, transform.position.z, target.position.x, target.position.z);
         }
 
         private Transform GetClosetPlayer()
@@ -138,16 +154,14 @@ namespace BBO.BBO.MonsterMovement
             return closetPlayer.transform;
         }
 
-        private void AnimateEeeMovement(float eeeXPos, float targetXPos)
+        private void AnimateEeeMovement(float eeeXPos, float eeeZPos, float targetXPos, float targetZPos)
         {
-
             int triggerHash = MonstersData.IdleTriggerHash;
             transform.localScale = new Vector3(1, 1, 1);
 
             if (Vector3.Distance(transform.position, target.position) <= stop_distance)
             {
                 triggerHash = MonstersData.IdleTriggerHash;
-                transform.localScale = new Vector3(1, 1, 1);
             }
             else if (eeeXPos < targetXPos)
             {
@@ -157,6 +171,10 @@ namespace BBO.BBO.MonsterMovement
             else if (eeeXPos > targetXPos)
             {
                 triggerHash = MonstersData.WalkSideTriggerHash;
+            }
+            else
+            {
+                triggerHash = eeeZPos >= targetZPos ? MonstersData.WalkFrontTriggerHash : MonstersData.WalkBackTriggerHash;
             }
 
             if (!EeeAnimator.GetCurrentAnimatorStateInfo(0).IsName(triggerHash.ToString()))

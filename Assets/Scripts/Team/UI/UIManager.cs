@@ -35,6 +35,7 @@ namespace BBO.BBO.TeamManagement.UI
             teamHpSlider.value = value;
             teamHpText.text = value.ToString();
         }
+
         public override void Back()
         {
             Setting();

@@ -107,11 +107,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 6024544657107004920}
   speed: 2
-  stop_distance: 2
+  stop_distance: 5
   EeeAnimator: {fileID: 9140735231360631251}
-  bullet: {fileID: 850465745720011697, guid: 029b535a2b54c4087931c8d233fc2640, type: 3}
-  bulletSpawnPoint: {fileID: 0}
+  firePoint: {fileID: 9069585180913961065}
+  vfx:
+  - {fileID: 1213795575542490557, guid: 9100d66b64ddf43d9b5807b022168c18, type: 3}
   bulletChargeSecond: 2
+  muzzlePrefab: {fileID: 8385974661095492317, guid: ceb6003da878b4062ad08362f9dfdcb3,
+    type: 3}
 --- !u!1 &6847169185593724269
 GameObject:
   m_ObjectHideFlags: 0
@@ -236,7 +239,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4318264487686954528}
   m_Layer: 0
-  m_Name: BullteSpawnPoint
+  m_Name: Bullte Spawn Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
