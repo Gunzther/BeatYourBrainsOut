@@ -1,12 +1,13 @@
-﻿using BBO.BBO.MonsterManagement;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace BBO.BBO.PlayerManagement
 {
-    public class PlayerDestroyer : MonoBehaviour
+    public class PlayerDestroyerContinuous : PlayerDestroyer
     {
         [SerializeField]
-        protected int damageValue = default;
+        private float damageSecond = 1f;
+
+        private float timer = 0f;
 
         private void OnTriggerEnter(Collider other)
         {
@@ -20,11 +21,15 @@ namespace BBO.BBO.PlayerManagement
 
         private void OnTriggerStay(Collider other)
         {
-            if (other.gameObject.GetComponent<PlayerCharacter>() is PlayerCharacter)
+            if (other.gameObject.GetComponent<PlayerCharacter>() is PlayerCharacter player)
             {
-                if (gameObject.GetComponent<MonsterCharacter>() is MonsterCharacter monster)
+                timer += Time.deltaTime;
+                if (timer >= damageSecond)
                 {
-                    monster.OnAttack();
+                    player.CurrentPlayerStats.DecreasePlayerHealth(damageValue);
+                    player.UpdateHpUI();
+                    player.TriggerHurtAnimation();
+                    timer = 0;
                 }
             }
         }

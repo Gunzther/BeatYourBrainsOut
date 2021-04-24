@@ -8,13 +8,19 @@ namespace BBO.BBO.BulletManagement
     {
         [SerializeField]
         private LineRenderer lineRenderer = default;
+        [SerializeField]
+        private GameObject collider = default;
+
         private float timer = 0;
         private GameObject startPosition = default;
         private PlayerCharacter playerTarget = default;
+        private Vector3 playerOldPos = default;
+
         public void SetLaserTarget(GameObject start, PlayerCharacter target)
         {
             startPosition = start;
             playerTarget = target;
+            playerOldPos = target.transform.position;
         }
 
         protected override void MoveToTarget()
@@ -22,8 +28,12 @@ namespace BBO.BBO.BulletManagement
             if (!lineRenderer.enabled) lineRenderer.enabled = true;
             Vector3 s = startPosition.transform.position;
             Vector3 p = playerTarget.transform.position;
+            Vector3 endLine = Vector3.MoveTowards(playerOldPos, p, moveSpeed);
+
             lineRenderer.SetPosition(0, new Vector3(s.x, s.y, s.z));
-            lineRenderer.SetPosition(1, new Vector3(p.x, p.y + 0.5f, p.z));
+            lineRenderer.SetPosition(1, endLine);
+            playerOldPos = endLine;
+            collider.transform.position = endLine;
         }
 
         private void FixedUpdate()
