@@ -15,6 +15,7 @@ namespace BBO.BBO.PlayerManagement
                 player.CurrentPlayerStats.DecreasePlayerHealth(damageValue);
                 player.UpdateHpUI();
                 player.TriggerHurtAnimation();
+                player.PlayHurtSound();
             }
         }
 

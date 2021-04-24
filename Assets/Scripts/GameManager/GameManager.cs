@@ -38,7 +38,7 @@ namespace BBO.BBO.GameManagement
                     action?.Invoke();
                     StopAllCoroutines();
                 }
-                ));
+            ));
         }
     }
 }
