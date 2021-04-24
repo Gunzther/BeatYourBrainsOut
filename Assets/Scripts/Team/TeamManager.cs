@@ -59,7 +59,7 @@ namespace BBO.BBO.TeamManagement
 
             PlayerSmoothController playerController = spawnedPlayer.GetComponent<PlayerSmoothController>();
             AddPlayerToActivePlayerList(playerController);
-            playerController.SetupPlayer(numberOfPlayers, input.deviceId);
+            playerController.SetupPlayer(input.deviceId);
 
             // Add player into the team
             var playerCharacter = spawnedPlayer.GetComponent<PlayerCharacter>();
@@ -96,14 +96,6 @@ namespace BBO.BBO.TeamManagement
         private void AddPlayerToActivePlayerList(PlayerSmoothController newPlayer)
         {
             activePlayerControllers.Add(newPlayer);
-        }
-
-        private void DestroyOldPlayers()
-        {
-            foreach (Transform child in parent)
-            {
-                Destroy(child.gameObject);
-            }
         }
 
         //Spawn Utilities

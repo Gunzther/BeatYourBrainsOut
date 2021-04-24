@@ -51,6 +51,12 @@ namespace BBO.BBO.PlayerManagement
             this.team = team;
         }
 
+        public void SetPlayerId(int playerID)
+        {
+            this.playerID = playerID;
+            CurrentPlayerStats = new PlayerStats(playerID);
+        }
+
         public void UpdateHpUI()
         {
             uiManager.SetTeamHpValue(team.CurrentTeamHealth);
@@ -96,9 +102,6 @@ namespace BBO.BBO.PlayerManagement
 
         private void Awake()
         {
-            // TODO: generate player id and assign value to playerID variable
-            playerID = 0;
-            CurrentPlayerStats = new PlayerStats(playerID);
             CurrentPlayerWeapon = new PlayerWeapon();
             stupidWeaponPrototypes = new Dictionary<WeaponData.Weapon, GameObject>();
         }

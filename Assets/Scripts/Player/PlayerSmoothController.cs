@@ -70,12 +70,13 @@ namespace BBO.BBO.PlayerManagement
             AnimatePlayerMovement();
         }
 
-        public void SetupPlayer(int newPlayerID, int newDeviceID)
+        public void SetupPlayer(int newDeviceID)
         {
-            playerID = newPlayerID;
+            playerID = newDeviceID;
             deviceID = newDeviceID;
             currentControlScheme = playerInput.currentControlScheme;
             playerVisualsBehaviour.SetupBehaviour(playerID, playerInput);
+            playerCharacter.SetPlayerId(newDeviceID);
         }
 
         public void OnAttack(InputAction.CallbackContext value)
