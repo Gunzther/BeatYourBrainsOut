@@ -66,7 +66,7 @@ namespace BBO.BBO.TeamManagement
             playerCharacter.SetTeam(team);
             team.AddPlayer(playerCharacter);
 
-            numberOfPlayers += 1;
+            numberOfPlayers++;
         }
 
         public void RemovePlayer(PlayerSmoothController player)
@@ -74,6 +74,8 @@ namespace BBO.BBO.TeamManagement
             GameManager.Instance.RemovePlayer(player.DeviceId);
             activePlayerControllers.Remove(player);
             Destroy(player.gameObject);
+
+            numberOfPlayers--;
         }
 
         private bool IsAdded(InputDevice input)

@@ -20,8 +20,9 @@ namespace BBO.BBO.GameManagement
         }
 
         private bool activeSelectMap = false;
-        private int currentDevicesCount = 0;
+        private int currentDevicesCount => addedDevices.Count;
         private HashSet<int> detectedDevices = default;
+        private HashSet<int> addedDevices = default;
 
         public void LoadSceneCoroutine(string name, Action action)
         {
@@ -37,12 +38,15 @@ namespace BBO.BBO.GameManagement
         public void RemovePlayer(int deviceID)
         {
             detectedDevices.Remove(deviceID);
-            currentDevicesCount--;
+            addedDevices.Remove(deviceID);
+
+            // print($"[{nameof(GameManager)}] current connected devices: {currentDevicesCount}/{maxPlayerNumber}");
         }
 
         private void Start()
         {
             detectedDevices = new HashSet<int>();
+            addedDevices = new HashSet<int>();
             AddNewPlayers();
         }
 
@@ -59,7 +63,6 @@ namespace BBO.BBO.GameManagement
         {
             if (InputSystem.devices.Count != detectedDevices.Count)
             {
-                print("has new device");
                 AddNewPlayers();
             }
         }
@@ -73,15 +76,18 @@ namespace BBO.BBO.GameManagement
                 if (IsValidController(inputDevice))
                 {
                     TeamManager.Instance.SetupLocalMultiplayer(inputDevice);
-                    currentDevicesCount++;
+                    addedDevices.Add(inputDevice.deviceId);
+
+                    // print($"[{nameof(GameManager)}] current connected devices: {currentDevicesCount}/{maxPlayerNumber}");
                 }
             }
         }
 
         private bool IsValidController(InputDevice inputDevice)
         {
-            return !ControllerData.NotGameControllers.Contains(inputDevice.device.name) 
-                   && currentDevicesCount < maxPlayerNumber;
+            return !ControllerData.NotGameControllers.Contains(inputDevice.device.name)
+                   && currentDevicesCount < maxPlayerNumber
+                   && !addedDevices.Contains(inputDevice.deviceId);
         }
     }
 }
