@@ -1,4 +1,5 @@
-﻿using BBO.BBO.GameManagement;
+﻿using BBO.BBO.GameData;
+using BBO.BBO.GameManagement;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -24,6 +25,9 @@ namespace BBO.BBO.InterfaceManagement
         private void Awake()
         {
             Pause();
+            master.value = PlayerPrefs.GetFloat(PlayerPrefsData.MasterVolume);
+            bg.value = PlayerPrefs.GetFloat(PlayerPrefsData.BackgroundVolume);
+            fx.value = PlayerPrefs.GetFloat(PlayerPrefsData.EffectVolume);
         }
         public void ActiveQuitButton()
         {
