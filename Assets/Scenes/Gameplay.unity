@@ -316,6 +316,7 @@ MonoBehaviour:
   teamHpSlider: {fileID: 1188512576}
   teamHpText: {fileID: 804202418}
   resultCanvas: {fileID: 823904373}
+  setting: {fileID: 3422437042971057407, guid: be880ec55dfc30b4cb89f846761bde82, type: 3}
 --- !u!1 &188402244
 GameObject:
   m_ObjectHideFlags: 0

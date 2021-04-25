@@ -26,9 +26,7 @@ namespace BBO.BBO.MonsterMovement
         [SerializeField]
         private GameObject bullet = default;
         [SerializeField]
-        private GameObject bulletSpawnPoint;
-        [SerializeField]
-        private float bulletChargeSecond = 2f;
+        private GameObject bulletSpawnPoint = default;
 
         private const float bounceForce = 2f;
         private const float bounceAttackedForce = 1.5f;

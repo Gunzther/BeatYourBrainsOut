@@ -1,8 +1,7 @@
-﻿using BBO.BBO.InterfaceManagement;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace BBO.BBO.TeamManagement.UI
+namespace BBO.BBO.InterfaceManagement
 {
     public class UIManager : InterfaceManager
     {
@@ -15,6 +14,10 @@ namespace BBO.BBO.TeamManagement.UI
         [Header("Result Page")]
         [SerializeField]
         private GameObject resultCanvas = default;
+
+        [Header("Setting")]
+        [SerializeField]
+        private GameObject setting = default;
 
         public void SetTeamHpMaxValue(int value)
         {
@@ -43,14 +46,21 @@ namespace BBO.BBO.TeamManagement.UI
 
         public void Setting()
         {
-            Debug.Log("Setting button press");
+            GameObject tmp = Instantiate(setting);
+            SettingManager settingManager = tmp.GetComponent<SettingManager>();
+            settingManager?.ActiveQuitButton();
         }
 
         void Update()
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                Back();
+                SettingManager settingManager = FindObjectOfType<SettingManager>();
+
+                if (!settingManager)
+                {
+                    Back();
+                }
             }
         }
     }
