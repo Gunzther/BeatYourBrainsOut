@@ -11,6 +11,8 @@ public class StartGameManager : InterfaceManager
     private Camera nextCamera = default;
     [SerializeField]
     private InterfaceManager nextManager = default;
+    [SerializeField]
+    private GameObject settingPrefab = default;
 
     private void Update()
     {
@@ -35,7 +37,7 @@ public class StartGameManager : InterfaceManager
 
     public void Setting()
     {
-        Debug.Log("Setting button press");
+        Instantiate(settingPrefab);
     }
 
     public void Quit()
