@@ -99,12 +99,12 @@ MonoBehaviour:
   craftSlots: []
   noWeaponObject: {fileID: 4883439947483765959}
   items:
-  - Weapon: 4
-    weaponModel: {fileID: 7317550057025807333}
-  - Weapon: 5
-    weaponModel: {fileID: 754491823163110851}
-  - Weapon: 6
-    weaponModel: {fileID: 6637437962068551470}
+  - WeaponName: 4
+    WeaponModel: {fileID: 7353130998469429496}
+  - WeaponName: 5
+    WeaponModel: {fileID: 350217136733478163}
+  - WeaponName: 6
+    WeaponModel: {fileID: 781317611654104966}
 --- !u!1 &4892962281445767346
 GameObject:
   m_ObjectHideFlags: 0
@@ -373,18 +373,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 894ed07b5b568fe40af36bbf6b403703, type: 3}
---- !u!1 &6637437962068551470 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6617222608611167847, guid: 894ed07b5b568fe40af36bbf6b403703,
-    type: 3}
-  m_PrefabInstance: {fileID: 561246052959267145}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4214757097198969619 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4446215497228470874, guid: 894ed07b5b568fe40af36bbf6b403703,
     type: 3}
   m_PrefabInstance: {fileID: 561246052959267145}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &781317611654104966 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 945261646867885775, guid: 894ed07b5b568fe40af36bbf6b403703,
+    type: 3}
+  m_PrefabInstance: {fileID: 561246052959267145}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7831e1bdc7aedf44ca3be3b8cef9f069, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &3675990916648445531
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -522,18 +528,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ab26c16b27e24444ba4cdf0b3ad5e783, type: 3}
---- !u!1 &7317550057025807333 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6617222608611167847, guid: ab26c16b27e24444ba4cdf0b3ad5e783,
-    type: 3}
-  m_PrefabInstance: {fileID: 4492395494745206146}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &282619115699021784 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4446215497228470874, guid: ab26c16b27e24444ba4cdf0b3ad5e783,
     type: 3}
   m_PrefabInstance: {fileID: 4492395494745206146}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7353130998469429496 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6364606936623965562, guid: ab26c16b27e24444ba4cdf0b3ad5e783,
+    type: 3}
+  m_PrefabInstance: {fileID: 4492395494745206146}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7831e1bdc7aedf44ca3be3b8cef9f069, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &5093294327171360340
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -746,18 +758,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c766395ebc3a3ee419e97b8da6372f9a, type: 3}
---- !u!1 &754491823163110851 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6617222608611167847, guid: c766395ebc3a3ee419e97b8da6372f9a,
-    type: 3}
-  m_PrefabInstance: {fileID: 5885473228375276452}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7789335954619298302 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4446215497228470874, guid: c766395ebc3a3ee419e97b8da6372f9a,
     type: 3}
   m_PrefabInstance: {fileID: 5885473228375276452}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &350217136733478163 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6156805616944932535, guid: c766395ebc3a3ee419e97b8da6372f9a,
+    type: 3}
+  m_PrefabInstance: {fileID: 5885473228375276452}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7831e1bdc7aedf44ca3be3b8cef9f069, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &7515939845562448988
 PrefabInstance:
   m_ObjectHideFlags: 0

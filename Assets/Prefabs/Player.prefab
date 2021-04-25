@@ -426,22 +426,22 @@ MonoBehaviour:
   playerAnimatorController: {fileID: 7510636998256204326}
   stupidWeapons:
   - Weapon: 1
-    StupidPrefab: {fileID: 6617222608611167847, guid: c0e2f0303f6a77a4fac6bd1ce2ad31b9,
+    StupidPrefab: {fileID: 2724476926566508097, guid: c0e2f0303f6a77a4fac6bd1ce2ad31b9,
       type: 3}
   - Weapon: 2
-    StupidPrefab: {fileID: 896939178005117703, guid: ba86de7042c58fa4687056b61c9b3036,
+    StupidPrefab: {fileID: 7282387203395876885, guid: ba86de7042c58fa4687056b61c9b3036,
       type: 3}
   - Weapon: 3
-    StupidPrefab: {fileID: 2168545729610353427, guid: 34a27211eed11ef4ca3a2479894e40a9,
+    StupidPrefab: {fileID: 3511931065447622142, guid: 34a27211eed11ef4ca3a2479894e40a9,
       type: 3}
   - Weapon: 4
-    StupidPrefab: {fileID: 6617222608611167847, guid: 786211c733e7f5c4695519251c5ee7f0,
+    StupidPrefab: {fileID: -7236795557441196743, guid: 786211c733e7f5c4695519251c5ee7f0,
       type: 3}
   - Weapon: 5
-    StupidPrefab: {fileID: 6617222608611167847, guid: 84b403fe04de86245814daab2e18590b,
+    StupidPrefab: {fileID: 7767032443430369714, guid: 84b403fe04de86245814daab2e18590b,
       type: 3}
   - Weapon: 6
-    StupidPrefab: {fileID: 6617222608611167847, guid: c4f95d7edbf45b84da1220a52af57f50,
+    StupidPrefab: {fileID: 627983635647659176, guid: c4f95d7edbf45b84da1220a52af57f50,
       type: 3}
 --- !u!114 &4784475903516044564
 MonoBehaviour:
@@ -642,7 +642,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7831e1bdc7aedf44ca3be3b8cef9f069, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WeaponGO: 0
+  IsStupid: 0
+  WeaponName: 0
   Type: 0
   DamageValue: 0
   IntervalSeconds: 0
