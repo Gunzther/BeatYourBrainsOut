@@ -23,6 +23,19 @@ namespace BBO.BBO.GameData
             Sling
         }
 
+        public static bool IsDirectionalWeapon(Weapon weaponName)
+        {
+            return weaponName == Weapon.RubberBand ||
+                   weaponName == Weapon.Shield ||
+                   weaponName == Weapon.Sling;
+        }
+
+        public static bool IsCloseRangeWeapon(Weapon weaponName)
+        {
+            return weaponName == Weapon.Baseballbat ||
+                   weaponName == Weapon.BaseballbatWithNails;
+        }
+
         public static CraftedWeaponRecipe[] CraftedWeaponRecipes =
         {
             new CraftedWeaponRecipe(Weapon.BaseballbatWithNails, new Dictionary<Weapon, int>()
