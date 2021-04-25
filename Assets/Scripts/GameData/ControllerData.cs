@@ -18,6 +18,6 @@ namespace BBO.BBO.GameData
         }
 
         private static HashSet<string> notGameControllerSet = default;
-        private static string[] notGameController = { "Mouse" };
+        private static string[] notGameController = { "Mouse", "Pen" };
     }
 }
