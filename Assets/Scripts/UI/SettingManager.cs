@@ -1,5 +1,4 @@
 ﻿using BBO.BBO.GameManagement;
-using BBO.BBO.TeamManagement;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,6 +18,8 @@ namespace BBO.BBO.InterfaceManagement
         private Slider bg = default;
         [SerializeField]
         private Slider fx = default;
+        [SerializeField]
+        private Camera startCamera = default;
 
         public void ActiveQuitButton()
         {
@@ -35,7 +36,10 @@ namespace BBO.BBO.InterfaceManagement
 
         public void ToMenu()
         {
-            GameManager.Instance.LoadSceneCoroutine("StartGame", () => TeamManager.Instance.Reload());
+            GameManager.Instance.LoadSceneCoroutine("StartGame", null);
+            Camera.main.transform.position = startCamera.transform.position;
+            Camera.main.transform.rotation = startCamera.transform.rotation;
+
         }
         public void ToDesktop()
         {
