@@ -7,10 +7,13 @@ public class StartGameManager : InterfaceManager
     [Header("Next Page")]
     [SerializeField]
     private GameObject nextCanvas = default;
+
     [SerializeField]
     private Camera nextCamera = default;
+
     [SerializeField]
     private InterfaceManager nextManager = default;
+
     [SerializeField]
     private GameObject settingPrefab = default;
 
@@ -28,9 +31,11 @@ public class StartGameManager : InterfaceManager
 
     public void SelectMap()
     {
-        ConnectPlayerManager cpm = nextCanvas.gameObject.GetComponent<ConnectPlayerManager>();
-        GameObject temp = cpm?.NextCanvas;
-        SetActiveCanvas(temp, currentCanvas);
+        if (nextCanvas.gameObject.GetComponent<ConnectPlayerManager>() is ConnectPlayerManager cpm)
+        {
+            GameObject temp = cpm.NextCanvas;
+            SetActiveCanvas(temp, currentCanvas);
+        }
 
         GameManager.Instance.ActiveSelectMap = false;
     }

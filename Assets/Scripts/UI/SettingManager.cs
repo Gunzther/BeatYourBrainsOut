@@ -8,17 +8,23 @@ namespace BBO.BBO.InterfaceManagement
     public class SettingManager : MonoBehaviour
     {
         [SerializeField]
-        AudioMixerManager audioMixer = default;
+        private AudioMixerManager audioMixer = default;
+
         [SerializeField]
-        GameObject menu = default;
+        private GameObject menu = default;
+
         [SerializeField]
-        GameObject desktop = default;
+        private GameObject desktop = default;
+
         [SerializeField]
         private Slider master = default;
+
         [SerializeField]
         private Slider bg = default;
+
         [SerializeField]
         private Slider fx = default;
+
         [SerializeField]
         private Camera startCamera = default;
 
@@ -29,11 +35,13 @@ namespace BBO.BBO.InterfaceManagement
             bg.value = PlayerPrefs.GetFloat(PlayerPrefsData.BackgroundVolume);
             fx.value = PlayerPrefs.GetFloat(PlayerPrefsData.EffectVolume);
         }
+
         public void ActiveQuitButton()
         {
             menu.SetActive(true);
             desktop.SetActive(true);
         }
+
         public void ResetAudioMixer()
         {
             audioMixer.ResetMixer();
@@ -49,6 +57,7 @@ namespace BBO.BBO.InterfaceManagement
             Camera.main.transform.rotation = startCamera.transform.rotation;
 
         }
+
         public void ToDesktop()
         {
             Application.Quit();

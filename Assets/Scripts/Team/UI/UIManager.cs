@@ -8,6 +8,7 @@ namespace BBO.BBO.InterfaceManagement
         [Header("HP")]
         [SerializeField]
         private Slider teamHpSlider = default;
+
         [SerializeField]
         private Text teamHpText = default;
 
@@ -47,11 +48,14 @@ namespace BBO.BBO.InterfaceManagement
         public void Setting()
         {
             GameObject tmp = Instantiate(setting);
-            SettingManager settingManager = tmp.GetComponent<SettingManager>();
-            settingManager?.ActiveQuitButton();
+
+            if (tmp.GetComponent<SettingManager>() is SettingManager settingManager)
+            {
+                settingManager.ActiveQuitButton();
+            }
         }
 
-        void Update()
+        private void Update()
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
