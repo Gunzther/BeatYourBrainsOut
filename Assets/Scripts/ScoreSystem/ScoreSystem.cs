@@ -6,11 +6,16 @@ using UnityEngine;
 
 public class ScoreSystem : MonoBehaviour
 {
+    private int damageDealScore = default;
+    private int damageReceivedScore = default;
+    private int craftingDoneScore = default;
+    private int jukingDoneScore = default;
+    private int healingDoneScore = default;
     private void GetScore()
     {
         foreach (PlayerCharacter player in TeamManager.Instance.Team.PlayerCharacters)
         {
-            // TODO : Add logic for calculate scores for each players
+           
         }
     }
 }
