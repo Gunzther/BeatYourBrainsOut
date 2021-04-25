@@ -158,6 +158,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45dd2770e1c3736488c368bc7ccfedc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerTransform: {fileID: 6398968537170311853}
   spriteList:
   - {fileID: 2800000, guid: cbcf919b980a3db4e8204b1bbc28cfcf, type: 3}
   - {fileID: 2800000, guid: 11ad26cfa145a4e4181184d500035531, type: 3}

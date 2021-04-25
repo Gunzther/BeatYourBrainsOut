@@ -66,9 +66,10 @@ namespace BBO.BBO.PlayerManagement
             uiManager.SetTeamHpValue(team.CurrentTeamHealth);
         }
 
-        public void OnAttack()
+        public void OnAttack(Vector3 inputDirection)
         {
-            playerAnimatorController.ChangePlayerMainTex(PlayerData.PlayerSprite.RubberBandAttack);
+            playerAnimatorController.UpdatePlayerAttackingMainTex(CurrentPlayerWeapon.CurrentWeaponName);
+            playerAnimatorController.TriggerAttackAnimation(CurrentPlayerWeapon.CurrentWeaponName, inputDirection);
         }
 
         public void OnPick()
@@ -141,24 +142,25 @@ namespace BBO.BBO.PlayerManagement
             {
                 if (other.GetComponent<WeaponBox>() is WeaponBox weaponBox)
                 {
-                    playerAnimatorController.ChangePlayerMainTex(CurrentPlayerWeapon.SetWeapon(weaponBox.WeaponName, weaponBox.WeaponPrototype));
+                    CurrentPlayerWeapon.SetWeapon(weaponBox.WeaponName, weaponBox.WeaponPrototype);
                 }
                 else if (other.GetComponent<Weapon>() is Weapon weapon)
                 {
-                    playerAnimatorController.ChangePlayerMainTex(CurrentPlayerWeapon.SetWeapon(weapon.WeaponName, weapon));
+                    CurrentPlayerWeapon.SetWeapon(weapon.WeaponName, weapon);
                     weapon.OnPicked();
                 }
                 else if (other.GetComponent<CraftSlot>() is CraftSlot slot && slot.CanPick)
                 {
                     (WeaponData.Weapon weaponName, Weapon weapon) pickedWeapon = slot.OnPicked();
-                    playerAnimatorController.ChangePlayerMainTex(CurrentPlayerWeapon.SetWeapon(pickedWeapon.weaponName, pickedWeapon.weapon));
+                    CurrentPlayerWeapon.SetWeapon(pickedWeapon.weaponName, pickedWeapon.weapon);
                 }
                 else if (other.GetComponent<CraftTable>() is CraftTable table && table.CanPick)
                 {
                     (WeaponData.Weapon weaponName, Weapon weapon) pickedWeapon = table.OnPicked();
-                    playerAnimatorController.ChangePlayerMainTex(CurrentPlayerWeapon.SetWeapon(pickedWeapon.weaponName, pickedWeapon.weapon));
+                    CurrentPlayerWeapon.SetWeapon(pickedWeapon.weaponName, pickedWeapon.weapon);
                 }
 
+                playerAnimatorController.UpdatePlayerIdleMainTex(CurrentPlayerWeapon.CurrentWeaponName);
                 isPicking = false;
             }
             if (isPlacing && canPlace)
@@ -166,9 +168,11 @@ namespace BBO.BBO.PlayerManagement
                 if (currentCraftSlot.CanPlace)
                 {
                     currentCraftSlot.OnPlaced(CurrentPlayerWeapon.CurrentWeaponName, CurrentPlayerWeapon.CurrentWeapon);
-                    playerAnimatorController.ChangePlayerMainTex(CurrentPlayerWeapon.SetWeapon(WeaponData.Weapon.NoWeapon, null));
-                    isPlacing = false;
+                    CurrentPlayerWeapon.SetWeapon(WeaponData.Weapon.NoWeapon, null);
                 }
+
+                playerAnimatorController.UpdatePlayerIdleMainTex(CurrentPlayerWeapon.CurrentWeaponName);
+                isPlacing = false;
             }
         }
 
@@ -210,7 +214,8 @@ namespace BBO.BBO.PlayerManagement
                 SetNewWeaponValue(newStupidWeapon);
             }
 
-            playerAnimatorController.ChangePlayerMainTex(CurrentPlayerWeapon.SetWeapon(WeaponData.Weapon.NoWeapon, null));
+            CurrentPlayerWeapon.SetWeapon(WeaponData.Weapon.NoWeapon, null);
+            playerAnimatorController.UpdatePlayerIdleMainTex(CurrentPlayerWeapon.CurrentWeaponName);
             isPlacing = false;
         }
 
@@ -229,7 +234,6 @@ namespace BBO.BBO.PlayerManagement
                 case WeaponData.Type.Protected:
                     newWeapon.SetProtectedWeaponValue(currentWeapon.HP);
                     break;
-
             }
         }
     }
