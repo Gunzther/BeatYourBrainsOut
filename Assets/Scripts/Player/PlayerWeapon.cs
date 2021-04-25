@@ -6,18 +6,15 @@ namespace BBO.BBO.PlayerManagement
     public class PlayerWeapon
     {
         public WeaponData.Weapon CurrentWeaponName => weaponName;
+        public Weapon CurrentWeapon => weapon;
 
         private WeaponData.Weapon weaponName = default;
         private Weapon weapon = default;
 
         public PlayerData.PlayerSprite SetWeapon(WeaponData.Weapon weaponName, Weapon interactWeapon)
         {
-            if (weaponName != WeaponData.Weapon.NoWeapon && interactWeapon == null) //player did not pick weapon that have already been used
-            {
-                // TODO: create new Weapon
-            }
-
             this.weaponName = weaponName;
+            this.weapon = interactWeapon;
             return GetPlayerSprite(weaponName);
         }
 

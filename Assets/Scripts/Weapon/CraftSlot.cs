@@ -15,25 +15,30 @@ namespace BBO.BBO.WeaponManagement
         public bool CanPlace => currentWeaponName == WeaponData.Weapon.NoWeapon;
 
         private WeaponData.Weapon currentWeaponName = default;
+        private Weapon currentWeapon = default;
 
-        public WeaponData.Weapon OnPicked()
+        public (WeaponData.Weapon, Weapon) OnPicked()
         {
             WeaponData.Weapon pickedWeaponName = currentWeaponName;
+            Weapon pickedWeapon = currentWeapon;
+            craftTable.RemoveSlotItems(pickedWeaponName, 1);
             Clear();
 
-            return pickedWeaponName;
+            return (pickedWeaponName, pickedWeapon);
         }
 
-        public void OnPlaced(WeaponData.Weapon weaponName)
+        public void OnPlaced(WeaponData.Weapon weaponName, Weapon weapon)
         {
             currentWeaponName = weaponName;
-            base.ShowWeapon(weaponName, items);
-            craftTable.AddSlotItems(weaponName, 1);
+            currentWeapon = weapon;
+            base.ShowWeapon(currentWeaponName, items);
+            craftTable.AddSlotItems(currentWeaponName, 1);
         }
 
         public void Clear()
         {
             currentWeaponName = default;
+            currentWeapon = default;
             base.HideWeapon(items);
         }
     }

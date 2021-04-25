@@ -34,7 +34,7 @@ namespace BBO.BBO.PlayerManagement
         private bool canPlace => CurrentPlayerWeapon.CurrentWeaponName != WeaponData.Weapon.NoWeapon;
 
         // stupid weapon
-        private Dictionary<WeaponData.Weapon, GameObject> stupidWeaponPrototypes = default;
+        private Dictionary<WeaponData.Weapon, Weapon> stupidWeaponPrototypes = default;
         private GameObject stupidContainer = default;
 
         // crafting
@@ -112,7 +112,7 @@ namespace BBO.BBO.PlayerManagement
         private void Awake()
         {
             CurrentPlayerWeapon = new PlayerWeapon();
-            stupidWeaponPrototypes = new Dictionary<WeaponData.Weapon, GameObject>();
+            stupidWeaponPrototypes = new Dictionary<WeaponData.Weapon, Weapon>();
 
             soundManager = FindObjectOfType<SoundManager>();
         }
@@ -139,10 +139,9 @@ namespace BBO.BBO.PlayerManagement
         {
             if (isPicking && canPick)
             {
-                print(other.name);
                 if (other.GetComponent<WeaponBox>() is WeaponBox weaponBox)
                 {
-                    playerAnimatorController.ChangePlayerMainTex(CurrentPlayerWeapon.SetWeapon(weaponBox.WeaponName, null));
+                    playerAnimatorController.ChangePlayerMainTex(CurrentPlayerWeapon.SetWeapon(weaponBox.WeaponName, weaponBox.WeaponPrototype));
                 }
                 else if (other.GetComponent<Weapon>() is Weapon weapon)
                 {
@@ -151,11 +150,13 @@ namespace BBO.BBO.PlayerManagement
                 }
                 else if (other.GetComponent<CraftSlot>() is CraftSlot slot && slot.CanPick)
                 {
-                    playerAnimatorController.ChangePlayerMainTex(CurrentPlayerWeapon.SetWeapon(slot.OnPicked(), null));
+                    (WeaponData.Weapon weaponName, Weapon weapon) pickedWeapon = slot.OnPicked();
+                    playerAnimatorController.ChangePlayerMainTex(CurrentPlayerWeapon.SetWeapon(pickedWeapon.weaponName, pickedWeapon.weapon));
                 }
                 else if (other.GetComponent<CraftTable>() is CraftTable table && table.CanPick)
                 {
-                    playerAnimatorController.ChangePlayerMainTex(CurrentPlayerWeapon.SetWeapon(table.OnPicked(), null));
+                    (WeaponData.Weapon weaponName, Weapon weapon) pickedWeapon = table.OnPicked();
+                    playerAnimatorController.ChangePlayerMainTex(CurrentPlayerWeapon.SetWeapon(pickedWeapon.weaponName, pickedWeapon.weapon));
                 }
 
                 isPicking = false;
@@ -164,7 +165,7 @@ namespace BBO.BBO.PlayerManagement
             {
                 if (currentCraftSlot.CanPlace)
                 {
-                    currentCraftSlot.OnPlaced(CurrentPlayerWeapon.CurrentWeaponName);
+                    currentCraftSlot.OnPlaced(CurrentPlayerWeapon.CurrentWeaponName, CurrentPlayerWeapon.CurrentWeapon);
                     playerAnimatorController.ChangePlayerMainTex(CurrentPlayerWeapon.SetWeapon(WeaponData.Weapon.NoWeapon, null));
                     isPlacing = false;
                 }
@@ -202,14 +203,34 @@ namespace BBO.BBO.PlayerManagement
                 stupidContainer = new GameObject("StupidContainer");
             }
 
-            if (stupidWeaponPrototypes.TryGetValue(CurrentPlayerWeapon.CurrentWeaponName, out GameObject weaponPrototype))
+            if (stupidWeaponPrototypes.TryGetValue(CurrentPlayerWeapon.CurrentWeaponName, out Weapon weaponPrototype))
             {
-                var newStupidWeapon = Instantiate(weaponPrototype, stupidContainer.transform);
+                Weapon newStupidWeapon = Instantiate(weaponPrototype, stupidContainer.transform);
                 newStupidWeapon.transform.position = transform.position;
+                SetNewWeaponValue(newStupidWeapon);
             }
 
             playerAnimatorController.ChangePlayerMainTex(CurrentPlayerWeapon.SetWeapon(WeaponData.Weapon.NoWeapon, null));
             isPlacing = false;
+        }
+
+        private void SetNewWeaponValue(Weapon newWeapon)
+        {
+            Weapon currentWeapon = CurrentPlayerWeapon.CurrentWeapon;
+
+            switch (newWeapon.Type)
+            {
+                case WeaponData.Type.IntervalDamage:
+                    newWeapon.SetIntervalDamageWeaponValue(currentWeapon.DamageValue, currentWeapon.IntervalSeconds);
+                    break;
+                case WeaponData.Type.LimitAttacksNumber:
+                    newWeapon.SetLimitAttacksWeaponValue(currentWeapon.DamageValue, currentWeapon.AttacksNumber);
+                    break;
+                case WeaponData.Type.Protected:
+                    newWeapon.SetProtectedWeaponValue(currentWeapon.HP);
+                    break;
+
+            }
         }
     }
 
@@ -218,6 +239,6 @@ namespace BBO.BBO.PlayerManagement
     public class StupidWeapon
     {
         public WeaponData.Weapon Weapon = default;
-        public GameObject StupidPrefab = default;
+        public Weapon StupidPrefab = default;
     }
 }

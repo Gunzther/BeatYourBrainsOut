@@ -7,6 +7,7 @@ namespace BBO.BBO.WeaponManagement
 {
     public class Weapon : MonoBehaviour
     {
+        public bool IsStupid = default; // just stupid thing on the floor
         public WeaponData.Weapon WeaponName = default;
         public WeaponData.Type Type = default;
         public int DamageValue = default;
@@ -22,12 +23,21 @@ namespace BBO.BBO.WeaponManagement
         private bool isLimitAttacksNumber = false;
         private int attacksCount = default;
 
-        // Stupid
-        private bool stupid = false;
-
-        public void SetDamageValue(int value)
+        public void SetLimitAttacksWeaponValue(int damageValue, int attacksNumber)
         {
-            DamageValue = value;
+            DamageValue = damageValue;
+            AttacksNumber = attacksNumber;
+        }
+
+        public void SetIntervalDamageWeaponValue(int damageValue, float intervalSeconds)
+        {
+            DamageValue = damageValue;
+            IntervalSeconds = intervalSeconds;
+        }
+
+        public void SetProtectedWeaponValue(int hp)
+        {
+            HP = hp;
         }
 
         public void OnPicked()
@@ -38,29 +48,35 @@ namespace BBO.BBO.WeaponManagement
 
         private void OnTriggerEnter(Collider other)
         {
-            if (!stupid && !isIntervalDamage && other.gameObject.GetComponent<MonsterCharacter>() is MonsterCharacter monster)
+            if (!IsStupid)
             {
-                monster.DecreaseMonsterHp(DamageValue);
-                monster.OnAttacked();
-            }
-            if (isLimitAttacksNumber && other.gameObject.GetComponent<MonsterCharacter>() is MonsterCharacter)
-            {
-                attacksCount++;
-
-                if (attacksCount == AttacksNumber)
+                if (!isIntervalDamage && other.gameObject.GetComponent<MonsterCharacter>() is MonsterCharacter monster)
                 {
-                    // TODO: change to pooling objects
-                    Destroy(gameObject);
+                    monster.DecreaseMonsterHp(DamageValue);
+                    monster.OnAttacked();
+                }
+                if (isLimitAttacksNumber && other.gameObject.GetComponent<MonsterCharacter>() is MonsterCharacter)
+                {
+                    attacksCount++;
+
+                    if (attacksCount == AttacksNumber)
+                    {
+                        // TODO: change to pooling objects
+                        Destroy(gameObject);
+                    }
                 }
             }
         }
 
         private void OnTriggerStay(Collider other)
         {
-            if (isIntervalDamage && other.gameObject.GetComponent<MonsterCharacter>() is MonsterCharacter monster)
+            if (!IsStupid)
             {
-                monster.DecreaseMonsterHp(DamageValue);
-                monster.OnAttacked();
+                if (isIntervalDamage && other.gameObject.GetComponent<MonsterCharacter>() is MonsterCharacter monster)
+                {
+                    monster.DecreaseMonsterHp(DamageValue);
+                    monster.OnAttacked();
+                }
             }
         }
 
@@ -68,19 +84,21 @@ namespace BBO.BBO.WeaponManagement
         {
             isIntervalDamage = Type == WeaponData.Type.IntervalDamage;
             isLimitAttacksNumber = Type == WeaponData.Type.LimitAttacksNumber;
-            stupid = Type == WeaponData.Type.Stupid;
         }
 
         private void Update()
         {
-            if (isIntervalDamage)
+            if (!IsStupid)
             {
-                timer += Time.deltaTime;
-
-                if (timer > IntervalSeconds)
+                if (isIntervalDamage)
                 {
-                    // TODO: change to pooling objects
-                    Destroy(gameObject);
+                    timer += Time.deltaTime;
+
+                    if (timer > IntervalSeconds)
+                    {
+                        // TODO: change to pooling objects
+                        Destroy(gameObject);
+                    }
                 }
             }
         }
@@ -95,6 +113,7 @@ namespace BBO.BBO.WeaponManagement
         public override void OnInspectorGUI()
         {
             weaponScript = target as Weapon;
+            weaponScript.IsStupid = EditorGUILayout.Toggle("Is stupid weapon", weaponScript.IsStupid);
             weaponScript.WeaponName = (WeaponData.Weapon)EditorGUILayout.EnumPopup("Weapon", weaponScript.WeaponName);
             weaponScript.Type = (WeaponData.Type)EditorGUILayout.EnumPopup("Type", weaponScript.Type);
 
@@ -110,8 +129,6 @@ namespace BBO.BBO.WeaponManagement
                     break;
                 case WeaponData.Type.Protected:
                     ShowHP();
-                    break;
-                case WeaponData.Type.Stupid:
                     break;
                 default:
                     ShowDamageValue();

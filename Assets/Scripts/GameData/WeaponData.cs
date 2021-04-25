@@ -10,7 +10,6 @@ namespace BBO.BBO.GameData
             IntervalDamage, // weapon that attack for a certain time, then disappear
             LimitAttacksNumber, // weapon that has limit number of attacks
             Protected, // weapon for protection
-            Stupid // just stupid thing on the floor
         }
 
         public enum Weapon
