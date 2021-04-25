@@ -27,7 +27,7 @@ namespace BBO.BBO.PlayerManagement
                 case WeaponData.Weapon.Nail:
                     return PlayerData.PlayerSprite.Nail;
                 case WeaponData.Weapon.RubberBand:
-                    return PlayerData.PlayerSprite.RubberBandDefault;
+                    return PlayerData.PlayerSprite.RubberBand;
                 case WeaponData.Weapon.BaseballbatWithNails:
                     return PlayerData.PlayerSprite.MorningStar;
                 case WeaponData.Weapon.Shield:
