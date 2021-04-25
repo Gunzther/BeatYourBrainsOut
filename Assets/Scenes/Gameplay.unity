@@ -316,6 +316,7 @@ MonoBehaviour:
   teamHpSlider: {fileID: 1188512576}
   teamHpText: {fileID: 804202418}
   resultCanvas: {fileID: 823904373}
+  setting: {fileID: 3422437042971057407, guid: be880ec55dfc30b4cb89f846761bde82, type: 3}
 --- !u!1 &188402244
 GameObject:
   m_ObjectHideFlags: 0
@@ -2092,7 +2093,8 @@ AudioSource:
   m_GameObject: {fileID: 1383079585}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 536341165623848521, guid: 7ff815babb91448408e4f2c9c12f4fac,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: 9efbe05c258350143a660b2086f84901, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.5

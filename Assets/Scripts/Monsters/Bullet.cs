@@ -6,7 +6,7 @@ namespace BBO.BBO.BulletManagement
         [SerializeField]
         protected float moveSpeed = default;
         [SerializeField]
-        private GameObject hitPrefab;
+        private GameObject hitPrefab = default;
 
         protected Vector3 target = default;
         private Quaternion rot;

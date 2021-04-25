@@ -9,7 +9,7 @@ namespace BBO.BBO.BulletManagement
         [SerializeField]
         private LineRenderer lineRenderer = default;
         [SerializeField]
-        private GameObject collider = default;
+        private GameObject colliderObj = default;
         [SerializeField]
         private TrailRenderer laserTrace = default;
 
@@ -37,7 +37,7 @@ namespace BBO.BBO.BulletManagement
             lineRenderer.SetPosition(0, new Vector3(s.x, s.y, s.z));
             lineRenderer.SetPosition(1, endLine);
             playerOldPos = endLine;
-            collider.transform.position = endLine;
+            colliderObj.transform.position = endLine;
         }
 
         private void FixedUpdate()
