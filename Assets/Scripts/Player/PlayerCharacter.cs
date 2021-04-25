@@ -1,7 +1,7 @@
 ﻿using BBO.BBO.GameData;
 using BBO.BBO.GameManagement;
+using BBO.BBO.InterfaceManagement;
 using BBO.BBO.TeamManagement;
-using BBO.BBO.TeamManagement.UI;
 using BBO.BBO.WeaponManagement;
 using System;
 using System.Collections.Generic;

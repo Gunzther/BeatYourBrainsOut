@@ -2,7 +2,7 @@
 {
     Properties
     {
-        _MainTex ("Texture", 2D) = "white" {}
+        [PerRendererData] _MainTex ("Sprite Texture", 2D) = "white" {}
         _SpriteColor("Sprite color", Color) = (0, 0, 0, 1)
         _OutlineColor("Outline color", Color) = (0, 0, 0, 1)
         _OutlineWidth("Outline width", Range(1.0, 10.0)) = 1
