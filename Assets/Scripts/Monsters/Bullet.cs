@@ -5,11 +5,12 @@ namespace BBO.BBO.BulletManagement
     {
         [SerializeField]
         protected float moveSpeed = default;
+
         [SerializeField]
         private GameObject hitPrefab = default;
 
         protected Vector3 target = default;
-        private Quaternion rot;
+        private Quaternion rot = default;
 
         public Vector3 Target
         {
@@ -30,8 +31,9 @@ namespace BBO.BBO.BulletManagement
             {
                 if (hitPrefab != null)
                 {
-                    var hitVFX = Instantiate(hitPrefab, target, rot);
+                    Instantiate(hitPrefab, target, rot);
                 }
+
                 Destroy(gameObject);
             }
 
