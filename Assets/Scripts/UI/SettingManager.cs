@@ -21,6 +21,10 @@ namespace BBO.BBO.InterfaceManagement
         [SerializeField]
         private Camera startCamera = default;
 
+        private void Awake()
+        {
+            Pause();
+        }
         public void ActiveQuitButton()
         {
             menu.SetActive(true);
@@ -48,6 +52,7 @@ namespace BBO.BBO.InterfaceManagement
 
         public void Back()
         {
+            Resume();
             Destroy(gameObject);
         }
 
@@ -57,6 +62,16 @@ namespace BBO.BBO.InterfaceManagement
             {
                 Back();
             }
+        }
+
+        private void Pause()
+        {
+            Time.timeScale = 0f;
+        }
+
+        private void Resume()
+        {
+            Time.timeScale = 1f;
         }
     }
 }
