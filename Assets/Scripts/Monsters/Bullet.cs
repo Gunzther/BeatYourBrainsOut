@@ -1,16 +1,16 @@
-using System;
 using UnityEngine;
-
 namespace BBO.BBO.BulletManagement
 {
     public class Bullet : MonoBehaviour
     {
         [SerializeField]
-        private float moveSpeed = default;
+        protected float moveSpeed = default;
         [SerializeField]
-        private GameObject hitPrefab;
-        private Vector3 target = default;
+        private GameObject hitPrefab = default;
+
+        protected Vector3 target = default;
         private Quaternion rot;
+
         public Vector3 Target
         {
             get => target;
@@ -22,7 +22,7 @@ namespace BBO.BBO.BulletManagement
             MoveToTarget();
         }
 
-        private void MoveToTarget()
+        protected virtual void MoveToTarget()
         {
             Vector3 currentPos = transform.position;
 
@@ -30,7 +30,7 @@ namespace BBO.BBO.BulletManagement
             {
                 if (hitPrefab != null)
                 {
-                    var hitVFX = Instantiate(hitPrefab,target, rot);
+                    var hitVFX = Instantiate(hitPrefab, target, rot);
                 }
                 Destroy(gameObject);
             }

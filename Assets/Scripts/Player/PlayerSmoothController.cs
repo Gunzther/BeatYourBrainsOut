@@ -1,6 +1,7 @@
 ﻿using BBO.BBO.GameData;
 using BBO.BBO.GameManagement;
 using BBO.BBO.PlayerInputSystem;
+using BBO.BBO.TeamManagement;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -11,7 +12,6 @@ namespace BBO.BBO.PlayerManagement
     {
         //Player ID
         private int playerID = default;
-
         private int deviceID = default;
         public int DeviceId => deviceID;
 
@@ -53,13 +53,9 @@ namespace BBO.BBO.PlayerManagement
         //Current Control Scheme
         private string currentControlScheme = default;
 
-        //sound
-        SoundManager soundManager = default;
-
         private void Start()
         {
             mainCamera = Camera.main;
-            soundManager = FindObjectOfType<SoundManager>();
         }
 
         private void Update()
@@ -75,12 +71,13 @@ namespace BBO.BBO.PlayerManagement
             AnimatePlayerMovement();
         }
 
-        public void SetupPlayer(int newPlayerID, int newDeviceID)
+        public void SetupPlayer(int newDeviceID)
         {
-            playerID = newPlayerID;
+            playerID = newDeviceID;
             deviceID = newDeviceID;
             currentControlScheme = playerInput.currentControlScheme;
             playerVisualsBehaviour.SetupBehaviour(playerID, playerInput);
+            playerCharacter.SetPlayerId(newDeviceID);
         }
 
         public void OnAttack(InputAction.CallbackContext value)
@@ -91,6 +88,7 @@ namespace BBO.BBO.PlayerManagement
                 // TODO: add attacking function
                 playerCharacter.CurrentPlayerStats.IncreaseDamageDealScore(1);
                 // TODO: add increase damage deal score value related to the method that the player use to attack
+                playerCharacter.OnAttack();
             }
         }
 
@@ -234,12 +232,13 @@ namespace BBO.BBO.PlayerManagement
 
         public void OnDeviceLost()
         {
-            playerVisualsBehaviour.SetDisconnectedDeviceVisuals();
+            TeamManager.Instance.RemovePlayer(this);
+            //playerVisualsBehaviour.SetDisconnectedDeviceVisuals();
         }
 
         public void OnDeviceRegained()
         {
-            StartCoroutine(WaitForDeviceToBeRegained());
+            //StartCoroutine(WaitForDeviceToBeRegained());
         }
 
         private IEnumerator WaitForDeviceToBeRegained()

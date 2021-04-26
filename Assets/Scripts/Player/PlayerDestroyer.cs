@@ -6,7 +6,7 @@ namespace BBO.BBO.PlayerManagement
     public class PlayerDestroyer : MonoBehaviour
     {
         [SerializeField]
-        private int damageValue = default;
+        protected int damageValue = default;
 
         private void OnTriggerEnter(Collider other)
         {
