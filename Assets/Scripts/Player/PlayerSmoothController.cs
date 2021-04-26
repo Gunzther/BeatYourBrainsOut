@@ -89,7 +89,7 @@ namespace BBO.BBO.PlayerManagement
             {
                 Debug.Log($"[{nameof(PlayerSmoothController)}] attack!");
                 // TODO: add attacking function
-                playerCharacter.CurrentPlayerStats.IncreaseDamageDealScore(10);
+                playerCharacter.CurrentPlayerStats.IncreaseDamageDealScore(1);
                 // TODO: add increase damage deal score value related to the method that the player use to attack
             }
         }
@@ -169,7 +169,11 @@ namespace BBO.BBO.PlayerManagement
             if (hasCurrentInput)
             {
                 soundManager.PlayPlayerWalking();
-                playerCharacter.CurrentPlayerStats.IncreaseJukingDoneScore(1);
+                if (playerCharacter.GetIsHurt())
+                {
+                    playerCharacter.CurrentPlayerStats.IncreaseJukingDoneScore(1);
+                    playerCharacter.SetIsHurt(false);
+                }
                 movement.Set(smoothDirection.x, 0f, smoothDirection.z);
                 movement = movement.normalized * movementSpeed * Time.deltaTime;
                 playerRigidbody.MovePosition(transform.position + movement);

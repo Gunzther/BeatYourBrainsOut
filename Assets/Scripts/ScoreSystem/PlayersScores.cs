@@ -12,21 +12,13 @@ public class PlayersScores : MonoBehaviour
     private UI_StatsRadarChart uiStatsRadarChart;
 
     public event EventHandler OnScoresChanged;
-    
-    private int amountDamageDealScore;
-    private int amountDamageReceivedScore;
-    private int amountCraftingDoneScore;
-    private int amountJuckingDonScore;
-    private int amountHealingDoneScore;
+
+    private float allPlayersSummaryScore;
     private PlayerStats playerStats;
 
     private void Start()
     {
-        amountDamageDealScore = 0;
-        amountDamageReceivedScore = 0;
-        amountCraftingDoneScore = 0;
-        amountJuckingDonScore = 0;
-        amountHealingDoneScore = 0;
+        allPlayersSummaryScore = 0;
     }
 
     private void Update()
@@ -37,11 +29,7 @@ public class PlayersScores : MonoBehaviour
     {
         foreach (PlayerCharacter player in TeamManager.Instance.Team.PlayerCharacters)
         {
-            amountDamageDealScore += player.CurrentPlayerStats.DamageDealScore;
-            amountDamageReceivedScore += player.CurrentPlayerStats.DamageReceivedScore;
-            amountCraftingDoneScore += player.CurrentPlayerStats.CraftingDoneScore;
-            amountJuckingDonScore += player.CurrentPlayerStats.JukingDoneScore;
-            amountHealingDoneScore += player.CurrentPlayerStats.HealingDoneScore;
+            allPlayersSummaryScore += player.CurrentPlayerStats.GetSummaryScore();
         }
     }
     private float CalculateAverage(float value)

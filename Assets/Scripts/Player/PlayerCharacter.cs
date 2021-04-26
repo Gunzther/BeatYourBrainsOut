@@ -32,6 +32,8 @@ namespace BBO.BBO.PlayerManagement
         private CraftSlot currentCraftSlot = default;
         private bool canPick => CurrentPlayerWeapon.CurrentWeapon == WeaponData.Weapon.NoWeapon;
         private bool canPlace => CurrentPlayerWeapon.CurrentWeapon != WeaponData.Weapon.NoWeapon;
+        
+        private bool isHurt = false;
 
         // stupid weapon
         private Dictionary<WeaponData.Weapon, GameObject> stupidWeaponPrototypes = default;
@@ -96,6 +98,16 @@ namespace BBO.BBO.PlayerManagement
         public void PlayHurtSound()
         {
             soundManager.PlayPlayerHurt();
+        }
+
+        public void SetIsHurt(bool value)
+        {
+            this.isHurt = value;
+        }
+
+        public bool GetIsHurt()
+        {
+            return isHurt;
         }
 
         private void Awake()

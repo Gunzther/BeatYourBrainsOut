@@ -13,10 +13,11 @@ namespace BBO.BBO.PlayerManagement
             if (other.gameObject.GetComponent<PlayerCharacter>() is PlayerCharacter player)
             {
                 player.CurrentPlayerStats.DecreasePlayerHealth(damageValue);
-                player.CurrentPlayerStats.IncreaseDamageReceivedScore(damageValue);
+                player.CurrentPlayerStats.IncreaseDamageReceivedScore(1);
                 player.UpdateHpUI();
                 player.TriggerHurtAnimation();
                 player.PlayHurtSound();
+                player.SetIsHurt(true);
             }
         }
 

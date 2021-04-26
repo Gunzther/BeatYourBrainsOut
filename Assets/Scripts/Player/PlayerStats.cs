@@ -19,7 +19,7 @@ namespace BBO.BBO.PlayerManagement
         private int craftingDoneScore = default;
         private int jukingDoneScore = default;
         private int healingDoneScore = default;
-        private int sumsummaryScore = default;
+        private int summaryScore = default;
 
         public PlayerStats(int playerID)
         {
@@ -72,9 +72,12 @@ namespace BBO.BBO.PlayerManagement
             healingDoneScore += value;
         }
 
-        public void GetSummaryScore()
+        public float GetSummaryScore()
         {
-            sumsummaryScore
+            // TODO : put some weighting for each score before return
+            summaryScore = damageDealScore + damageReceivedScore + craftingDoneScore + jukingDoneScore +
+                           healingDoneScore;
+            return summaryScore;
         }
     }
 }
