@@ -29,7 +29,7 @@ namespace BBO.BBO.MonsterMovement
         private GameObject bulletSpawnPoint = default;
 
         private const float bounceForce = 2f;
-        private const float bounceAttackedForce = 1.5f;
+        private const float bounceAttackedForce = 2.5f;
         private const float targetOffset = 0.05f;
 
         private IEnumerable<PlayerCharacter> players = default;
