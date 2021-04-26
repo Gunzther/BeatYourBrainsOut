@@ -31,5 +31,13 @@ namespace BBO.BBO.GameData
             Sling,
             SlingActive
         }
+
+        public enum PlayerColor
+        {
+            White,
+            Red,
+            Blue,
+            Yellow
+        }
     }
 }
