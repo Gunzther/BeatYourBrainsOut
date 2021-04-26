@@ -52,6 +52,7 @@ namespace BBO.BBO.InterfaceManagement
 
         public void ToMenu()
         {
+            Resume();
             GameManager.Instance.LoadSceneCoroutine("StartGame", null);
             Camera.main.transform.position = startCamera.transform.position;
             Camera.main.transform.rotation = startCamera.transform.rotation;

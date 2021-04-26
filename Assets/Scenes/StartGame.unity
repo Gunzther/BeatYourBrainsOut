@@ -860,6 +860,26 @@ MonoBehaviour:
   previousCanvas: {fileID: 899309902}
   previousCamera: {fileID: 2007047451}
   nextCamera: {fileID: 560629726}
+  mapSprite: {fileID: 1982201209}
+  mapName: {fileID: 178903301}
+  allMapSprite:
+  - {fileID: 21300000, guid: 7250eeda849ab724490145457451c531, type: 3}
+  - {fileID: 21300000, guid: 66625ddfab4637b4983c81533c947b23, type: 3}
+  - {fileID: 21300000, guid: 1b4486fbb86e84142a8d81af0b13d71f, type: 3}
+  - {fileID: 21300000, guid: 0ba08e3a122737d40a2209e77acba832, type: 3}
+  - {fileID: 21300000, guid: 0741a64f4e0755a499ce977850e8ff54, type: 3}
+  allMapName:
+  - Little house 1-1
+  - Little house 1-2
+  - warehouse 2-1
+  - warehouse 2-2
+  - The last house 3
+  sceneName:
+  - Gameplay
+  - Gameplay1-1
+  - Gameplay
+  - 
+  - 
 --- !u!1 &253111527
 GameObject:
   m_ObjectHideFlags: 0
@@ -1503,7 +1523,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 509001342}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 202332763}
+        m_MethodName: NextPage
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &509001342
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5586,7 +5617,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2067138043}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 202332763}
+        m_MethodName: PreviousPage
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2067138043
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7119,17 +7161,17 @@ PrefabInstance:
     - target: {fileID: 7781378595788568527, guid: 6501dfacd42f4c04e9e67ccd02411302,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.5
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 7781378595788568527, guid: 6501dfacd42f4c04e9e67ccd02411302,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -4
+      value: -3.65
       objectReference: {fileID: 0}
     - target: {fileID: 7781378595788568527, guid: 6501dfacd42f4c04e9e67ccd02411302,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.38268343
+      value: 0.42261827
       objectReference: {fileID: 0}
     - target: {fileID: 7781378595788568527, guid: 6501dfacd42f4c04e9e67ccd02411302,
         type: 3}
@@ -7144,7 +7186,7 @@ PrefabInstance:
     - target: {fileID: 7781378595788568527, guid: 6501dfacd42f4c04e9e67ccd02411302,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.92387956
+      value: 0.9063079
       objectReference: {fileID: 0}
     - target: {fileID: 7781378595788568527, guid: 6501dfacd42f4c04e9e67ccd02411302,
         type: 3}
@@ -7154,7 +7196,7 @@ PrefabInstance:
     - target: {fileID: 7781378595788568527, guid: 6501dfacd42f4c04e9e67ccd02411302,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 45
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 7781378595788568527, guid: 6501dfacd42f4c04e9e67ccd02411302,
         type: 3}
