@@ -1,6 +1,6 @@
-﻿using UnityEngine;
+﻿using BBO.BBO.GameManagement;
+using UnityEngine;
 using UnityEngine.UI;
-
 namespace BBO.BBO.InterfaceManagement
 {
     public class UIManager : InterfaceManager
@@ -33,7 +33,7 @@ namespace BBO.BBO.InterfaceManagement
             if (value < 0)
             {
                 value = 0;
-                SetActiveCanvas(resultCanvas, currentCanvas);
+                GameManager.Instance.LoadSceneCoroutine("Result", null);
             }
 
             teamHpSlider.value = value;
