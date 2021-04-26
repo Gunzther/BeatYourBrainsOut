@@ -1,5 +1,6 @@
 ﻿using BBO.BBO.GameData;
 using BBO.BBO.MonsterManagement;
+using System;
 using UnityEditor;
 using UnityEngine;
 
@@ -7,7 +8,7 @@ namespace BBO.BBO.WeaponManagement
 {
     public class Weapon : MonoBehaviour
     {
-        public bool IsStupid = default; // just stupid thing on the floor
+        public bool IsStupid = false; // just stupid thing on the floor
         public WeaponData.Weapon WeaponName = default;
         public WeaponData.Type Type = default;
         public int DamageValue = default;
@@ -15,35 +16,57 @@ namespace BBO.BBO.WeaponManagement
         public int AttacksNumber = default;
         public int HP = default;
 
+        public Action OnSetPlayerMainTexToDefault = default;
+
         // IntervalDamage
         private bool isIntervalDamage = false;
         private float timer = default;
 
         // LimitAttacksNumber
         private bool isLimitAttacksNumber = false;
-        private int attacksCount = default;
 
-        public void SetLimitAttacksWeaponValue(int damageValue, int attacksNumber)
+        public void CopyWeaponValue(Weapon weapon)
         {
-            DamageValue = damageValue;
-            AttacksNumber = attacksNumber;
-        }
+            if (weapon != null)
+            {
+                IsStupid = weapon.IsStupid;
+                WeaponName = weapon.WeaponName;
+                Type = weapon.Type;
+                DamageValue = weapon.DamageValue;
+                IntervalSeconds = weapon.IntervalSeconds;
+                AttacksNumber = weapon.AttacksNumber;
+                HP = weapon.HP;
 
-        public void SetIntervalDamageWeaponValue(int damageValue, float intervalSeconds)
-        {
-            DamageValue = damageValue;
-            IntervalSeconds = intervalSeconds;
-        }
-
-        public void SetProtectedWeaponValue(int hp)
-        {
-            HP = hp;
+                ReloadValue();
+            }
+            else
+            {
+                ResetWeaponValue();
+            }
         }
 
         public void OnPicked()
         {
             // TODO: change to pooling object
-            Destroy(gameObject);
+            DestroyWeapon();
+        }
+
+        public void SetIsStupidValue(bool isStupid)
+        {
+            IsStupid = isStupid;
+        }
+
+        public void ResetWeaponValue()
+        {
+            IsStupid = false;
+            WeaponName = default;
+            Type = default;
+            DamageValue = default;
+            IntervalSeconds = default;
+            AttacksNumber = default;
+            HP = default;
+
+            ReloadValue();
         }
 
         private void OnTriggerEnter(Collider other)
@@ -57,12 +80,11 @@ namespace BBO.BBO.WeaponManagement
                 }
                 if (isLimitAttacksNumber && other.gameObject.GetComponent<MonsterCharacter>() is MonsterCharacter)
                 {
-                    attacksCount++;
+                    AttacksNumber--;
 
-                    if (attacksCount == AttacksNumber)
+                    if (AttacksNumber == 0)
                     {
-                        // TODO: change to pooling objects
-                        Destroy(gameObject);
+                        DestroyWeapon();
                     }
                 }
             }
@@ -82,8 +104,7 @@ namespace BBO.BBO.WeaponManagement
 
         private void Start()
         {
-            isIntervalDamage = Type == WeaponData.Type.IntervalDamage;
-            isLimitAttacksNumber = Type == WeaponData.Type.LimitAttacksNumber;
+            ReloadValue();
         }
 
         private void Update()
@@ -100,6 +121,25 @@ namespace BBO.BBO.WeaponManagement
                         Destroy(gameObject);
                     }
                 }
+            }
+        }
+
+        private void ReloadValue()
+        {
+            isIntervalDamage = Type == WeaponData.Type.IntervalDamage;
+            isLimitAttacksNumber = Type == WeaponData.Type.LimitAttacksNumber;
+        }
+
+        private void DestroyWeapon()
+        {
+            if (WeaponData.IsCloseRangeWeapon(WeaponName))
+            {
+                ResetWeaponValue();
+                OnSetPlayerMainTexToDefault?.Invoke();
+            }
+            else
+            {
+                Destroy(gameObject);
             }
         }
     }

@@ -30,6 +30,13 @@ namespace BBO.BBO.GameData
                    weaponName == Weapon.Sling;
         }
 
+        public static bool IsCastAttackWeapon(Weapon weaponName)
+        {
+            return weaponName == Weapon.Baseballbat ||
+                   weaponName == Weapon.BaseballbatWithNails ||
+                   weaponName == Weapon.Nail;
+        }
+
         public static bool IsCloseRangeWeapon(Weapon weaponName)
         {
             return weaponName == Weapon.Baseballbat ||

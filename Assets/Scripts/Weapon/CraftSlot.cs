@@ -9,36 +9,38 @@ namespace BBO.BBO.WeaponManagement
         private CraftTable craftTable = default;
 
         [SerializeField]
+        private Weapon currentWeapon = default;
+
+        [SerializeField]
+        private Weapon pickedWeapon = default;
+
+        [SerializeField]
         private SlotItem[] items = default;
 
         public bool CanPick => currentWeaponName != WeaponData.Weapon.NoWeapon;
         public bool CanPlace => currentWeaponName == WeaponData.Weapon.NoWeapon;
 
-        private WeaponData.Weapon currentWeaponName = default;
-        private Weapon currentWeapon = default;
+        private WeaponData.Weapon currentWeaponName => currentWeapon.WeaponName;
 
-        public (WeaponData.Weapon, Weapon) OnPicked()
+        public Weapon OnPicked()
         {
-            WeaponData.Weapon pickedWeaponName = currentWeaponName;
-            Weapon pickedWeapon = currentWeapon;
-            craftTable.RemoveSlotItems(pickedWeaponName, 1);
+            craftTable.RemoveSlotItems(pickedWeapon.WeaponName, 1);
             Clear();
 
-            return (pickedWeaponName, pickedWeapon);
+            return pickedWeapon;
         }
 
-        public void OnPlaced(WeaponData.Weapon weaponName, Weapon weapon)
+        public void OnPlaced(Weapon weapon)
         {
-            currentWeaponName = weaponName;
-            currentWeapon = weapon;
+            currentWeapon.CopyWeaponValue(weapon);
+            pickedWeapon.CopyWeaponValue(weapon);
             base.ShowWeapon(currentWeaponName, items);
             craftTable.AddSlotItems(currentWeaponName, 1);
         }
 
         public void Clear()
         {
-            currentWeaponName = default;
-            currentWeapon = default;
+            currentWeapon.ResetWeaponValue();
             base.HideWeapon(items);
         }
     }

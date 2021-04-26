@@ -1,21 +1,32 @@
 ﻿using BBO.BBO.GameData;
 using BBO.BBO.WeaponManagement;
+using UnityEngine;
 
 namespace BBO.BBO.PlayerManagement
 {
-    public class PlayerWeapon
+    public class PlayerWeapon : MonoBehaviour
     {
-        public WeaponData.Weapon CurrentWeaponName => weaponName;
-        public Weapon CurrentWeapon => weapon;
-
-        private WeaponData.Weapon weaponName = default;
+        [SerializeField]
         private Weapon weapon = default;
 
-        public PlayerData.PlayerSprite SetWeapon(WeaponData.Weapon weaponName, Weapon interactWeapon)
+        public WeaponData.Weapon CurrentWeaponName => weapon.WeaponName;
+        public Weapon CurrentWeapon => weapon;
+
+        public PlayerData.PlayerSprite SetWeapon(Weapon interactWeapon)
         {
-            this.weaponName = weaponName;
-            this.weapon = interactWeapon;
-            return GetPlayerSprite(weaponName);
+            if (interactWeapon == null)
+            {
+                weapon.ResetWeaponValue();
+            }
+            else
+            {
+                weapon.CopyWeaponValue(interactWeapon);
+                print(weapon.WeaponName);
+            }
+
+            print(CurrentWeaponName);
+
+            return GetPlayerSprite(CurrentWeaponName);
         }
 
         private PlayerData.PlayerSprite GetPlayerSprite(WeaponData.Weapon weaponName)

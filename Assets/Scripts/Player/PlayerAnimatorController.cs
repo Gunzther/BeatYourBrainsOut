@@ -19,7 +19,7 @@ namespace BBO.BBO.PlayerManagement
         private Animator playerAnimator = default;
 
         [SerializeField]
-        private Weapon weaponCollider = default;
+        private Weapon weapon = default;
 
         private Renderer spriteRenderer = default;
         private WeaponData.Weapon currentWeaponName = default;
@@ -45,16 +45,18 @@ namespace BBO.BBO.PlayerManagement
 
         public void BeginAttackAction()
         {
+            weapon.SetIsStupidValue(false);
+
             if (WeaponData.IsCloseRangeWeapon(currentWeaponName))
             {
-                weaponCollider.gameObject.SetActive(true);
+                weapon.gameObject.SetActive(true);
             }
         }
 
         public void EndAttackAction()
         {
-            print("end");
-            weaponCollider.gameObject.SetActive(false);
+            weapon.SetIsStupidValue(true);
+            weapon.gameObject.SetActive(false);
             UpdatePlayerIdleMainTex(currentWeaponName);
         }
 
@@ -110,7 +112,7 @@ namespace BBO.BBO.PlayerManagement
                         break;
                 }
             }
-            else
+            else if (WeaponData.IsCastAttackWeapon(weaponName))
             {
                 triggerHash = PlayerData.CastAttackTriggerHash;
             }

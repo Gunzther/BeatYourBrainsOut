@@ -85,13 +85,12 @@ namespace BBO.BBO.WeaponManagement
             return false;
         }
 
-        public (WeaponData.Weapon, Weapon) OnPicked()
+        public Weapon OnPicked()
         {
-            WeaponData.Weapon pickedWeaponName = currentWeaponName;
-            Weapon pickedWeapon = GetWeapon(pickedWeaponName, items);
+            Weapon pickedWeapon = GetWeapon(currentWeaponName, items);
             Clear();
 
-            return (pickedWeaponName, pickedWeapon);
+            return pickedWeapon;
         }
 
         public void Clear()
