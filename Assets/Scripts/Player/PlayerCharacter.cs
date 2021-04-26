@@ -193,7 +193,7 @@ namespace BBO.BBO.PlayerManagement
                 isPlacing = false;
             }
 
-            // TODO: should not check in trigger stay loop
+            // TODO: [too lazy todo] should not check in trigger stay loop
             if (currentCraftSlot == null && other.GetComponent<CraftSlot>() is CraftSlot craftSlot)
             {
                 currentCraftSlot = craftSlot;
