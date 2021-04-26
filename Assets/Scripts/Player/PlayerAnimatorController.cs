@@ -110,6 +110,9 @@ namespace BBO.BBO.PlayerManagement
                         triggerHash = PlayerData.ShotSideTriggerHash;
                         playerTransform.localScale = new Vector3(-1, 1, 1);
                         break;
+                    default:
+                        triggerHash = PlayerData.ShotFrontTriggerHash;
+                        break;
                 }
             }
             else if (WeaponData.IsCastAttackWeapon(weaponName))
