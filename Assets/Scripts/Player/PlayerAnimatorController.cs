@@ -141,7 +141,7 @@ namespace BBO.BBO.PlayerManagement
 
         public void UpdatePlayerIdleMainTex(WeaponData.Weapon weaponName)
         {
-            print($"UpdatePlayerIdleMainTex: {weaponName}");
+            // print($"UpdatePlayerIdleMainTex: {weaponName}");
             currentWeaponName = weaponName;
 
             switch (weaponName)

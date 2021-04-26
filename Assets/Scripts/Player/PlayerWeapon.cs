@@ -21,10 +21,7 @@ namespace BBO.BBO.PlayerManagement
             else
             {
                 weapon.CopyWeaponValue(interactWeapon);
-                print(weapon.WeaponName);
             }
-
-            print(CurrentWeaponName);
 
             return GetPlayerSprite(CurrentWeaponName);
         }
