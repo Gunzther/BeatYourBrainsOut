@@ -17,7 +17,6 @@ namespace BBO.BBO.PlayerManagement
                 player.UpdateHpUI();
                 player.TriggerHurtAnimation();
                 player.PlayHurtSound();
-                player.SetIsHurt(true);
             }
         }
 

@@ -4,9 +4,10 @@ using System.Collections.Generic;
 using BBO.BBO.PlayerManagement;
 using BBO.BBO.ScoreSystem;
 using BBO.BBO.TeamManagement;
+using BBO.BBO.Utilities;
 using UnityEngine;
 
-public class PlayersScores : MonoBehaviour
+public class PlayersScores : MonoSingleton<PlayersScores>
 {
     [SerializeField] 
     private UI_StatsRadarChart uiStatsRadarChart;
@@ -14,7 +15,9 @@ public class PlayersScores : MonoBehaviour
     public event EventHandler OnScoresChanged;
 
     private float allPlayersSummaryScore;
+    private Array playerSummaryScore;
     private PlayerStats playerStats;
+    private double upperSD;
 
     private void Start()
     {
@@ -29,7 +32,9 @@ public class PlayersScores : MonoBehaviour
     {
         foreach (PlayerCharacter player in TeamManager.Instance.Team.PlayerCharacters)
         {
+            Debug.Log(player.CurrentPlayerStats.GetSummaryScore());
             allPlayersSummaryScore += player.CurrentPlayerStats.GetSummaryScore();
+            upperSD += Math.Pow(player.CurrentPlayerStats.SummaryScore - CalculateAverage(allPlayersSummaryScore),2);
         }
     }
     private float CalculateAverage(float value)
@@ -38,8 +43,9 @@ public class PlayersScores : MonoBehaviour
         return AverageValue;
     }
 
-    private void CalculateUnityScore()
+    private Double CalculateSD()
     {
-        
+        return Math.Sqrt(upperSD / CalculateAverage(allPlayersSummaryScore));
     }
+    
 }

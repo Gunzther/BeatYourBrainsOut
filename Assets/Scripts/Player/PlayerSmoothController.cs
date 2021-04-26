@@ -169,11 +169,11 @@ namespace BBO.BBO.PlayerManagement
             if (hasCurrentInput)
             {
                 soundManager.PlayPlayerWalking();
-                if (playerCharacter.GetIsHurt())
+                if (playerCharacter.GetIsnotHurt())
                 {
                     playerCharacter.CurrentPlayerStats.IncreaseJukingDoneScore(1);
-                    playerCharacter.SetIsHurt(false);
                 }
+                playerCharacter.SetIsNotHurt(false);
                 movement.Set(smoothDirection.x, 0f, smoothDirection.z);
                 movement = movement.normalized * movementSpeed * Time.deltaTime;
                 playerRigidbody.MovePosition(transform.position + movement);
