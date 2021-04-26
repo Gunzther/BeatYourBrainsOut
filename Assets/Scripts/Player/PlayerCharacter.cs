@@ -78,6 +78,11 @@ namespace BBO.BBO.PlayerManagement
             }
         }
 
+        public void OnFinishedAttack()
+        {
+            playerAnimatorController.UpdatePlayerIdleMainTex(currentPlayerWeapon.CurrentWeaponName);
+        }
+
         public void OnPick()
         {
             isPicking = true;

@@ -85,6 +85,11 @@ namespace BBO.BBO.PlayerManagement
                 Debug.Log($"[{nameof(PlayerSmoothController)}] attack!");
                 playerCharacter.OnAttack(inputDirection);
             }
+            else if (value.canceled)
+            {
+                Debug.Log($"[{nameof(PlayerSmoothController)}] finished attack!");
+                playerCharacter.OnFinishedAttack();
+            }
         }
 
         public void OnPickObject(InputAction.CallbackContext value)

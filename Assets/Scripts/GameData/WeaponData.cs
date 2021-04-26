@@ -26,7 +26,6 @@ namespace BBO.BBO.GameData
         public static bool IsDirectionalWeapon(Weapon weaponName)
         {
             return weaponName == Weapon.RubberBand ||
-                   weaponName == Weapon.Shield ||
                    weaponName == Weapon.Sling;
         }
 
