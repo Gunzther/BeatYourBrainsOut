@@ -14,12 +14,14 @@ namespace BBO.BBO.PlayerManagement
         [SerializeField]
         private PlayerAnimatorController playerAnimatorController = default;
 
+        [SerializeField]
+        private PlayerWeapon currentPlayerWeapon = default;
+
         // TODO: [too lazy todo] move to another class
         [SerializeField]
         private StupidWeapon[] stupidWeapons = default;
 
         public PlayerStats CurrentPlayerStats { get; private set; }
-        public PlayerWeapon CurrentPlayerWeapon { get; private set; }
 
         private int playerID = default;
         private UIManager uiManager = default;
@@ -30,13 +32,13 @@ namespace BBO.BBO.PlayerManagement
         private bool isPlacing = false;
         private bool nearCraftSlot = false;
         private CraftSlot currentCraftSlot = default;
-        private bool canPick => CurrentPlayerWeapon.CurrentWeapon == WeaponData.Weapon.NoWeapon;
-        private bool canPlace => CurrentPlayerWeapon.CurrentWeapon != WeaponData.Weapon.NoWeapon;
-
+        private bool canPick => currentPlayerWeapon.CurrentWeaponName == WeaponData.Weapon.NoWeapon;
+        private bool canPlace => currentPlayerWeapon.CurrentWeaponName != WeaponData.Weapon.NoWeapon;
+        private bool canAttack => currentPlayerWeapon.CurrentWeaponName != WeaponData.Weapon.NoWeapon;
         private bool isNotHurt = true;
 
         // stupid weapon
-        private Dictionary<WeaponData.Weapon, GameObject> stupidWeaponPrototypes = default;
+        private Dictionary<WeaponData.Weapon, Weapon> stupidWeaponPrototypes = default;
         private GameObject stupidContainer = default;
 
         // crafting
@@ -68,9 +70,18 @@ namespace BBO.BBO.PlayerManagement
             uiManager.SetTeamHpValue(team.CurrentTeamHealth);
         }
 
-        public void OnAttack()
+        public void OnAttack(Vector3 inputDirection)
         {
-            playerAnimatorController.ChangePlayerMainTex(PlayerData.PlayerSprite.RubberBandAttack);
+            if (canAttack)
+            {
+                playerAnimatorController.UpdatePlayerAttackingMainTex(currentPlayerWeapon.CurrentWeaponName);
+                playerAnimatorController.TriggerAttackAnimation(currentPlayerWeapon.CurrentWeaponName, inputDirection);
+            }
+        }
+
+        public void OnFinishedAttack()
+        {
+            playerAnimatorController.UpdatePlayerIdleMainTex(currentPlayerWeapon.CurrentWeaponName);
         }
 
         public void OnPick()
@@ -123,10 +134,15 @@ namespace BBO.BBO.PlayerManagement
 
         private void Awake()
         {
-            CurrentPlayerWeapon = new PlayerWeapon();
-            stupidWeaponPrototypes = new Dictionary<WeaponData.Weapon, GameObject>();
-
+            stupidWeaponPrototypes = new Dictionary<WeaponData.Weapon, Weapon>();
             soundManager = FindObjectOfType<SoundManager>();
+
+            currentPlayerWeapon.CurrentWeapon.OnSetPlayerMainTexToDefault += SetPlayerMainTexToDefault;
+        }
+
+        private void SetPlayerMainTexToDefault()
+        {
+            playerAnimatorController.UpdatePlayerIdleMainTex(WeaponData.Weapon.NoWeapon);
         }
 
         private void OnEnable()
@@ -151,46 +167,58 @@ namespace BBO.BBO.PlayerManagement
         {
             if (isPicking && canPick)
             {
-                print(other.name);
                 if (other.GetComponent<WeaponBox>() is WeaponBox weaponBox)
                 {
-                    playerAnimatorController.ChangePlayerMainTex(CurrentPlayerWeapon.SetWeapon(weaponBox.WeaponName, null));
+                    currentPlayerWeapon.SetWeapon(weaponBox.WeaponPrototype);
                 }
                 else if (other.GetComponent<Weapon>() is Weapon weapon)
                 {
-                    playerAnimatorController.ChangePlayerMainTex(CurrentPlayerWeapon.SetWeapon(weapon.WeaponName, weapon));
+                    currentPlayerWeapon.SetWeapon(weapon);
                     weapon.OnPicked();
                 }
                 else if (other.GetComponent<CraftSlot>() is CraftSlot slot && slot.CanPick)
                 {
-                    playerAnimatorController.ChangePlayerMainTex(CurrentPlayerWeapon.SetWeapon(slot.OnPicked(), null));
+                    Weapon pickedWeapon = slot.OnPicked();
+                    print(pickedWeapon);
+                    currentPlayerWeapon.SetWeapon(pickedWeapon);
                 }
                 else if (other.GetComponent<CraftTable>() is CraftTable table && table.CanPick)
                 {
-                    playerAnimatorController.ChangePlayerMainTex(CurrentPlayerWeapon.SetWeapon(table.OnPicked(), null));
+                    Weapon pickedWeapon = table.OnPicked();
+                    currentPlayerWeapon.SetWeapon(pickedWeapon);
                 }
 
+                playerAnimatorController.UpdatePlayerIdleMainTex(currentPlayerWeapon.CurrentWeaponName);
                 isPicking = false;
             }
             if (isPlacing && canPlace)
             {
                 if (currentCraftSlot.CanPlace)
                 {
-                    currentCraftSlot.OnPlaced(CurrentPlayerWeapon.CurrentWeaponName);
-                    playerAnimatorController.ChangePlayerMainTex(CurrentPlayerWeapon.SetWeapon(WeaponData.Weapon.NoWeapon, null));
-                    isPlacing = false;
+                    currentCraftSlot.OnPlaced(currentPlayerWeapon.CurrentWeapon);
+                    currentPlayerWeapon.SetWeapon(null);
                 }
+
+                playerAnimatorController.UpdatePlayerIdleMainTex(currentPlayerWeapon.CurrentWeaponName);
+                isPlacing = false;
+            }
+
+            // TODO: should not check in trigger stay loop
+            if (currentCraftSlot == null && other.GetComponent<CraftSlot>() is CraftSlot craftSlot)
+            {
+                currentCraftSlot = craftSlot;
+                nearCraftSlot = true;
             }
         }
 
         private void OnTriggerExit(Collider other)
         {
-            nearCraftSlot = false;
             isPicking = false;
             isPlacing = false;
 
             if (other.GetComponent<CraftSlot>())
             {
+                nearCraftSlot = false;
                 currentCraftSlot = null;
             }
             if (other.GetComponent<CraftTable>())
@@ -214,14 +242,21 @@ namespace BBO.BBO.PlayerManagement
                 stupidContainer = new GameObject("StupidContainer");
             }
 
-            if (stupidWeaponPrototypes.TryGetValue(CurrentPlayerWeapon.CurrentWeaponName, out GameObject weaponPrototype))
+            if (stupidWeaponPrototypes.TryGetValue(currentPlayerWeapon.CurrentWeaponName, out Weapon weaponPrototype))
             {
-                var newStupidWeapon = Instantiate(weaponPrototype, stupidContainer.transform);
+                Weapon newStupidWeapon = Instantiate(weaponPrototype, stupidContainer.transform);
                 newStupidWeapon.transform.position = transform.position;
+                SetNewWeaponValue(newStupidWeapon);
             }
 
-            playerAnimatorController.ChangePlayerMainTex(CurrentPlayerWeapon.SetWeapon(WeaponData.Weapon.NoWeapon, null));
+            currentPlayerWeapon.SetWeapon(null);
+            playerAnimatorController.UpdatePlayerIdleMainTex(currentPlayerWeapon.CurrentWeaponName);
             isPlacing = false;
+        }
+
+        private void SetNewWeaponValue(Weapon newWeapon)
+        {
+            newWeapon.CopyWeaponValue(currentPlayerWeapon.CurrentWeapon);
         }
     }
 
@@ -230,6 +265,6 @@ namespace BBO.BBO.PlayerManagement
     public class StupidWeapon
     {
         public WeaponData.Weapon Weapon = default;
-        public GameObject StupidPrefab = default;
+        public Weapon StupidPrefab = default;
     }
 }

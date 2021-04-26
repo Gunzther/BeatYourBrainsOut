@@ -39,12 +39,27 @@ namespace BBO.BBO.WeaponManagement
             }
         }
 
+        public void RemoveSlotItems(WeaponData.Weapon weaponKey, int amount)
+        {
+            if (slotItems == null)
+            {
+                return;
+            }
+
+            if (slotItems.TryGetValue(weaponKey, out int currentAmount))
+            {
+                slotItems[weaponKey] = currentAmount - amount;
+            }
+        }
+
         public void Craft()
         {
+            print($"on craft: {WeaponData.CraftedWeaponRecipes.Count()}");
             foreach (CraftedWeaponRecipe recipe in WeaponData.CraftedWeaponRecipes)
             {
                 if (IsMatchedRecipe(recipe.Recipe, slotItems))
                 {
+                    print($"craft: {recipe.WeaponName}");
                     ShowWeapon(recipe.WeaponName, items);
                     currentWeaponName = recipe.WeaponName;
                     ClearSlots();
@@ -70,12 +85,12 @@ namespace BBO.BBO.WeaponManagement
             return false;
         }
 
-        public WeaponData.Weapon OnPicked()
+        public Weapon OnPicked()
         {
-            WeaponData.Weapon pickedWeaponName = currentWeaponName;
+            Weapon pickedWeapon = GetWeapon(currentWeaponName, items);
             Clear();
 
-            return pickedWeaponName;
+            return pickedWeapon;
         }
 
         public void Clear()

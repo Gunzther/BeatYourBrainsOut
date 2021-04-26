@@ -1,24 +1,29 @@
 ﻿using BBO.BBO.GameData;
 using BBO.BBO.WeaponManagement;
+using UnityEngine;
 
 namespace BBO.BBO.PlayerManagement
 {
-    public class PlayerWeapon
+    public class PlayerWeapon : MonoBehaviour
     {
-        public WeaponData.Weapon CurrentWeaponName => weaponName;
-
-        private WeaponData.Weapon weaponName = default;
+        [SerializeField]
         private Weapon weapon = default;
 
-        public PlayerData.PlayerSprite SetWeapon(WeaponData.Weapon weaponName, Weapon interactWeapon)
+        public WeaponData.Weapon CurrentWeaponName => weapon.WeaponName;
+        public Weapon CurrentWeapon => weapon;
+
+        public PlayerData.PlayerSprite SetWeapon(Weapon interactWeapon)
         {
-            if (weaponName != WeaponData.Weapon.NoWeapon && interactWeapon == null) //player did not pick weapon that have already been used
+            if (interactWeapon == null)
             {
-                // TODO: create new Weapon
+                weapon.ResetWeaponValue();
+            }
+            else
+            {
+                weapon.CopyWeaponValue(interactWeapon);
             }
 
-            this.weaponName = weaponName;
-            return GetPlayerSprite(weaponName);
+            return GetPlayerSprite(CurrentWeaponName);
         }
 
         private PlayerData.PlayerSprite GetPlayerSprite(WeaponData.Weapon weaponName)
@@ -30,7 +35,7 @@ namespace BBO.BBO.PlayerManagement
                 case WeaponData.Weapon.Nail:
                     return PlayerData.PlayerSprite.Nail;
                 case WeaponData.Weapon.RubberBand:
-                    return PlayerData.PlayerSprite.RubberBandDefault;
+                    return PlayerData.PlayerSprite.RubberBand;
                 case WeaponData.Weapon.BaseballbatWithNails:
                     return PlayerData.PlayerSprite.MorningStar;
                 case WeaponData.Weapon.Shield:

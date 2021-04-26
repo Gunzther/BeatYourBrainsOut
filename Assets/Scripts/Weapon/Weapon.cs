@@ -1,5 +1,6 @@
 ﻿using BBO.BBO.GameData;
 using BBO.BBO.MonsterManagement;
+using System;
 using UnityEditor;
 using UnityEngine;
 
@@ -7,6 +8,7 @@ namespace BBO.BBO.WeaponManagement
 {
     public class Weapon : MonoBehaviour
     {
+        public bool IsStupid = false; // just stupid thing on the floor
         public WeaponData.Weapon WeaponName = default;
         public WeaponData.Type Type = default;
         public int DamageValue = default;
@@ -14,20 +16,33 @@ namespace BBO.BBO.WeaponManagement
         public int AttacksNumber = default;
         public int HP = default;
 
+        public Action OnSetPlayerMainTexToDefault = default;
+
         // IntervalDamage
         private bool isIntervalDamage = false;
         private float timer = default;
 
         // LimitAttacksNumber
         private bool isLimitAttacksNumber = false;
-        private int attacksCount = default;
 
-        // Stupid
-        private bool stupid = false;
-
-        public void SetDamageValue(int value)
+        public void CopyWeaponValue(Weapon weapon)
         {
-            DamageValue = value;
+            if (weapon != null)
+            {
+                IsStupid = weapon.IsStupid;
+                WeaponName = weapon.WeaponName;
+                Type = weapon.Type;
+                DamageValue = weapon.DamageValue;
+                IntervalSeconds = weapon.IntervalSeconds;
+                AttacksNumber = weapon.AttacksNumber;
+                HP = weapon.HP;
+
+                ReloadValue();
+            }
+            else
+            {
+                ResetWeaponValue();
+            }
         }
 
         public void OnPicked()
@@ -36,52 +51,95 @@ namespace BBO.BBO.WeaponManagement
             Destroy(gameObject);
         }
 
+        public void SetIsStupidValue(bool isStupid)
+        {
+            IsStupid = isStupid;
+        }
+
+        public void ResetWeaponValue()
+        {
+            IsStupid = false;
+            WeaponName = default;
+            Type = default;
+            DamageValue = default;
+            IntervalSeconds = default;
+            AttacksNumber = default;
+            HP = default;
+
+            ReloadValue();
+        }
+
         private void OnTriggerEnter(Collider other)
         {
-            if (!stupid && !isIntervalDamage && other.gameObject.GetComponent<MonsterCharacter>() is MonsterCharacter monster)
+            if (!IsStupid)
             {
-                monster.DecreaseMonsterHp(DamageValue);
-                monster.OnAttacked();
-            }
-            if (isLimitAttacksNumber && other.gameObject.GetComponent<MonsterCharacter>() is MonsterCharacter)
-            {
-                attacksCount++;
-
-                if (attacksCount == AttacksNumber)
+                if (!isIntervalDamage && other.gameObject.GetComponent<MonsterCharacter>() is MonsterCharacter monster)
                 {
-                    // TODO: change to pooling objects
-                    Destroy(gameObject);
+                    monster.DecreaseMonsterHp(DamageValue);
+                    monster.OnAttacked();
+                }
+                if (isLimitAttacksNumber && other.gameObject.GetComponent<MonsterCharacter>() is MonsterCharacter)
+                {
+                    AttacksNumber--;
+
+                    if (AttacksNumber == 0)
+                    {
+                        DestroyWeapon();
+                    }
                 }
             }
         }
 
         private void OnTriggerStay(Collider other)
         {
-            if (isIntervalDamage && other.gameObject.GetComponent<MonsterCharacter>() is MonsterCharacter monster)
+            if (!IsStupid)
             {
-                monster.DecreaseMonsterHp(DamageValue);
-                monster.OnAttacked();
+                if (isIntervalDamage && other.gameObject.GetComponent<MonsterCharacter>() is MonsterCharacter monster)
+                {
+                    monster.DecreaseMonsterHp(DamageValue);
+                    monster.OnAttacked();
+                }
             }
         }
 
         private void Start()
         {
-            isIntervalDamage = Type == WeaponData.Type.IntervalDamage;
-            isLimitAttacksNumber = Type == WeaponData.Type.LimitAttacksNumber;
-            stupid = Type == WeaponData.Type.Stupid;
+            ReloadValue();
         }
 
         private void Update()
         {
-            if (isIntervalDamage)
+            if (!IsStupid)
             {
-                timer += Time.deltaTime;
-
-                if (timer > IntervalSeconds)
+                if (isIntervalDamage)
                 {
-                    // TODO: change to pooling objects
-                    Destroy(gameObject);
+                    timer += Time.deltaTime;
+
+                    if (timer > IntervalSeconds)
+                    {
+                        // TODO: change to pooling objects
+                        Destroy(gameObject);
+                    }
                 }
+            }
+        }
+
+        private void ReloadValue()
+        {
+            isIntervalDamage = Type == WeaponData.Type.IntervalDamage;
+            isLimitAttacksNumber = Type == WeaponData.Type.LimitAttacksNumber;
+        }
+
+        private void DestroyWeapon()
+        {
+            if (WeaponData.IsCloseRangeWeapon(WeaponName))
+            {
+                ResetWeaponValue();
+                OnSetPlayerMainTexToDefault?.Invoke();
+            }
+            else
+            {
+                Destroy(gameObject);
             }
         }
     }
@@ -95,6 +153,7 @@ namespace BBO.BBO.WeaponManagement
         public override void OnInspectorGUI()
         {
             weaponScript = target as Weapon;
+            weaponScript.IsStupid = EditorGUILayout.Toggle("Is stupid weapon", weaponScript.IsStupid);
             weaponScript.WeaponName = (WeaponData.Weapon)EditorGUILayout.EnumPopup("Weapon", weaponScript.WeaponName);
             weaponScript.Type = (WeaponData.Type)EditorGUILayout.EnumPopup("Type", weaponScript.Type);
 
@@ -110,8 +169,6 @@ namespace BBO.BBO.WeaponManagement
                     break;
                 case WeaponData.Type.Protected:
                     ShowHP();
-                    break;
-                case WeaponData.Type.Stupid:
                     break;
                 default:
                     ShowDamageValue();

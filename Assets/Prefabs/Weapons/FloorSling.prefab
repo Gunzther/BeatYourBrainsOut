@@ -58,11 +58,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7831e1bdc7aedf44ca3be3b8cef9f069, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WeaponGO: 6
-  Type: 4
-  DamageValue: 0
+  IsStupid: 1
+  WeaponName: 6
+  Type: 2
+  DamageValue: 5
   IntervalSeconds: 0
-  AttacksNumber: 0
+  AttacksNumber: 10
   HP: 0
 --- !u!1 &8665763484337012832
 GameObject:

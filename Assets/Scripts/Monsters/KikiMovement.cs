@@ -23,7 +23,7 @@ namespace BBO.BBO.MonsterMovement
 
         private const float waitSec = 1;
         private const float bounceForce = 2f;
-        private const float bounceAttackedForce = 1.5f;
+        private const float bounceAttackedForce = 2.5f;
         private const float targetOffset = 0.05f;
 
         private IEnumerable<PlayerCharacter> players = default;
