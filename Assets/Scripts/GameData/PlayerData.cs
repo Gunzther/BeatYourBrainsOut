@@ -5,6 +5,7 @@ namespace BBO.BBO.GameData
     public static class PlayerData
     {
         public const int DefaultHealth = 100;
+        public const string PlayerTag = "Player";
 
         public static readonly int IdleTriggerHash = Animator.StringToHash("Idle");
         public static readonly int WalkFrontTriggerHash = Animator.StringToHash("WalkFront");

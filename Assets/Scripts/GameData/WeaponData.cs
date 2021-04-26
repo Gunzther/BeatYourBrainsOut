@@ -61,6 +61,8 @@ namespace BBO.BBO.GameData
                 { Weapon.Nail, 1 }
             })
         };
+
+        public static string OneTimeWeaponTag = "OneTimeWeapon";
     }
 
     public class CraftedWeaponRecipe

@@ -73,6 +73,7 @@ namespace BBO.BBO.PlayerManagement
         {
             if (canAttack)
             {
+                currentPlayerWeapon.ActiveWeapon(inputDirection);
                 playerAnimatorController.UpdatePlayerAttackingMainTex(currentPlayerWeapon.CurrentWeaponName);
                 playerAnimatorController.TriggerAttackAnimation(currentPlayerWeapon.CurrentWeaponName, inputDirection);
             }

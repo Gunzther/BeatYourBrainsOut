@@ -47,7 +47,7 @@ MonoBehaviour:
   moveSpeed: 0.07
   hitPrefab: {fileID: 0}
   lineRenderer: {fileID: 8789995041752742322}
-  collider: {fileID: 8676348038300188152}
+  colliderObj: {fileID: 8676348038300188152}
   laserTrace: {fileID: 1508307148701883864}
 --- !u!1 &6311466599599400710
 GameObject:
