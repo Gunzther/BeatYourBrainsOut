@@ -10,6 +10,10 @@ namespace BBO.BBO.GameData
         public static readonly int WalkFrontTriggerHash = Animator.StringToHash("WalkFront");
         public static readonly int WalkBackTriggerHash = Animator.StringToHash("WalkBack");
         public static readonly int WalkSideTriggerHash = Animator.StringToHash("WalkSide");
+        public static readonly int CastAttackTriggerHash = Animator.StringToHash("CastAttack");
+        public static readonly int ShotFrontTriggerHash = Animator.StringToHash("ShotFront");
+        public static readonly int ShotBackTriggerHash = Animator.StringToHash("ShotBack");
+        public static readonly int ShotSideTriggerHash = Animator.StringToHash("ShotSide");
         public static readonly int DeadTriggerHash = Animator.StringToHash("Dead");
         public static readonly int HurtTriggerHash = Animator.StringToHash("Hurt");
 
@@ -18,7 +22,7 @@ namespace BBO.BBO.GameData
             Default = 0,
             Baseball,
             Nail,
-            RubberBandDefault,
+            RubberBand,
             RubberBandAttack,
             MorningStar,
             Shield,

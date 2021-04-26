@@ -6,11 +6,24 @@ namespace BBO.BBO.WeaponManagement
 {
     public class BaseCraftPlace : MonoBehaviour
     {
+        protected virtual Weapon GetWeapon(WeaponData.Weapon weaponName, SlotItem[] items)
+        {
+            foreach (SlotItem item in items)
+            {
+                if (item.WeaponName == weaponName)
+                {
+                    return item.WeaponModel;
+                }
+            }
+
+            return null;
+        }
+
         protected virtual void ShowWeapon(WeaponData.Weapon weaponName, SlotItem[] items)
         {
             foreach (SlotItem item in items)
             {
-                item.weaponModel.SetActive(item.WeaponName == weaponName);
+                item.WeaponModel.gameObject.SetActive(item.WeaponName == weaponName);
             }
         }
 
@@ -18,7 +31,7 @@ namespace BBO.BBO.WeaponManagement
         {
             foreach (SlotItem item in items)
             {
-                item.weaponModel.SetActive(false);
+                item.WeaponModel.gameObject.SetActive(false);
             }
         }
     }
@@ -27,6 +40,6 @@ namespace BBO.BBO.WeaponManagement
     public class SlotItem
     {
         public WeaponData.Weapon WeaponName = default;
-        public GameObject weaponModel = default;
+        public Weapon WeaponModel = default;
     }
 }

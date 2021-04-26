@@ -1,8 +1,6 @@
-﻿using BBO.BBO.GameData;
-using BBO.BBO.GameManagement;
+﻿using BBO.BBO.GameManagement;
 using BBO.BBO.PlayerInputSystem;
 using BBO.BBO.TeamManagement;
-using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -85,7 +83,12 @@ namespace BBO.BBO.PlayerManagement
             if (value.started)
             {
                 Debug.Log($"[{nameof(PlayerSmoothController)}] attack!");
-                playerCharacter.OnAttack();
+                playerCharacter.OnAttack(inputDirection);
+            }
+            else if (value.canceled)
+            {
+                Debug.Log($"[{nameof(PlayerSmoothController)}] finished attack!");
+                playerCharacter.OnFinishedAttack();
             }
         }
 
@@ -171,31 +174,7 @@ namespace BBO.BBO.PlayerManagement
 
         private void AnimatePlayerMovement()
         {
-            int triggerHash = PlayerData.IdleTriggerHash;
-            transform.localScale = new Vector3(1, 1, 1);
-
-            if (inputDirection.z < 0)
-            {
-                triggerHash = PlayerData.WalkFrontTriggerHash;
-            }
-            else if (inputDirection.z > 0)
-            {
-                triggerHash = PlayerData.WalkBackTriggerHash;
-            }
-            else if (inputDirection.x < 0)
-            {
-                triggerHash = PlayerData.WalkSideTriggerHash;
-            }
-            else if (inputDirection.x > 0)
-            {
-                triggerHash = PlayerData.WalkSideTriggerHash;
-                transform.localScale = new Vector3(-1, 1, 1);
-            }
-
-            if (!playerAnimatorController.IsInState(triggerHash.ToString()))
-            {
-                playerAnimatorController.SetTrigger(triggerHash);
-            }
+            playerAnimatorController.UpdatePlayerMovementAnimation(inputDirection);
         }
 
         //INPUT SYSTEM AUTOMATIC CALLBACKS --------------
@@ -224,18 +203,6 @@ namespace BBO.BBO.PlayerManagement
         public void OnDeviceLost()
         {
             TeamManager.Instance.RemovePlayer(this);
-            //playerVisualsBehaviour.SetDisconnectedDeviceVisuals();
-        }
-
-        public void OnDeviceRegained()
-        {
-            //StartCoroutine(WaitForDeviceToBeRegained());
-        }
-
-        private IEnumerator WaitForDeviceToBeRegained()
-        {
-            yield return new WaitForSeconds(0.1f);
-            playerVisualsBehaviour.UpdatePlayerVisuals();
         }
 
         //Get Data ----

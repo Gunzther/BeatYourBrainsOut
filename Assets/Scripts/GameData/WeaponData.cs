@@ -10,7 +10,6 @@ namespace BBO.BBO.GameData
             IntervalDamage, // weapon that attack for a certain time, then disappear
             LimitAttacksNumber, // weapon that has limit number of attacks
             Protected, // weapon for protection
-            Stupid // just stupid thing on the floor
         }
 
         public enum Weapon
@@ -22,6 +21,25 @@ namespace BBO.BBO.GameData
             BaseballbatWithNails,
             Shield,
             Sling
+        }
+
+        public static bool IsDirectionalWeapon(Weapon weaponName)
+        {
+            return weaponName == Weapon.RubberBand ||
+                   weaponName == Weapon.Sling;
+        }
+
+        public static bool IsCastAttackWeapon(Weapon weaponName)
+        {
+            return weaponName == Weapon.Baseballbat ||
+                   weaponName == Weapon.BaseballbatWithNails ||
+                   weaponName == Weapon.Nail;
+        }
+
+        public static bool IsCloseRangeWeapon(Weapon weaponName)
+        {
+            return weaponName == Weapon.Baseballbat ||
+                   weaponName == Weapon.BaseballbatWithNails;
         }
 
         public static CraftedWeaponRecipe[] CraftedWeaponRecipes =

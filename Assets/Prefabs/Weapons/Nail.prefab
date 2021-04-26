@@ -93,7 +93,7 @@ GameObject:
   - component: {fileID: 6905011036024338777}
   - component: {fileID: 3301819954785724672}
   m_Layer: 0
-  m_Name: NailFloor
+  m_Name: Nail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -139,7 +139,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7831e1bdc7aedf44ca3be3b8cef9f069, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WeaponGO: 2
+  IsStupid: 0
+  WeaponName: 2
   Type: 1
   DamageValue: 5
   IntervalSeconds: 5

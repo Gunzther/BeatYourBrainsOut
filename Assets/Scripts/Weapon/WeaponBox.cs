@@ -7,6 +7,11 @@ namespace BBO.BBO.WeaponManagement
     {
         [SerializeField]
         private WeaponData.Weapon weaponName = default;
+
+        [SerializeField]
+        private Weapon weaponPrototype = default;
+
         public WeaponData.Weapon WeaponName => weaponName;
+        public Weapon WeaponPrototype => weaponPrototype;
     }
 }
