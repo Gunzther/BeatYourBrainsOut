@@ -49,6 +49,9 @@ public class PlayersScores : MonoBehaviour
         float AverageValue = value / TeamManager.Instance.Team.PlayerAmount;
         return AverageValue;
     }
-    
-    private void 
+
+    private void CalculateUnityScore()
+    {
+        
+    }
 }

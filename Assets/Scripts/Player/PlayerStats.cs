@@ -10,6 +10,7 @@ namespace BBO.BBO.PlayerManagement
         public int CraftingDoneScore => craftingDoneScore;
         public int JukingDoneScore => jukingDoneScore;
         public int HealingDoneScore => healingDoneScore;
+        public int SummaryScore => summaryScore;
         
         private readonly int playerID = default;
         private int health = default;
@@ -18,6 +19,7 @@ namespace BBO.BBO.PlayerManagement
         private int craftingDoneScore = default;
         private int jukingDoneScore = default;
         private int healingDoneScore = default;
+        private int sumsummaryScore = default;
 
         public PlayerStats(int playerID)
         {
@@ -68,6 +70,11 @@ namespace BBO.BBO.PlayerManagement
         public void IncreaseHealingDoneScore(int value)
         {
             healingDoneScore += value;
+        }
+
+        public void GetSummaryScore()
+        {
+            sumsummaryScore
         }
     }
 }
