@@ -48,7 +48,7 @@ namespace BBO.BBO.WeaponManagement
         public void OnPicked()
         {
             // TODO: change to pooling object
-            DestroyWeapon();
+            Destroy(gameObject);
         }
 
         public void SetIsStupidValue(bool isStupid)
