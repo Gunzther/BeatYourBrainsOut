@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10af556cb3da8f84aadd1fb07b2eb6d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCharacter: {fileID: 0}
+  playerCharacter: {fileID: 5387966283118922947}
   weapon: {fileID: 622178082472614362}
   activeWeapons:
   - {fileID: 8758971969607120339, guid: e81d0fddfecfaff469a5db9d3cf0240a, type: 3}
@@ -663,6 +663,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7831e1bdc7aedf44ca3be3b8cef9f069, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayerIdentify: {fileID: 5387966283118922947}
   IsStupid: 0
   IsPlayerWeaponDataCache: 1
   WeaponName: 0

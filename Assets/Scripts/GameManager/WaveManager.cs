@@ -1,4 +1,5 @@
-﻿using BBO.BBO.MonsterManagement;
+﻿using BBO.BBO.GameManagement;
+using BBO.BBO.MonsterManagement;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,7 +19,7 @@ public class WaveManager : MonoBehaviour
     private WaveConfig currentWaveConfig = default;
     private Queue<MonsterCharacter> monstersQueue = default;
     private bool isCompleted => (currentDeadMonsterAmount == monsterAmount)
-                     && (currentWaveIndex >= waves.Length);
+                     && (currentWaveIndex >= waves.Length - 1);
 
     // monster amount
     private int monsterAmount = default;
@@ -57,6 +58,7 @@ public class WaveManager : MonoBehaviour
         if (isCompleted)
         {
             Debug.Log($"[{nameof(WaveManager)}] Stage Complete!");
+            GameManager.Instance.LoadSceneCoroutine("Result", null);
         }
     }
 
@@ -111,6 +113,8 @@ public class WaveManager : MonoBehaviour
                 {
                     monstersSorted.Add(config.Monster);
                 }
+
+                monsterAmount += config.MonsterAmount;
             }
 
             int count = monstersSorted.Count;
@@ -122,8 +126,6 @@ public class WaveManager : MonoBehaviour
                 monstersSorted.RemoveAt(index);
             }
         }
-
-        monsterAmount = monstersQueue.Count;
     }
 }
 

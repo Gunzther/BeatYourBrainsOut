@@ -1,5 +1,8 @@
-﻿using BBO.BBO.GameManagement;
+﻿using BBO.BBO.GameData;
+using BBO.BBO.GameManagement;
 using BBO.BBO.InterfaceManagement;
+using BBO.BBO.PlayerManagement;
+using BBO.BBO.TeamManagement;
 using BBO.BBO.UI;
 using UnityEngine;
 
@@ -16,7 +19,16 @@ public class ResultManager : InterfaceManager
 
     private void Start()
     {
-        // TODO: Calculate score &  Update UI
+        int index = 0;
+        resultUI.ResetResultUI();
+
+        foreach (PlayerCharacter player in TeamManager.Instance.Team.PlayerCharacters)
+        {
+            var stat = player.CurrentPlayerStats;
+            resultUI.SetPlayerResult(index, player.PlayerID, stat.SummaryScore, PlayerData.PlayerColor.Red);
+            resultUI.SetStars(3); // TODO: set stars depends on Shapley formula
+            print($"[{nameof(ResultManager)}] damage: {stat.DamageDealScore}, re damage: {stat.DamageReceivedScore}, craft: {stat.CraftingDoneScore}");
+        }
     }
 
     private void Update()

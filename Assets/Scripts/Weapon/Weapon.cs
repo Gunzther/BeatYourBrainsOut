@@ -9,6 +9,7 @@ namespace BBO.BBO.WeaponManagement
 {
     public class Weapon : MonoBehaviour
     {
+        public PlayerCharacter PlayerIdentify = default;
         public bool IsStupid = false; // just stupid thing on the floor
         public bool IsPlayerWeaponDataCache = false;
         public WeaponData.Weapon WeaponName = default;
@@ -19,6 +20,7 @@ namespace BBO.BBO.WeaponManagement
         public int HP = default;
 
         public Action OnSetPlayerMainTexToDefault = default;
+        public Action OnAttackMonster = default;
 
         // IntervalDamage
         private bool isIntervalDamage = false;
@@ -92,9 +94,9 @@ namespace BBO.BBO.WeaponManagement
         {
             if (!IsStupid)
             {
-                if (!isIntervalDamage && other.gameObject.GetComponent<MonsterCharacter>() is MonsterCharacter monster)
+                if (other.gameObject.GetComponent<MonsterCharacter>() is MonsterCharacter monster)
                 {
-                    monster.DecreaseMonsterHp(DamageValue);
+                    UpdatePlayerDealDamageScore(monster.DecreaseMonsterHp(DamageValue));
                     monster.OnAttacked();
                 }
                 if (isLimitAttacksNumber && other.gameObject.GetComponent<MonsterCharacter>() is MonsterCharacter)
@@ -110,18 +112,6 @@ namespace BBO.BBO.WeaponManagement
                 {
                     print($"destroy by: {other.name}");
                     Destroy(gameObject);  // hit anything except monster, should be destroyed
-                }
-            }
-        }
-
-        private void OnTriggerStay(Collider other)
-        {
-            if (!IsStupid)
-            {
-                if (isIntervalDamage && other.gameObject.GetComponent<MonsterCharacter>() is MonsterCharacter monster)
-                {
-                    monster.DecreaseMonsterHp(DamageValue);
-                    monster.OnAttacked();
                 }
             }
         }
@@ -166,6 +156,17 @@ namespace BBO.BBO.WeaponManagement
                 Destroy(gameObject);
             }
         }
+
+        private void UpdatePlayerDealDamageScore(int damageValue)
+        {
+            if (PlayerIdentify != null)
+            {
+                PlayerIdentify.CurrentPlayerStats.UpdateDamageDealScore(damageValue);
+            }
+
+            OnAttackMonster?.Invoke();
+            print($"[{nameof(Weapon)}] damage score +{damageValue}");
+        }
     }
 
 #if UNITY_EDITOR
@@ -177,6 +178,7 @@ namespace BBO.BBO.WeaponManagement
         public override void OnInspectorGUI()
         {
             weaponScript = target as Weapon;
+            weaponScript.PlayerIdentify = (PlayerCharacter)EditorGUILayout.ObjectField("Player Identify", weaponScript.PlayerIdentify, typeof(PlayerCharacter), true);
             weaponScript.IsStupid = EditorGUILayout.Toggle("Is Stupid Weapon", weaponScript.IsStupid);
             weaponScript.IsPlayerWeaponDataCache = EditorGUILayout.Toggle("Is Player Weapon Data Cache", weaponScript.IsPlayerWeaponDataCache);
             weaponScript.WeaponName = (WeaponData.Weapon)EditorGUILayout.EnumPopup("Weapon", weaponScript.WeaponName);

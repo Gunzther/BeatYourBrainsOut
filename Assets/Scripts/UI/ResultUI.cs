@@ -18,12 +18,21 @@ namespace BBO.BBO.UI
         [SerializeField]
         private PlayerResultUI[] playerResultsUI = default;
 
-        public void SetPlayerResult(int index, int score, PlayerData.PlayerColor color)
+        public void ResetResultUI()
+        {
+            foreach (PlayerResultUI playerUI in playerResultsUI)
+            {
+                playerUI.SetUIActive(false);
+            }
+        }
+
+        public void SetPlayerResult(int index, int playerID, int score, PlayerData.PlayerColor color)
         {
             var playerUI = playerResultsUI[index];
-            playerUI.SetPlayerName(index + 1);
+            playerUI.SetPlayerName(playerID);
             playerUI.SetPlayerScore(score);
             playerUI.SetPlayerImage(color);
+            playerUI.SetUIActive(true);
         }
 
         public void SetStars(int activeAmount)

@@ -22,6 +22,7 @@ namespace BBO.BBO.PlayerManagement
         private StupidWeapon[] stupidWeapons = default;
 
         public PlayerStats CurrentPlayerStats { get; private set; }
+        public int PlayerID => playerID;
 
         private int playerID = default;
         private UIManager uiManager = default;
@@ -49,6 +50,8 @@ namespace BBO.BBO.PlayerManagement
         public void Reload()
         {
             CurrentPlayerStats.Reset();
+            currentPlayerWeapon.ResetWeapon();
+            playerAnimatorController.UpdatePlayerIdleMainTex(currentPlayerWeapon.CurrentWeaponName);
             uiManager = FindObjectOfType<UIManager>();
             uiManager.SetTeamHpMaxValue(team.CurrentTeamHealth);
         }
@@ -108,7 +111,9 @@ namespace BBO.BBO.PlayerManagement
         {
             if (craftTable != null && craftTable.CanCraft)
             {
-                craftTable.Craft();
+                int craftScore = craftTable.Craft();
+                CurrentPlayerStats.UpdateCraftingDoneScore(craftScore);
+                print($"[{nameof(PlayerCharacter)}:{playerID}] craft score +{craftScore}");
             }
         }
 

@@ -21,6 +21,12 @@ namespace BBO.BBO.PlayerManagement
 
         private Dictionary<WeaponData.Weapon, Weapon> activeWeaponsDict = default;
 
+        public PlayerData.PlayerSprite ResetWeapon()
+        {
+            weapon.ResetWeaponValue();
+            return GetPlayerSprite(CurrentWeaponName);
+        }
+
         public PlayerData.PlayerSprite SetWeapon(Weapon interactWeapon)
         {
             if (interactWeapon == null)
@@ -46,6 +52,8 @@ namespace BBO.BBO.PlayerManagement
                     weaponMovement.ActiveMovement(inputDirection);
                 }
 
+                print(playerCharacter);
+                CurrentWeapon.OnAttackMonster += () => playerCharacter.CurrentPlayerStats.UpdateDamageDealScore(newActiveWeapon.DamageValue);
                 CurrentWeapon.OnAttack();
             }
         }

@@ -52,19 +52,23 @@ namespace BBO.BBO.WeaponManagement
             }
         }
 
-        public void Craft()
+        /// <returns>craft score</returns>
+        public int Craft()
         {
-            print($"on craft: {WeaponData.CraftedWeaponRecipes.Count()}");
             foreach (CraftedWeaponRecipe recipe in WeaponData.CraftedWeaponRecipes)
             {
                 if (IsMatchedRecipe(recipe.Recipe, slotItems))
                 {
-                    print($"craft: {recipe.WeaponName}");
+                    print($"[{nameof(CraftTable)}] craft: {recipe.WeaponName}");
                     ShowWeapon(recipe.WeaponName, items);
                     currentWeaponName = recipe.WeaponName;
                     ClearSlots();
+
+                    return recipe.CraftScore;
                 }
             }
+
+            return 0;
         }
 
         public bool IsMatchedRecipe(Dictionary<WeaponData.Weapon, int> dict1, Dictionary<WeaponData.Weapon, int> dict2)

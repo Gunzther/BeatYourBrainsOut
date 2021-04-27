@@ -30,6 +30,7 @@ namespace BBO.BBO.UI
 
         public void SetPlayerScore(int score)
         {
+            if (score < 0) score = 0;
             playerScore.text = score.ToString();
         }
 
@@ -51,6 +52,11 @@ namespace BBO.BBO.UI
             }
 
             playerImage.material = playerColors[colorIndex];
+        }
+
+        public void SetUIActive(bool isActive)
+        {
+            gameObject.SetActive(isActive);
         }
     }
 }

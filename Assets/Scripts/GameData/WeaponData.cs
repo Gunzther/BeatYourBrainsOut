@@ -48,18 +48,18 @@ namespace BBO.BBO.GameData
             {
                 { Weapon.Baseballbat, 1 },
                 { Weapon.Nail, 1 }
-            }),
+            }, craftScore: 20),
             new CraftedWeaponRecipe(Weapon.Shield, new Dictionary<Weapon, int>()
             {
                 { Weapon.Baseballbat, 2 },
                 { Weapon.Nail, 3 }
-            }),
+            }, craftScore: 50),
             new CraftedWeaponRecipe(Weapon.Sling, new Dictionary<Weapon, int>()
             {
                 { Weapon.Baseballbat, 1 },
                 { Weapon.RubberBand, 1},
                 { Weapon.Nail, 1 }
-            })
+            }, craftScore: 30)
         };
 
         public static string OneTimeWeaponTag = "OneTimeWeapon";
@@ -69,11 +69,13 @@ namespace BBO.BBO.GameData
     {
         public WeaponData.Weapon WeaponName { get; private set; }
         public Dictionary<WeaponData.Weapon, int> Recipe { get; private set; }
+        public int CraftScore { get; private set; }
 
-        public CraftedWeaponRecipe(WeaponData.Weapon weaponName, Dictionary<WeaponData.Weapon, int> recipe)
+        public CraftedWeaponRecipe(WeaponData.Weapon weaponName, Dictionary<WeaponData.Weapon, int> recipe, int craftScore)
         {
             WeaponName = weaponName;
             Recipe = recipe;
+            CraftScore = craftScore;
         }
     }
 }

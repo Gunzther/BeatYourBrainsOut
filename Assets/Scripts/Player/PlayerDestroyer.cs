@@ -16,6 +16,9 @@ namespace BBO.BBO.PlayerManagement
                 player.UpdateHpUI();
                 player.TriggerHurtAnimation();
                 player.PlayHurtSound();
+
+                player.CurrentPlayerStats.UpdateDamageReceivedScore(damageValue);
+                print($"[{nameof(PlayerDestroyer)}] damage recieved score -{damageValue}");
             }
         }
 

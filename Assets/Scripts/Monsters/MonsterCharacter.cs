@@ -14,7 +14,7 @@ namespace BBO.BBO.MonsterManagement
 
         public Action Dead = default;
 
-        public void DecreaseMonsterHp(int value)
+        public int DecreaseMonsterHp(int value)
         {
             hp -= value;
 
@@ -22,7 +22,10 @@ namespace BBO.BBO.MonsterManagement
             {
                 Dead?.Invoke();
                 Destroy(gameObject);
+                return value + hp;
             }
+
+            return value;
         }
 
         public void IncreaseMonsterHp(int value)
