@@ -63,7 +63,6 @@ public class WaveManager : MonoBehaviour
     private void Start()
     {
         monstersQueue = new Queue<MonsterCharacter>();
-        // TODO: change to call ActiveWave in GameManager
         ActiveWave();
     }
 

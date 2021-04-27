@@ -74,6 +74,7 @@ namespace BBO.BBO.PlayerManagement
         {
             if (canAttack)
             {
+                currentPlayerWeapon.ActiveWeapon(inputDirection);
                 playerAnimatorController.UpdatePlayerAttackingMainTex(currentPlayerWeapon.CurrentWeaponName);
                 playerAnimatorController.TriggerAttackAnimation(currentPlayerWeapon.CurrentWeaponName, inputDirection);
             }
@@ -203,7 +204,7 @@ namespace BBO.BBO.PlayerManagement
                 isPlacing = false;
             }
 
-            // TODO: should not check in trigger stay loop
+            // TODO: [too lazy todo] should not check in trigger stay loop
             if (currentCraftSlot == null && other.GetComponent<CraftSlot>() is CraftSlot craftSlot)
             {
                 currentCraftSlot = craftSlot;
