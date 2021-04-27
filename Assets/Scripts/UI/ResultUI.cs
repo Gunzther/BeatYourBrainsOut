@@ -16,6 +16,9 @@ namespace BBO.BBO.UI
         private Image[] stars = default;
 
         [SerializeField]
+        private Text teamWorkPercentage = default;
+
+        [SerializeField]
         private PlayerResultUI[] playerResultsUI = default;
 
         public void ResetResultUI()
@@ -33,6 +36,11 @@ namespace BBO.BBO.UI
             playerUI.SetPlayerScore(score);
             playerUI.SetPlayerImage(color);
             playerUI.SetUIActive(true);
+        }
+
+        public void SetTeamWorkPercentage(float percentage)
+        {
+            teamWorkPercentage.text = percentage.ToString("0.0");
         }
 
         public void SetStars(int activeAmount)
