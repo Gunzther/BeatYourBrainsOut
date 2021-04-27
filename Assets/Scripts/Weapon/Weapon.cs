@@ -1,5 +1,6 @@
 ﻿using BBO.BBO.GameData;
 using BBO.BBO.MonsterManagement;
+using BBO.BBO.PlayerManagement;
 using System;
 using UnityEditor;
 using UnityEngine;
@@ -9,6 +10,7 @@ namespace BBO.BBO.WeaponManagement
     public class Weapon : MonoBehaviour
     {
         public bool IsStupid = false; // just stupid thing on the floor
+        public bool IsPlayerWeaponDataCache = false;
         public WeaponData.Weapon WeaponName = default;
         public WeaponData.Type Type = default;
         public int DamageValue = default;
@@ -51,6 +53,23 @@ namespace BBO.BBO.WeaponManagement
             Destroy(gameObject);
         }
 
+        public void OnAttack()
+        {
+            if (isLimitAttacksNumber)
+            {
+                AttacksNumber--;
+
+                if (AttacksNumber == 0)
+                {
+                    DestroyWeapon();
+                }
+            }
+            else if (isIntervalDamage)
+            {
+                DestroyWeapon();
+            }
+        }
+
         public void SetIsStupidValue(bool isStupid)
         {
             IsStupid = isStupid;
@@ -86,6 +105,11 @@ namespace BBO.BBO.WeaponManagement
                     {
                         DestroyWeapon();
                     }
+                }
+                else if (transform.CompareTag(WeaponData.OneTimeWeaponTag) && !other.CompareTag(PlayerData.PlayerTag))
+                {
+                    print($"destroy by: {other.name}");
+                    Destroy(gameObject);  // hit anything except monster, should be destroyed
                 }
             }
         }
@@ -132,7 +156,7 @@ namespace BBO.BBO.WeaponManagement
 
         private void DestroyWeapon()
         {
-            if (WeaponData.IsCloseRangeWeapon(WeaponName))
+            if (IsPlayerWeaponDataCache)
             {
                 ResetWeaponValue();
                 OnSetPlayerMainTexToDefault?.Invoke();
@@ -153,7 +177,8 @@ namespace BBO.BBO.WeaponManagement
         public override void OnInspectorGUI()
         {
             weaponScript = target as Weapon;
-            weaponScript.IsStupid = EditorGUILayout.Toggle("Is stupid weapon", weaponScript.IsStupid);
+            weaponScript.IsStupid = EditorGUILayout.Toggle("Is Stupid Weapon", weaponScript.IsStupid);
+            weaponScript.IsPlayerWeaponDataCache = EditorGUILayout.Toggle("Is Player Weapon Data Cache", weaponScript.IsPlayerWeaponDataCache);
             weaponScript.WeaponName = (WeaponData.Weapon)EditorGUILayout.EnumPopup("Weapon", weaponScript.WeaponName);
             weaponScript.Type = (WeaponData.Type)EditorGUILayout.EnumPopup("Type", weaponScript.Type);
 

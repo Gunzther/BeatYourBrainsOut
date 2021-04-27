@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7716297010599108313}
   - component: {fileID: 8253063854933107793}
   - component: {fileID: 7193226743392034409}
+  - component: {fileID: 2380879611773788681}
   m_Layer: 0
   m_Name: Eee
   m_TagString: Untagged
@@ -90,7 +91,7 @@ SphereCollider:
   m_GameObject: {fileID: 2332957842240919011}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.4
   m_Center: {x: 0, y: 0.4, z: 0}
@@ -116,6 +117,20 @@ MonoBehaviour:
   bulletChargeSecond: 2
   muzzlePrefab: {fileID: 8385974661095492317, guid: ceb6003da878b4062ad08362f9dfdcb3,
     type: 3}
+--- !u!136 &2380879611773788681
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2332957842240919011}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.35
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!1 &6847169185593724269
 GameObject:
   m_ObjectHideFlags: 0
@@ -299,7 +314,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9151227344175667350}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.35
   m_Height: 1

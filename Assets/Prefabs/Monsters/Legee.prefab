@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7716297010599108313}
   - component: {fileID: 8253063854933107793}
   - component: {fileID: 6153085081303129043}
+  - component: {fileID: 1718030856081098012}
   m_Layer: 0
   m_Name: Legee
   m_TagString: Untagged
@@ -90,7 +91,7 @@ SphereCollider:
   m_GameObject: {fileID: 2332957842240919011}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0.5, z: 0}
@@ -112,7 +113,20 @@ MonoBehaviour:
   legeeAnimator: {fileID: 9140735231360631251}
   bullet: {fileID: 850465745720011697, guid: 99a54e8dc2bd43946ae3a3929eee1b41, type: 3}
   bulletSpawnPoint: {fileID: 7364188003017657786}
-  bulletChargeSecond: 2
+--- !u!136 &1718030856081098012
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2332957842240919011}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.4
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &6847169185593724269
 GameObject:
   m_ObjectHideFlags: 0
@@ -266,7 +280,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6907225026822687524}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.4
   m_Height: 2

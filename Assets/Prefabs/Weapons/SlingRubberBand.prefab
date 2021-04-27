@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 8758971969607120339}
   - component: {fileID: 716693051015008746}
   m_Layer: 0
-  m_Name: RubberBand
+  m_Name: SlingRubberBand
   m_TagString: OneTimeWeapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -159,9 +159,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsStupid: 0
   IsPlayerWeaponDataCache: 0
-  WeaponName: 3
+  WeaponName: 6
   Type: 2
-  DamageValue: 1
+  DamageValue: 5
   IntervalSeconds: 0
   AttacksNumber: 1
   HP: 0
