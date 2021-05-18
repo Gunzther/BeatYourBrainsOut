@@ -168,7 +168,7 @@ namespace BBO.BBO.PlayerManagement
         {
             if (hasCurrentInput)
             {
-                soundManager.PlayPlayerWalking();
+                SoundManager.Instance.PlayPlayerWalking();
                 if (playerCharacter.GetIsnotHurt())
                 {
                     playerCharacter.CurrentPlayerStats.IncreaseJukingDoneScore(1);
