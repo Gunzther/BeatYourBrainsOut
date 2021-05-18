@@ -35,6 +35,7 @@ namespace BBO.BBO.PlayerManagement
         private bool canPick => currentPlayerWeapon.CurrentWeaponName == WeaponData.Weapon.NoWeapon;
         private bool canPlace => currentPlayerWeapon.CurrentWeaponName != WeaponData.Weapon.NoWeapon;
         private bool canAttack => currentPlayerWeapon.CurrentWeaponName != WeaponData.Weapon.NoWeapon;
+        private bool isNotHurt = true;
 
         // stupid weapon
         private Dictionary<WeaponData.Weapon, Weapon> stupidWeaponPrototypes = default;
@@ -120,6 +121,16 @@ namespace BBO.BBO.PlayerManagement
         public void PlayHurtSound()
         {
             soundManager.PlayPlayerHurt();
+        }
+
+        public void SetIsNotHurt(bool value)
+        {
+            this.isNotHurt = value;
+        }
+
+        public bool GetIsnotHurt()
+        {
+            return isNotHurt;
         }
 
         private void Awake()
